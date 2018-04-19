@@ -1,14 +1,15 @@
 package com.example.rlagk.ks_project001;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -30,7 +31,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends Activity{
+        public static final String TAG = "MainActivity";
         private TextView indicatorTv;
         private View positionView;
         private ViewPager viewPager;
@@ -41,32 +43,14 @@ public class MainActivity extends FragmentActivity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-
-            // 1. 沉浸式状态栏
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(Color.TRANSPARENT);
-                    getWindow()
-                            .getDecorView()
-                            .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-                } else {
-                    getWindow()
-                            .setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                }
-            }
             positionView = findViewById(R.id.position_view);
-            dealStatusBar(); // 调整状态栏高度
-
-            // 2. 初始化ImageLoader
+            dealStatusBar();
             initImageLoader();
 
-            // 3. 填充ViewPager
+
             fillViewPager();
         }
 
-        /**
-         * 填充ViewPager
-         */
         private void fillViewPager() {
             indicatorTv = (TextView) findViewById(R.id.indicator_tv);
             viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -90,12 +74,10 @@ public class MainActivity extends FragmentActivity{
 
                 @Override
                 public int getCount() {
-                    return 666;
+                    return 10;
                 }
             });
 
-
-            // 3. viewPager滑动时，调整指示器
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -115,25 +97,17 @@ public class MainActivity extends FragmentActivity{
             updateIndicatorTv();
         }
 
-        /**
-         * 更新指示器
-         */
         private void updateIndicatorTv() {
             int totalNum = viewPager.getAdapter().getCount();
             int currentItem = viewPager.getCurrentItem() + 1;
             indicatorTv.setText(Html.fromHtml("<font color='#12edf0'>" + currentItem + "</font>  /  " + totalNum));
         }
 
-        /**
-         * 调整沉浸式菜单的title
-         */
         private void dealStatusBar() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 int statusBarHeight = getStatusBarHeight();
                 ViewGroup.LayoutParams lp = positionView.getLayoutParams();
                 lp.height = statusBarHeight;
                 positionView.setLayoutParams(lp);
-            }
         }
 
         private int getStatusBarHeight() {
@@ -155,16 +129,11 @@ public class MainActivity extends FragmentActivity{
 
         @SuppressWarnings("deprecation")
         private void initImageLoader() {
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                    this)
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                     .memoryCacheExtraOptions(480, 800)
-                    // default = device screen dimensions
                     .threadPoolSize(3)
-                    // default
                     .threadPriority(Thread.NORM_PRIORITY - 1)
-                    // default
                     .tasksProcessingOrder(QueueProcessingType.FIFO)
-                    // default
                     .denyCacheImageMultipleSizesInMemory()
                     .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
                     .memoryCacheSize(2 * 1024 * 1024).memoryCacheSizePercentage(13) // default
@@ -175,7 +144,6 @@ public class MainActivity extends FragmentActivity{
                     .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
                     .writeDebugLogs().build();
 
-            // 2.单例ImageLoader类的初始化
             ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.init(config);
         }
