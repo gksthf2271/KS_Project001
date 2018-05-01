@@ -1,51 +1,42 @@
 package com.example.rlagk.ks_project001;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.graphics.Color;
-import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.ViewManager;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
-import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
-import com.example.rlagk.ks_project001.Fragment.Fragment_SecretDiary;
 import com.example.rlagk.ks_project001.View.CustPagerTransformer;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.example.rlagk.ks_project001.utils.ImageLoaderUtility;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity{
+public class MainActivity extends FragmentActivity{
         public static final String TAG = "MainActivity";
         private TextView indicatorTv;
         private View positionView;
         private ViewPager viewPager;
-        private List<Fragment_Main> fragments = new ArrayList<>(); // 供ViewPager使用
-        private final String[] imageArray = {"assets://image1.jpg", "assets://image2.jpg", "assets://image3.jpg", "assets://image4.jpg", "assets://image5.jpg"};
+        private List<Fragment_Main> fragments = new ArrayList<>();
+        private final String[] imageArray = {"drawable://image1.jpg", "drawable://image2.jpg", "drawable://image3.jpg", "drawable://image4.jpg", "drawable://image5.jpg"};
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            positionView = findViewById(R.id.position_view);
-            dealStatusBar();
-            initImageLoader();
+            /*positionView = findViewById(R.id.position_view);
+            dealStatusBar();*/
+            ImageLoaderUtility.getInstance().setmContext(this);
+            ImageLoaderUtility.getInstance().initImageLoader();
 
 
             fillViewPager();
@@ -55,12 +46,9 @@ public class MainActivity extends Activity{
             indicatorTv = (TextView) findViewById(R.id.indicator_tv);
             viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-            // 1. viewPager添加parallax效果，使用PageTransformer就足够了
             viewPager.setPageTransformer(false, new CustPagerTransformer(this));
 
-            // 2. viewPager添加adapter
             for (int i = 0; i < 10; i++) {
-                // 预先准备10个fragment
                 fragments.add(new Fragment_Main());
             }
 
@@ -81,15 +69,18 @@ public class MainActivity extends Activity{
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    Log.d(TAG,"onPageScrolled");
                 }
 
                 @Override
                 public void onPageSelected(int position) {
+                    Log.d(TAG,"onPageSelFected");
                     updateIndicatorTv();
                 }
 
                 @Override
                 public void onPageScrollStateChanged(int state) {
+                    Log.d(TAG,"onPageScrollStateChanged");
 
                 }
             });
@@ -127,26 +118,6 @@ public class MainActivity extends Activity{
             return statusBarHeight;
         }
 
-        @SuppressWarnings("deprecation")
-        private void initImageLoader() {
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                    .memoryCacheExtraOptions(480, 800)
-                    .threadPoolSize(3)
-                    .threadPriority(Thread.NORM_PRIORITY - 1)
-                    .tasksProcessingOrder(QueueProcessingType.FIFO)
-                    .denyCacheImageMultipleSizesInMemory()
-                    .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
-                    .memoryCacheSize(2 * 1024 * 1024).memoryCacheSizePercentage(13) // default
-                    .discCacheSize(50 * 1024 * 1024)
-                    .discCacheFileCount(100)
-                    .discCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
-                    .imageDownloader(new BaseImageDownloader(this)) // default
-                    .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
-                    .writeDebugLogs().build();
-
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.init(config);
-        }
 
 }
 
