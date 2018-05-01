@@ -1,7 +1,6 @@
 package com.example.rlagk.ks_project001.Fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
