@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 
 public class Fragment_Main extends Fragment implements DragLayout.GotoDetailListener{
+    public static final String TAG = "Fragment_Main";
     private ImageView imageView;
     private View address1, address2, address3, address4, address5;
     private RatingBar ratingBar;
@@ -36,7 +38,7 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
         View rootView = inflater.inflate(R.layout.fragment_main, null);
         DragLayout dragLayout = (DragLayout) rootView.findViewById(R.id.drag_layout);
         imageView = (ImageView) dragLayout.findViewById(R.id.image);
-        ImageLoader.getInstance().displayImage(imageUrl, imageView);
+//        ImageLoader.getInstance().displayImage(imageUrl, imageView);
         address1 = dragLayout.findViewById(R.id.address1);
         address2 = dragLayout.findViewById(R.id.address2);
         address3 = dragLayout.findViewById(R.id.address3);
@@ -55,6 +57,7 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
 
     @Override
     public void gotoDetail() {
+        Log.d(TAG,"gotoDetail(...)");
         Activity activity = (Activity) getContext();
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                 new Pair(imageView, DetailActivity.IMAGE_TRANSITION_NAME),

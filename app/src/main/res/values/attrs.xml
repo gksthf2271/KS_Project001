@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DetailView">
+        <attr name="detailView" format="reference|integer" />
+    </declare-styleable>
+
+    <declare-styleable name="LockView">
+        <attr name="pwdView" format="reference|integer" />
+    </declare-styleable>
+</resources>

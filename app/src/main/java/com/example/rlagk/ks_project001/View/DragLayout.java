@@ -6,6 +6,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,12 +15,9 @@ import android.widget.FrameLayout;
 
 import com.example.rlagk.ks_project001.R;
 
-/**
- * 尽量考虑了所有操作系统版本的分辨率适配
- * Created by xmuSistone on 2016/9/18.
- */
 public class DragLayout extends FrameLayout {
 
+    public static final String TAG = "DragLayout";
     private int bottomDragVisibleHeight;
     private int bototmExtraIndicatorHeight;
     private int dragTopDest = 0;
@@ -52,6 +50,7 @@ public class DragLayout extends FrameLayout {
 
     public DragLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        Log.d(TAG,"DragLayout(...)");
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.app, 0, 0);
         bottomDragVisibleHeight = (int) a.getDimension(R.styleable.app_bottomDragVisibleHeight, 0);
@@ -59,7 +58,7 @@ public class DragLayout extends FrameLayout {
         a.recycle();
 
         mDragHelper = ViewDragHelper
-                .create(this, 10f, new DragHelperCallback());
+                .create(this, 1.0f, new DragHelperCallback());
         mDragHelper.setEdgeTrackingEnabled(ViewDragHelper.EDGE_TOP);
         moveDetector = new GestureDetectorCompat(context, new MoveDetector());
         moveDetector.setIsLongpressEnabled(false);
@@ -72,13 +71,14 @@ public class DragLayout extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG,"onFinishInflate(...)");
         bottomView = getChildAt(0);
         topView = getChildAt(1);
 
         topView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG,"onClick(...)");
                 int state = getCurrentState();
                 if (state == STATE_CLOSE) {
 
@@ -92,8 +92,8 @@ public class DragLayout extends FrameLayout {
         });
     }
 
-    // 跳转到下一页
     private void gotoDetailActivity() {
+        Log.d(TAG,"gotoDetailActivity(...)");
         if (null != gotoDetailListener) {
             gotoDetailListener.gotoDetail();
         }
@@ -103,6 +103,7 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            Log.d(TAG,"onViewPositionChanged(...)");
             if (changedView == topView) {
                 processLinkageView();
             }
@@ -110,6 +111,7 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
+            Log.d(TAG,"tryCaptureView(...)");
             if (child == topView) {
                 return true;
             }
@@ -118,6 +120,7 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
+            Log.d(TAG,"clampViewPositionVertical(...)");
             int currentTop = child.getTop();
             if (top > child.getTop()) {
                 return currentTop + (top - currentTop) / 2;
@@ -144,6 +147,7 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
+            Log.d(TAG,"clampViewPositionHorizontal(...)");
             return child.getLeft();
         }
 
@@ -159,6 +163,7 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            Log.d(TAG,"onViewReleased(...)");
             int finalY = originY;
             if (downState == STATE_CLOSE) {
                 if (originY - releasedChild.getTop() > DRAG_SWITCH_DISTANCE_THRESHOLD || yvel < -DRAG_SWITCH_VEL_THRESHOLD) {
@@ -183,20 +188,8 @@ public class DragLayout extends FrameLayout {
         }
     }
 
-
-    private void postResetPosition() {
-        this.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                topView.offsetTopAndBottom(dragTopDest - topView.getTop());
-            }
-        }, 500);
-    }
-
-    /**
-     * 顶层ImageView位置变动，需要对底层的view进行缩放显示
-     */
     private void processLinkageView() {
+        Log.d(TAG,"processLinkageView(...)");
         if (topView.getTop() > originY) {
             bottomView.setAlpha(0);
         } else {
@@ -217,25 +210,36 @@ public class DragLayout extends FrameLayout {
         }
     }
 
+
+    private void postResetPosition() {
+        Log.d(TAG,"postResetPosition(...)");
+        this.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                topView.offsetTopAndBottom(dragTopDest - topView.getTop());
+            }
+        }, 500);
+    }
+
     class MoveDetector extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float dx,
                                 float dy) {
+            Log.d(TAG,"onScroll(...)");
             return Math.abs(dy) + Math.abs(dx) > mTouchSlop;
         }
     }
 
     @Override
     public void computeScroll() {
+        Log.d(TAG,"computeScroll(...)");
         if (mDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 
-    /**
-     * 获取当前状态
-     */
     private int getCurrentState() {
+        Log.d(TAG,"getCurrentState(...)");
         int state;
         if (Math.abs(topView.getTop() - dragTopDest) <= mTouchSlop) {
             state = STATE_EXPANDED;
@@ -248,6 +252,7 @@ public class DragLayout extends FrameLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        Log.d(TAG,"onLayout(...)");
         if (!changed) {
             return;
         }
@@ -259,10 +264,9 @@ public class DragLayout extends FrameLayout {
         dragTopDest = bottomView.getBottom() - bottomDragVisibleHeight - topView.getMeasuredHeight();
     }
 
-    /* touch事件的拦截与处理都交给mDraghelper来处理 */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        // 1. detector和mDragHelper判断是否需要拦截
+        Log.d(TAG,"onInterceptTouchEvent(...)");
         boolean yScroll = moveDetector.onTouchEvent(ev);
         boolean shouldIntercept = false;
         try {
@@ -270,7 +274,6 @@ public class DragLayout extends FrameLayout {
         } catch (Exception e) {
         }
 
-        // 2. 触点按下的时候直接交给mDragHelper
         int action = ev.getActionMasked();
         if (action == MotionEvent.ACTION_DOWN) {
             downState = getCurrentState();
@@ -283,9 +286,8 @@ public class DragLayout extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(TAG,"onMeasure(...)");
 
-        // bottomMarginTop高度的计算，还是需要有一个清晰的数学模型才可以。
-        // 实现的效果，是topView.top和bottomView.bottom展开前、与展开后都整体居中
         int bottomMarginTop = (bottomDragVisibleHeight + topView.getMeasuredHeight() / 2 - bottomView.getMeasuredHeight() / 2) / 2 - bototmExtraIndicatorHeight;
         FrameLayout.LayoutParams lp1 = (LayoutParams) bottomView.getLayoutParams();
         lp1.setMargins(0, bottomMarginTop, 0, 0);
@@ -294,7 +296,7 @@ public class DragLayout extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        // 统一交给mDragHelper处理，由DragHelperCallback实现拖动效果
+        Log.d(TAG,"onTouchEvent(...)");
         try {
             mDragHelper.processTouchEvent(e);
         } catch (Exception ex) {
@@ -304,6 +306,7 @@ public class DragLayout extends FrameLayout {
     }
 
     public void setGotoDetailListener(GotoDetailListener gotoDetailListener) {
+        Log.d(TAG,"setGotoDetailListener(...)");
         this.gotoDetailListener = gotoDetailListener;
     }
 
