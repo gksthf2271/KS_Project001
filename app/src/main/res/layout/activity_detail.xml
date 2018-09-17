@@ -2,8 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/paper_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="저장" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="취소" />
+    </LinearLayout>
     <com.example.rlagk.ks_project001.View.DetailView
+        android:id="@+id/cDetailView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.example.rlagk.ks_project001.View.DetailView>

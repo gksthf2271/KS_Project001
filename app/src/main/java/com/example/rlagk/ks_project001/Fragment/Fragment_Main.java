@@ -14,11 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.DetailActivity;
 import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.View.AspectRatioCardView;
 import com.example.rlagk.ks_project001.View.DragLayout;
+import com.example.rlagk.ks_project001.View.LockView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.concurrent.locks.Lock;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rlagk on 2018-04-10.
@@ -26,32 +34,46 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class Fragment_Main extends Fragment implements DragLayout.GotoDetailListener{
     public static final String TAG = "Fragment_Main";
-    private ImageView imageView;
-    private View address1, address2, address3, address4, address5;
+
+    @BindView(R.id.aspectRatioCardView)
+    AspectRatioCardView mAspectRatioCardView;
+    @BindView(R.id.drag_layout)
+    DragLayout mDragLayout;
+
+    private LockView mLockView;
+    private TextView address1;
     private RatingBar ratingBar;
-    private View head1, head2, head3, head4;
-    private String imageUrl;
+    private ImageView mLove;
+
+    private static volatile Fragment_Main sInstance;
+
+    public static Fragment_Main getInstance() {
+        if (sInstance == null) {
+            synchronized (Fragment_Main.class) {
+                if (sInstance == null) {
+                    sInstance = new Fragment_Main();
+                }
+            }
+        }
+        return sInstance;
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, null);
-        DragLayout dragLayout = (DragLayout) rootView.findViewById(R.id.drag_layout);
-        imageView = (ImageView) dragLayout.findViewById(R.id.image);
-//        ImageLoader.getInstance().displayImage(imageUrl, imageView);
-        address1 = dragLayout.findViewById(R.id.address1);
-        address2 = dragLayout.findViewById(R.id.address2);
-        address3 = dragLayout.findViewById(R.id.address3);
-        address4 = dragLayout.findViewById(R.id.address4);
-        address5 = dragLayout.findViewById(R.id.address5);
-        ratingBar = (RatingBar) dragLayout.findViewById(R.id.rating);
+        ButterKnife.bind(this,rootView);
+        mLockView = mAspectRatioCardView.findViewById(R.id.lockView);
+        mLove = mAspectRatioCardView.findViewById(R.id.love);
+        address1 = mDragLayout.findViewById(R.id.address4);
+        ratingBar = mDragLayout.findViewById(R.id.rating);
 
-        head1 = dragLayout.findViewById(R.id.head1);
-        head2 = dragLayout.findViewById(R.id.head2);
-        head3 = dragLayout.findViewById(R.id.head3);
-        head4 = dragLayout.findViewById(R.id.head4);
+        mLockView.setBtnCallbacklistener(lockViewBtnCallback);
+        mLove.setVisibility(View.GONE);
+        mLockView.setVisibility(View.VISIBLE);
 
-        dragLayout.setGotoDetailListener(this);
+        mDragLayout.setGotoDetailListener(this);
         return rootView;
     }
 
@@ -60,24 +82,19 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
         Log.d(TAG,"gotoDetail(...)");
         Activity activity = (Activity) getContext();
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                new Pair(imageView, DetailActivity.IMAGE_TRANSITION_NAME),
                 new Pair(address1, DetailActivity.ADDRESS1_TRANSITION_NAME),
-                new Pair(address2, DetailActivity.ADDRESS2_TRANSITION_NAME),
-                new Pair(address3, DetailActivity.ADDRESS3_TRANSITION_NAME),
-                new Pair(address4, DetailActivity.ADDRESS4_TRANSITION_NAME),
-                new Pair(address5, DetailActivity.ADDRESS5_TRANSITION_NAME),
-                new Pair(ratingBar, DetailActivity.RATINGBAR_TRANSITION_NAME),
-                new Pair(head1, DetailActivity.HEAD1_TRANSITION_NAME),
-                new Pair(head2, DetailActivity.HEAD2_TRANSITION_NAME),
-                new Pair(head3, DetailActivity.HEAD3_TRANSITION_NAME),
-                new Pair(head4, DetailActivity.HEAD4_TRANSITION_NAME)
+                new Pair(ratingBar, DetailActivity.RATINGBAR_TRANSITION_NAME)
         );
         Intent intent = new Intent(activity, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_IMAGE_URL, imageUrl);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
-    public void bindData(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    private LockView.btnClickCallbackListener lockViewBtnCallback = new LockView.btnClickCallbackListener(){
+        @Override
+        public void onBtnClickCallback() {
+            mLove.setVisibility(View.VISIBLE);
+            mLockView.setVisibility(View.GONE);
+        }
+    };
+
 }

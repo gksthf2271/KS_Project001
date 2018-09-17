@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -29,7 +30,7 @@ public class DetailView extends LinearLayout {
     private static final String TAG = DetailView.class.getName();
 
     @BindView(R.id.diaryText)
-    View mDiaryText;
+    EditText mDiaryText;
     @BindView(R.id.image)
     ImageView imageView;
     @BindView(R.id.rating)
@@ -94,5 +95,9 @@ public class DetailView extends LinearLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         Log.d(TAG,"onDetachedFromWindow(...)");
+    }
+
+    public String getDescription(){
+        return mDiaryText.getText().toString();
     }
 }
