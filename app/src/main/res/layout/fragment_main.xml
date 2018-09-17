@@ -25,17 +25,6 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/address4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingRight="10dp"
-                    android:text="La Crescenta-Montrose, CA91020 Glende And Way"
-                    android:textColor="#333"
-                    android:textSize="15sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,7 +36,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/address5"
+                        android:id="@+id/address4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -71,60 +60,13 @@
                     android:layout_marginTop="10dp"
                     android:background="#f0f0f0" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/head1"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/head1" />
-
-                    <ImageView
-                        android:id="@+id/head2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="-10dp"
-                        android:src="@drawable/head2" />
-
-                    <ImageView
-                        android:id="@+id/head3"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="-10dp"
-                        android:src="@drawable/head3" />
-
-                    <ImageView
-                        android:id="@+id/head4"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="-10dp"
-                        android:src="@drawable/head4" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1px"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/three_dot" />
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </FrameLayout>
 
 
         <com.example.rlagk.ks_project001.View.AspectRatioCardView
+            android:id="@+id/aspectRatioCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -135,10 +77,18 @@
             app:cardElevation="6dp"
             app:cardMaxElevation="6dp">
             <com.example.rlagk.ks_project001.View.LockView
+                android:id="@+id/lockView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
             </com.example.rlagk.ks_project001.View.LockView>
+
+            <ImageView
+                android:id="@+id/love"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_love"/>
         </com.example.rlagk.ks_project001.View.AspectRatioCardView>
 
     </com.example.rlagk.ks_project001.View.DragLayout>
