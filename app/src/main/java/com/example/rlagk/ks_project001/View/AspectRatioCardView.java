@@ -3,12 +3,11 @@ package com.example.rlagk.ks_project001.View;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-/**
- * 锁定宽高比的CardView
- * Created by xmuSistone on 2016/9/21.
- */
+import com.example.rlagk.ks_project001.R;
+
 public class AspectRatioCardView extends CardView {
 
     private float ratio = 1.2f;
@@ -36,4 +35,11 @@ public class AspectRatioCardView extends CardView {
             setLayoutParams(lp);
         }
     }
+
+/*    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.cview_detail, this);
+    }*/
 }
