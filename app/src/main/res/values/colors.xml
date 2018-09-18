@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="activity_background">#2b3f6b</color>
+    <color name="fragment_background">#7b8ea9</color>
+    <color name="point_1">#fcc6a2</color>
+    <color name="point_2">#f89b6c</color>
+    <color name="point_3">#f37321</color>
 </resources>

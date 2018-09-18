@@ -40,7 +40,7 @@ public class MainActivity extends FragmentActivity {
         Log.d(TAG, "init(...)");
         viewPager.setPageTransformer(false, new CustPagerTransformer(this));
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             fragments.add(new Fragment_Main());
         }
 
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public int getCount() {
-                return 5;
+                return 1;
             }
         });
     }
