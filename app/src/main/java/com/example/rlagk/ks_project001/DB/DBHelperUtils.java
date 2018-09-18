@@ -15,7 +15,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "contactsManager";
+    private static final String DATABASE_NAME = "contactsManager.db";
 
     // Contacts table name
     private static final String TABLE_CONTACTS = "contacts";
