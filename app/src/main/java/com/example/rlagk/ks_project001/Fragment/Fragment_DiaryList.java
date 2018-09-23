@@ -11,9 +11,9 @@ import com.example.rlagk.ks_project001.R;
  * Created by rlagk on 2018-04-10.
  */
 
-public class Fragment_SecretDiary extends android.support.v4.app.Fragment{
+public class Fragment_DiaryList extends android.support.v4.app.Fragment{
 
-    public Fragment_SecretDiary(){
+    public Fragment_DiaryList(){
 
     }
 
