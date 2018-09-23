@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.DetailActivity;
+import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
 import com.example.rlagk.ks_project001.R;
 
 import org.w3c.dom.Text;
@@ -95,10 +96,13 @@ public class LockView extends RelativeLayout{
         String dummyPwd = "123";
         String inputData = mEditText.getText().toString();
         if (inputData.equals(dummyPwd)) {
+            Fragment_Main.STATE_PWD = DragLayout.STATE_PWD_SUCCESS;
             onBtnClickCallback();
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mPwdView.getWindowToken(), 0);
 
+        } else {
+            Fragment_Main.STATE_PWD = DragLayout.STATE_PWD_FAILED;
         }
     }
 

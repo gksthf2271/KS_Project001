@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
 import com.example.rlagk.ks_project001.View.CustPagerTransformer;
+import com.example.rlagk.ks_project001.View.DragLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity {
     public static final String TAG = "MainActivity";
-    @BindView(R.id.indicator_tv)
-    TextView indicatorTv;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
@@ -39,7 +38,7 @@ public class MainActivity extends FragmentActivity {
     public void init() {
         Log.d(TAG, "init(...)");
         viewPager.setPageTransformer(false, new CustPagerTransformer(this));
-
+        Fragment_Main.STATE_PWD = DragLayout.STATE_PWD_FAILED;
         for (int i = 0; i < 1; i++) {
             fragments.add(new Fragment_Main());
         }
@@ -70,7 +69,6 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelFected");
-                updateIndicatorTv();
             }
 
             @Override
@@ -79,17 +77,7 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
-        updateIndicatorTv();
     }
 
-
-
-
-    private void updateIndicatorTv() {
-        Log.d(TAG, "updateIndicatorTv(...)");
-        int totalNum = viewPager.getAdapter().getCount();
-        int currentItem = viewPager.getCurrentItem() + 1;
-        indicatorTv.setText(currentItem + "  /  " + totalNum);
-    }
 }
 

@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,9 +22,6 @@ import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.AspectRatioCardView;
 import com.example.rlagk.ks_project001.View.DragLayout;
 import com.example.rlagk.ks_project001.View.LockView;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.util.concurrent.locks.Lock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by rlagk on 2018-04-10.
  */
 
-public class Fragment_Main extends Fragment implements DragLayout.GotoDetailListener{
+public class Fragment_Main extends Fragment implements DragLayout.GotoDetailListener, DragLayout.OnTouchListener{
     public static final String TAG = "Fragment_Main";
 
     @BindView(R.id.aspectRatioCardView)
@@ -44,6 +42,8 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
     private TextView address1;
     private RatingBar ratingBar;
     private ImageView mLove;
+
+    public static int STATE_PWD = 0;
 
     private static volatile Fragment_Main sInstance;
 
@@ -97,4 +97,14 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
         }
     };
 
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.d(TAG,"view : " + v + "\n event : " + event);
+        if(STATE_PWD == DragLayout.STATE_PWD_FAILED){
+            Log.d(TAG,"PWD not success!");
+            return true;
+        }
+        return false;
+    }
 }
