@@ -1,12 +1,17 @@
 package com.example.rlagk.ks_project001.Fragment;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,15 +21,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rlagk.ks_project001.DetailActivity;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.AspectRatioCardView;
 import com.example.rlagk.ks_project001.View.DragLayout;
 import com.example.rlagk.ks_project001.View.LockView;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import gun0912.tedbottompicker.TedBottomPicker;
 
 /**
  * Created by rlagk on 2018-04-10.
@@ -94,6 +105,33 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
         public void onBtnClickCallback() {
             mLove.setVisibility(View.VISIBLE);
             mLockView.setVisibility(View.GONE);
+            int permissionCheck = ContextCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if(permissionCheck == PackageManager.PERMISSION_DENIED){
+                Log.d(TAG,"Permission check");
+                TedPermission.with(getContext())
+                        .setPermissionListener(permissionlistener)
+                        .setRationaleMessage("갤러리 접근 권한 요청")
+                        .setDeniedMessage("접근 권한 취소\n[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .check();
+                return;
+            }
+            TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(getContext())
+                    .setOnMultiImageSelectedListener(new TedBottomPicker.OnMultiImageSelectedListener() {
+                        @Override
+                        public void onImagesSelected(ArrayList<Uri> uriList) {
+                            Log.d(TAG, "onImagesSelected");
+                        }
+                    })
+                    .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
+                        @Override
+                        public void onImageSelected(Uri uri) {
+                            Log.d(TAG, "onImageSeleted");
+                        }
+                    })
+                    .setPeekHeight(2000)
+                    .create();
+            tedBottomPicker.show(getFragmentManager());
         }
     };
 
@@ -107,4 +145,18 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
         }
         return false;
     }
+
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(getContext(), "권한 허가", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            Toast.makeText(getContext(), "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    };
 }
