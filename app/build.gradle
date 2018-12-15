@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.rlagk.ks_project001"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0.1"

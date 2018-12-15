@@ -1,13 +1,14 @@
 package com.example.rlagk.ks_project001;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
+import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.View.DetailView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -41,54 +45,33 @@ public class DetailActivity extends FragmentActivity {
     public static final String IMAGE_TRANSITION_NAME = "transitionImage";
     public static final String ADDRESS1_TRANSITION_NAME = "address1";
     public static final String RATINGBAR_TRANSITION_NAME = "ratingBar";
-    public static long ID = 0;
 
-    @BindView(R.id.btnCancel)
-    Button mCancelBtn;
-    @BindView(R.id.btnSave)
-    Button mSaveBtn;
-    @BindView(R.id.cDetailView)
-    LinearLayout mDetailView;
-
-    private DBHelperUtils mDBHelperUtils;
-
+    @BindView(R.id.fragment_container)
+    FrameLayout mFrameLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Log.d(TAG,"onCreate(...)");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        init();
-        ButterKnife.bind(this);
+        loadFragment(Fragment_ShareDiary.newInstance());
     }
 
-    private void init(){
-        mDBHelperUtils = new DBHelperUtils(this);
+
+    private void loadFragment(@NonNull Fragment fragment) {
+        Log.v(TAG, "loadFragment(...)  " + fragment);
+        FragmentManager fragmentManager = getFragmentManager();
+
+        if (fragmentManager == null) {
+            Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
+            return;
+        }
+
+        String className = fragment.getClass().getName();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, className)
+                .addToBackStack(className)
+                .commit();
     }
 
-    @OnClick(R.id.btnCancel)
-    public void cancelBTNClick(){
-        Log.d(TAG,"cancelBTNClick(...)");
-        Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.btnSave)
-    public void saveBTNClick(){
-        ID++;
-        Log.d(TAG,"saveBTNClick(...) " + ID);
-        long nowTime = System.currentTimeMillis();
-        Date date = new Date(nowTime);
-        EditText diaryText = mDetailView.findViewById(R.id.diaryText);
-        SimpleDateFormat idFormat = new SimpleDateFormat("yyyyMMdd");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Contact contact = new Contact();
-        contact.setDate(simpleDateFormat.format(date));
-        contact.setTitle(diaryText.getText().toString());
-        contact.setDescription(diaryText.getText().toString());
-        contact.setId(String.valueOf(idFormat.format(date)) + ID);
-        mDBHelperUtils.addContact(contact);
-        diaryText.setText("");
-    }
 }

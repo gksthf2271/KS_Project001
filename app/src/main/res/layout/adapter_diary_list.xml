@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/diaryImg"
+            android:src="@drawable/icon_love"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:id="@+id/diaryText_date"
+                android:textSize="10dp"
+                android:text="2018-09-23"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:id="@+id/diaryText_title"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:text="title"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

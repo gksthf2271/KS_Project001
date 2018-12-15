@@ -1,5 +1,6 @@
 package com.example.rlagk.ks_project001;
 
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,8 +24,16 @@ public class MainActivity extends FragmentActivity {
     public static final String TAG = "MainActivity";
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    private static volatile MainActivity sInstance;
 
     private List<Fragment_Main> fragments = new ArrayList<>();
+
+    public static MainActivity getInstance(){
+        if (sInstance == null){
+            sInstance = new MainActivity();
+        }
+        return sInstance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
