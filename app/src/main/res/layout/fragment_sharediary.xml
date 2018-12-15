@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FF0000"
-    >
+    android:background="@drawable/paper_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="저장" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="30dp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:text="두번째 페이지"/>
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="취소" />
+    </LinearLayout>
+    <com.example.rlagk.ks_project001.View.DetailView
+        android:id="@+id/cDetailView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+    </com.example.rlagk.ks_project001.View.DetailView>
 
-</RelativeLayout>
+</LinearLayout>

@@ -5,11 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.example.rlagk.ks_project001.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelperUtils extends SQLiteOpenHelper{
+
+    public static final String TAG = "DBHelperUtils";
+
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -26,8 +32,17 @@ public class DBHelperUtils extends SQLiteOpenHelper{
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESCRIPTION = "description";
 
+    private static volatile DBHelperUtils sInstance;
+
     public DBHelperUtils(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static DBHelperUtils getInstance(){
+        if (sInstance == null){
+            sInstance = new DBHelperUtils(MainActivity.getInstance());
+        }
+        return sInstance;
     }
 
     // Creating Tables
@@ -89,7 +104,6 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         List<Contact> contactList = new ArrayList<Contact>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
