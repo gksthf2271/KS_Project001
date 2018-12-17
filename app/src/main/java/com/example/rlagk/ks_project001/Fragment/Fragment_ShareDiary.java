@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DetailView;
@@ -59,7 +60,7 @@ public class Fragment_ShareDiary extends Fragment {
 
 
     private void init(){
-        mDBHelperUtils = new DBHelperUtils(getActivity());
+        mDBHelperUtils = DatabaseManager.getInstance().getDB();
     }
 
     @OnClick(R.id.btnCancel)
@@ -86,7 +87,7 @@ public class Fragment_ShareDiary extends Fragment {
         contact.setId(String.valueOf(idFormat.format(date)) + ID);
         mDBHelperUtils.addContact(contact);
         diaryText.setText("");
-        loadFragment(Fragment_DiaryList.getInstance());
+        loadFragment(Fragment_DiaryList.newInstance());
     }
 
     private void loadFragment(@NonNull Fragment fragment) {
