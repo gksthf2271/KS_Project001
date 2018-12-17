@@ -23,15 +23,15 @@
         </activity>
         <activity android:name=".DetailActivity" />
 
-        <activity android:name=".CameraActivity"
-            android:screenOrientation="landscape">
-            <!-- configure this activity to use landscape orientation -->
+        <!--<activity android:name=".CameraActivity"-->
+            <!--android:screenOrientation="landscape">-->
+            <!--&lt;!&ndash; configure this activity to use landscape orientation &ndash;&gt;-->
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
     </application>
 
 </manifest>

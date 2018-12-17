@@ -1,5 +1,6 @@
 package com.example.rlagk.ks_project001;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
 import com.example.rlagk.ks_project001.View.CustPagerTransformer;
 import com.example.rlagk.ks_project001.View.DragLayout;
@@ -40,12 +43,14 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        init();
+        init(this);
         fillViewPager();
     }
 
-    public void init() {
+    public void init(Context context) {
         Log.d(TAG, "init(...)");
+        DatabaseManager.getInstance().init(this);
+
         viewPager.setPageTransformer(false, new CustPagerTransformer(this));
         Fragment_Main.STATE_PWD = DragLayout.STATE_PWD_FAILED;
         for (int i = 0; i < 1; i++) {

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
 
@@ -30,6 +31,7 @@ public class DiaryListView extends LinearLayout{
     RecyclerView mRecyclerView;
 
     private DiaryListAdapter mDiaryListAdapter;
+    private DBHelperUtils dbHelperUtils;
 
     public DiaryListView(Context context) {
         this(context, null, 0);
@@ -40,6 +42,7 @@ public class DiaryListView extends LinearLayout{
 
     public DiaryListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        initView();
     }
 
     private void initView() {
@@ -48,12 +51,8 @@ public class DiaryListView extends LinearLayout{
         ButterKnife.bind(this);
         ArrayList diaryListViewArrayList = new ArrayList<>();
         List<Contact> itemList = new ArrayList<>();
-//        if(DBHelperUtils.getInstance() == null) {
-//            dbHelperUtils = new DBHelperUtils(getContext());
-//        } else {
-//            dbHelperUtils = DBHelperUtils.getInstance();
-//        }
-        itemList.addAll(DBHelperUtils.getInstance().getAllContacts());
+        dbHelperUtils = DatabaseManager.getInstance().getDB();
+        itemList.addAll(dbHelperUtils.getAllContacts());
 
         for (int i = 0; i < itemList.size(); i++) {
             diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
@@ -62,14 +61,13 @@ public class DiaryListView extends LinearLayout{
 
         mRecyclerView.setAdapter(mDiaryListAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.HORIZONTAL, false));
+                LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(false);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        initView();
         Log.d(TAG,"onFinishInflate(...)");
 
     }
@@ -90,7 +88,6 @@ public class DiaryListView extends LinearLayout{
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Log.d(TAG,"onAttachedToWindow(...)");
-
     }
 
     @Override

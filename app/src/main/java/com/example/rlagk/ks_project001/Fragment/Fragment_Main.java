@@ -130,6 +130,8 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
                         }
                     })
                     .setPeekHeight(2000)
+                    .setSelectMaxCount(10)
+                    .setSelectedForeground(R.drawable.icon_selected)
                     .create();
             tedBottomPicker.show(getFragmentManager());
         }

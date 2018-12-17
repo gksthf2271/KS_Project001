@@ -45,7 +45,6 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         return sInstance;
     }
 
-    // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
@@ -157,6 +156,5 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         // return count
         return cursor.getCount();
     }
-
 }
 
