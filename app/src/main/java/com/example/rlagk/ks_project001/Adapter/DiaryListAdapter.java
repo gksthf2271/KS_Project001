@@ -1,28 +1,42 @@
 package com.example.rlagk.ks_project001.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.rlagk.ks_project001.DB.Contact;
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListItem;
 import com.example.rlagk.ks_project001.View.DiaryListView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.ViewHolder> {
 
     private static final String TAG = DiaryListAdapter.class.getName();
     private Context mContext;
-    private ArrayList mItems;
+    private ArrayList<DiaryListItem> mItems;
+    private int mLastPosition = -1;
 
-    public DiaryListAdapter(ArrayList items, Context context) {
+    private final Object mDiaryItemListLock = new Object();
+
+    public DiaryListAdapter(ArrayList<DiaryListItem> items, Context context) {
         mItems = items;
         mContext = context;
     }
@@ -37,18 +51,18 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull DiaryListAdapter.ViewHolder holder, int position) {
-        holder.mDiaryText_date.setText((Integer) mItems.get(position));
+        Log.d(TAG,"onBindViewHolder(...)");
+        holder.mDiaryImg.setImageResource(mItems.get(position).getImage());
+        holder.mDiaryText_date.setText(mItems.get(position).getDate());
+        holder.mDiaryText_title.setText(mItems.get(position).getTitle());
+        setAnimation(holder.mDiaryImg, position);
+//        mViewHolder = holder;
+//        mPosition = position;
     }
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull DiaryListAdapter.ViewHolder holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
-
+        return mItems.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -58,14 +72,19 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         public TextView mDiaryText_date;
         public TextView mDiaryText_title;
 
-
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mDiaryImg = itemView.findViewById(R.id.diaryImg);
-            mDiaryText_date = itemView.findViewById(R.id.diaryText_date);
-            mDiaryText_title = itemView.findViewById(R.id.diaryText_title);
+            mDiaryImg = (ImageView) itemView.findViewById(R.id.diaryImg);
+            mDiaryText_date = (TextView) itemView.findViewById(R.id.diaryText_date);
+            mDiaryText_title = (TextView) itemView.findViewById(R.id.diaryText_title);
         }
-
     }
 
+    private void setAnimation(View viewToAnimate, int position) {
+        if (position > mLastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            mLastPosition = position;
+        }
+    }
 }

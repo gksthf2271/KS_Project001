@@ -50,13 +50,8 @@ public class Fragment_DiaryList extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_secretdiary, container, false);
-        init();
         ButterKnife.bind(this, v);
         return v;
-    }
-
-    private void init() {
-
     }
 
     @OnClick(R.id.btnCancel)
