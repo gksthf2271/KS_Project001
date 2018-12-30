@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,7 +85,8 @@ public class Fragment_ShareDiary extends Fragment {
         contact.setDate(simpleDateFormat.format(date));
         contact.setTitle(diaryText.getText().toString());
         contact.setDescription(diaryText.getText().toString());
-        contact.setId(String.valueOf(idFormat.format(date)) + ID);
+//        contact.setId(String.valueOf(idFormat.format(date)) + ID);
+        contact.setId(String.valueOf(SystemClock.currentThreadTimeMillis()));
         mDBHelperUtils.addContact(contact);
         diaryText.setText("");
         loadFragment(Fragment_DiaryList.newInstance());
