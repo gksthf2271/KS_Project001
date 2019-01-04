@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.ViewHolder> {
+public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.ViewHolder>{
 
     private static final String TAG = DiaryListAdapter.class.getName();
     private Context mContext;
@@ -35,6 +35,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     private int mLastPosition = -1;
 
     private final Object mDiaryItemListLock = new Object();
+    private Listener mListener;
 
     public DiaryListAdapter(ArrayList<DiaryListItem> items, Context context) {
         mItems = items;
@@ -45,7 +46,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     @Override
     public DiaryListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_diary_list, parent, false);
-        ViewHolder holder = new ViewHolder(v);
+        ViewHolder holder = new ViewHolder(v, this);
         return holder;
     }
 
@@ -65,18 +66,30 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         return mItems.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener{
         private static final String TAG = DiaryListAdapter.TAG + ".ViewHolder";
-
+        private final WeakReference<DiaryListAdapter> mWeakReference;
+        private int mPosition;
         public ImageView mDiaryImg;
         public TextView mDiaryText_date;
         public TextView mDiaryText_title;
 
-        ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView, DiaryListAdapter diaryListAdapter) {
             super(itemView);
             mDiaryImg = (ImageView) itemView.findViewById(R.id.diaryImg);
             mDiaryText_date = (TextView) itemView.findViewById(R.id.diaryText_date);
             mDiaryText_title = (TextView) itemView.findViewById(R.id.diaryText_title);
+            mWeakReference = new WeakReference<>(diaryListAdapter);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG,"onClick(...)");
+            DiaryListAdapter optionAdapter = mWeakReference.get();
+            if (v != null && optionAdapter !=null ) {
+                mPosition = getAdapterPosition();
+                optionAdapter.notifyItemClicked(mPosition);
+            }
         }
     }
 
@@ -86,5 +99,16 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
             viewToAnimate.startAnimation(animation);
             mLastPosition = position;
         }
+    }
+
+    private void notifyItemClicked(int position) {
+        Log.v(TAG, "notifyOptionItemClicked(...)");
+        if (mListener != null) {
+            mListener.onOptionItemClicked(position);
+        }
+    }
+
+    public interface Listener {
+        void onOptionItemClicked(int position);
     }
 }
