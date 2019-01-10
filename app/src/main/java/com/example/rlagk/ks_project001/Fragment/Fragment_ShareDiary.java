@@ -1,9 +1,9 @@
 package com.example.rlagk.ks_project001.Fragment;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -43,22 +43,48 @@ public class Fragment_ShareDiary extends Fragment {
     private DBHelperUtils mDBHelperUtils;
     public static long ID = 0;
 
-    public Fragment_ShareDiary(){
+    private String mTitle;
+    private String mText;
+    private int mImageResId;
+    private String mDescription;
 
+    private static volatile Fragment_ShareDiary sInstance;
+
+    public Fragment_ShareDiary(){
     }
     public static Fragment_ShareDiary newInstance() {
         return new Fragment_ShareDiary();
     }
 
+    public static Fragment_ShareDiary getInstance(){
+        if (sInstance == null){
+            sInstance = new Fragment_ShareDiary();
+        }
+        return sInstance;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_sharediary, container, false);
+        if (getArguments() != null) {
+            mTitle = (String) getArguments().get("Title");
+            mText = (String) getArguments().get("Text");
+            mImageResId = (Integer) getArguments().get("ImageResId");
+            mDescription = (String) getArguments().get("Description");
+        }
         init();
         ButterKnife.bind(this,v);
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mDetailView != null) {
+            EditText view = mDetailView.findViewById(R.id.diaryText);
+            view.setText(mDescription);
+        }
+    }
 
     private void init(){
         mDBHelperUtils = DatabaseManager.getInstance().getDB();

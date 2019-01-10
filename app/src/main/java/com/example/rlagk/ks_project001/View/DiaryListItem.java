@@ -18,6 +18,7 @@ public class DiaryListItem {
     int mImage;
     String mTitle;
     String mDate;
+    String mDescription;
 
     public int getImage() {
         return mImage;
@@ -31,9 +32,20 @@ public class DiaryListItem {
         return mDate;
     }
 
+    public String getDescription(){
+        return mDescription;
+    }
+
     public DiaryListItem(int image, String title, String date) {
         this.mImage = image;
         this.mTitle = title;
+        this.mDate = date;
+    }
+
+    public DiaryListItem(int image, String title, String description, String date) {
+        this.mImage = image;
+        this.mTitle = title;
+        this.mDescription = description;
         this.mDate = date;
     }
 

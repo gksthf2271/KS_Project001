@@ -2,7 +2,6 @@ package com.example.rlagk.ks_project001.View;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +19,7 @@ import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
+import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.R;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiaryListView extends LinearLayout{
+public class DiaryListView extends LinearLayout {
 
     private static final String TAG = DiaryListView.class.getName();
 
@@ -37,6 +37,9 @@ public class DiaryListView extends LinearLayout{
     
     private DiaryListAdapter mDiaryListAdapter;
     private ArrayList<DiaryListItem> diaryListViewArrayList;
+
+    private OnSelectListener mSelectListener;
+
 
     public DiaryListView(Context context) {
         this(context, null, 0);
@@ -48,6 +51,7 @@ public class DiaryListView extends LinearLayout{
     public DiaryListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
 
     @Override
     protected void onFinishInflate() {
@@ -63,7 +67,8 @@ public class DiaryListView extends LinearLayout{
         itemList.addAll(dbHelperUtils.getAllContacts());
 
         for (int i = 0; i < itemList.size(); i++) {
-            diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
+//            diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
+            diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getDescription() ,itemList.get(i).getTitle()));
         }
 
         mDiaryListAdapter = new DiaryListAdapter(diaryListViewArrayList, getContext());
@@ -80,7 +85,13 @@ public class DiaryListView extends LinearLayout{
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.d(TAG,"onItemClick(...)");
+                Log.d(TAG, "onItemClick");
+                int imageRecId = diaryListViewArrayList.get(position).getImage();
+                String title = diaryListViewArrayList.get(position).getTitle();
+                String date = diaryListViewArrayList.get(position).getDate();
+                String description = diaryListViewArrayList.get(position).getDescription();
+                DiaryListItem item = new DiaryListItem(imageRecId, title, description, date);
+                notifyItemSelected(view, item, position);
             }
 
             @Override
@@ -112,6 +123,21 @@ public class DiaryListView extends LinearLayout{
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         Log.d(TAG,"onDetachedFromWindow(...)");
+    }
+
+    public void setDiaryListener(@Nullable OnSelectListener l) {
+        mSelectListener = l;
+    }
+
+    public interface OnSelectListener {
+        void onItemClick(View v, int position, DiaryListItem item);
+    }
+
+    private void notifyItemSelected(View view, @NonNull DiaryListItem diaryItem, int position) {
+        Log.v(TAG, "notifyItemSelected(...)  position=" + position);
+        if (mSelectListener != null) {
+            mSelectListener.onItemClick(view, position, diaryItem);
+        }
     }
 
     public static class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
@@ -157,5 +183,4 @@ public class DiaryListView extends LinearLayout{
         @Override
         public void onRequestDisallowInterceptTouchEvent (boolean disallowIntercept){}
     }
-
 }
