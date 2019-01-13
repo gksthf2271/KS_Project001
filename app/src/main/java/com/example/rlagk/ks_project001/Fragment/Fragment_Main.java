@@ -58,6 +58,10 @@ public class Fragment_Main extends Fragment implements DragLayout.GotoDetailList
 
     private static volatile Fragment_Main sInstance;
 
+    public static Fragment_Main newInstance() {
+        return new Fragment_Main();
+    }
+
     public static Fragment_Main getInstance() {
         if (sInstance == null) {
             synchronized (Fragment_Main.class) {

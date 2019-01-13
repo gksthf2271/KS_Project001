@@ -31,7 +31,7 @@ import butterknife.OnClick;
  * Created by rlagk on 2018-04-10.
  */
 
-public class Fragment_ShareDiary extends Fragment {
+public class Fragment_ShareDiary extends Fragment{
     public static final String TAG = Fragment_ShareDiary.class.getName();
     @BindView(R.id.btnCancel)
     Button mCancelBtn;
@@ -47,6 +47,7 @@ public class Fragment_ShareDiary extends Fragment {
     private String mText;
     private int mImageResId;
     private String mDescription;
+    private boolean mFlag = false;
 
     private static volatile Fragment_ShareDiary sInstance;
 
@@ -66,14 +67,19 @@ public class Fragment_ShareDiary extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_sharediary, container, false);
+        ButterKnife.bind(this,v);
         if (getArguments() != null) {
             mTitle = (String) getArguments().get("Title");
             mText = (String) getArguments().get("Text");
             mImageResId = (Integer) getArguments().get("ImageResId");
             mDescription = (String) getArguments().get("Description");
+            mSaveBtn.setVisibility(View.GONE);
+            mFlag = true;
+        } else {
+            mSaveBtn.setVisibility(View.VISIBLE);
+            mFlag = false;
         }
         init();
-        ButterKnife.bind(this,v);
         return v;
     }
 
@@ -92,10 +98,15 @@ public class Fragment_ShareDiary extends Fragment {
 
     @OnClick(R.id.btnCancel)
     public void cancelBTNClick(){
-        Log.d(TAG,"cancelBTNClick(...)");
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), MainActivity.class);
-        startActivity(intent);
+        if (mFlag) {
+            loadFragment(Fragment_DiaryList.getInstance());
+        } else {
+            Log.d(TAG, "cancelBTNClick(...)");
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), MainActivity.class);
+            startActivity(intent);
+            loadFragment(Fragment_DiaryList.newInstance());
+        }
     }
 
     @OnClick(R.id.btnSave)

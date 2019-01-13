@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +27,8 @@ import java.util.zip.Inflater;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class DetailView extends LinearLayout {
 
     private static final String TAG = DetailView.class.getName();
@@ -34,8 +37,6 @@ public class DetailView extends LinearLayout {
     EditText mDiaryText;
     @BindView(R.id.image)
     ImageView imageView;
-    @BindView(R.id.rating)
-    RatingBar ratingBar;
 
 
     public DetailView(Context context) {
@@ -70,7 +71,6 @@ public class DetailView extends LinearLayout {
 
         ViewCompat.setTransitionName(imageView, DetailActivity.IMAGE_TRANSITION_NAME);
         ViewCompat.setTransitionName(mDiaryText,DetailActivity.ADDRESS1_TRANSITION_NAME);
-        ViewCompat.setTransitionName(ratingBar, DetailActivity.RATINGBAR_TRANSITION_NAME);
     }
 
     @Override
@@ -83,6 +83,8 @@ public class DetailView extends LinearLayout {
     protected void onFocusChanged(boolean gainFocus, int direction, @Nullable Rect previouslyFocusedRect) {
         super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
         Log.d(TAG,"onFocusChanged(...)");
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mDiaryText.getWindowToken(),0);
     }
 
     @Override

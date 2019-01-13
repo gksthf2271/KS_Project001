@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListItem;
 import com.example.rlagk.ks_project001.View.DiaryListView;
@@ -98,6 +99,22 @@ public class Fragment_DiaryList extends Fragment{
         bundle.putInt("ImageResId",item.getImage());
         bundle.putString("Description", item.getDescription());
         fragment.setArguments(bundle);
+
+        String className = fragment.getClass().getName();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, className)
+                .addToBackStack(className)
+                .commit();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        Log.v(TAG, "loadFragment(...)  " + fragment);
+        FragmentManager fragmentManager = getFragmentManager();
+
+        if (fragmentManager == null) {
+            Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
+            return;
+        }
 
         String className = fragment.getClass().getName();
         fragmentManager.beginTransaction()
