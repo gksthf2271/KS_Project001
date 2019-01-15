@@ -1,7 +1,8 @@
 package com.example.rlagk.ks_project001.Fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,7 +13,7 @@ import android.widget.Button;
 
 import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
-import com.example.rlagk.ks_project001.View.DiaryListItem;
+import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.View.DiaryListView;
 
 import butterknife.BindView;
@@ -66,7 +67,9 @@ public class Fragment_DiaryList extends Fragment{
     @OnClick(R.id.btnCancel)
     public void onCancelButtonClick(){
         Log.d(TAG,"cancelBTNClick");
-        popBackStack();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        getActivity().startActivity(intent);
+//        popBackStack();
     }
 
     private void popBackStack() {

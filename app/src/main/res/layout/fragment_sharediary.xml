@@ -6,11 +6,20 @@
     android:orientation="vertical">
 
 
+    <com.example.rlagk.ks_project001.View.HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:id="@+id/cHorizontalScrollView"
+        android:background="#aaff00">
+    </com.example.rlagk.ks_project001.View.HorizontalScrollView>
+
+
     <com.example.rlagk.ks_project001.View.DetailView
         android:id="@+id/cDetailView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"/>
+        android:layout_weight="6"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

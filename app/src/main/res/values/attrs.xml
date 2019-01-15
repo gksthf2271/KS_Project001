@@ -11,4 +11,8 @@
     <declare-styleable name="DetailListView">
         <attr name="detailListView" format="reference|integer" />
     </declare-styleable>
+
+    <declare-styleable name="HorizontalScrollView">
+        <attr name="horizontalScrollView" format="reference|integer" />
+    </declare-styleable>
 </resources>

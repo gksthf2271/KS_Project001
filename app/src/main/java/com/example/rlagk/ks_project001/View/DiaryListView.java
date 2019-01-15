@@ -19,7 +19,7 @@ import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
-import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
+import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class DiaryListView extends LinearLayout {
     RecyclerView mRecyclerView;
     
     private DiaryListAdapter mDiaryListAdapter;
-    private ArrayList<DiaryListItem> diaryListViewArrayList;
+    private ArrayList<DiaryListItem> mDiaryListViewArrayList;
 
     private OnSelectListener mSelectListener;
 
@@ -53,25 +53,30 @@ public class DiaryListView extends LinearLayout {
     }
 
 
+    private void initView() {
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.cview_diary_list, this);
+        ButterKnife.bind(this);
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         Log.d(TAG,"onFinishInflate(...)");
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.cview_diary_list, this);
-        ButterKnife.bind(this);
 
-        diaryListViewArrayList = new ArrayList<>();
+        initView();
+
+        mDiaryListViewArrayList = new ArrayList<>();
         List<Contact> itemList = new ArrayList<>();
         DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
         itemList.addAll(dbHelperUtils.getAllContacts());
 
         for (int i = 0; i < itemList.size(); i++) {
-//            diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
-            diaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getDescription() ,itemList.get(i).getTitle()));
+//            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
+            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getDescription() ,itemList.get(i).getTitle()));
         }
 
-        mDiaryListAdapter = new DiaryListAdapter(diaryListViewArrayList, getContext());
+        mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
         LinearLayoutManager lim = new LinearLayoutManager(getContext());
         lim.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(lim);
@@ -86,10 +91,10 @@ public class DiaryListView extends LinearLayout {
             @Override
             public void onItemClick(View view, int position) {
                 Log.d(TAG, "onItemClick");
-                int imageRecId = diaryListViewArrayList.get(position).getImage();
-                String title = diaryListViewArrayList.get(position).getTitle();
-                String date = diaryListViewArrayList.get(position).getDate();
-                String description = diaryListViewArrayList.get(position).getDescription();
+                int imageRecId = mDiaryListViewArrayList.get(position).getImage();
+                String title = mDiaryListViewArrayList.get(position).getTitle();
+                String date = mDiaryListViewArrayList.get(position).getDate();
+                String description = mDiaryListViewArrayList.get(position).getDescription();
                 DiaryListItem item = new DiaryListItem(imageRecId, title, description, date);
                 notifyItemSelected(view, item, position);
             }

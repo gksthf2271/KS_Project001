@@ -35,9 +35,6 @@ public class DetailView extends LinearLayout {
 
     @BindView(R.id.diaryText)
     EditText mDiaryText;
-    @BindView(R.id.image)
-    ImageView imageView;
-
 
     public DetailView(Context context) {
         this(context, null, 0);
@@ -69,7 +66,6 @@ public class DetailView extends LinearLayout {
         String imageUrl = ((DetailActivity) getContext()).getIntent().getStringExtra(DetailActivity.EXTRA_IMAGE_URL);
 //        ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
-        ViewCompat.setTransitionName(imageView, DetailActivity.IMAGE_TRANSITION_NAME);
         ViewCompat.setTransitionName(mDiaryText,DetailActivity.ADDRESS1_TRANSITION_NAME);
     }
 

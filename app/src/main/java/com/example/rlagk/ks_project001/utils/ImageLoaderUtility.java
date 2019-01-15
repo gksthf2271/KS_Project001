@@ -1,10 +1,7 @@
 package com.example.rlagk.ks_project001.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.View;
 
-import com.example.rlagk.ks_project001.MainActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;

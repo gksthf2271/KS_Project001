@@ -1,7 +1,7 @@
 package com.example.rlagk.ks_project001.Fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -74,10 +74,8 @@ public class Fragment_ShareDiary extends Fragment{
             mImageResId = (Integer) getArguments().get("ImageResId");
             mDescription = (String) getArguments().get("Description");
             mSaveBtn.setVisibility(View.GONE);
-            mFlag = true;
         } else {
             mSaveBtn.setVisibility(View.VISIBLE);
-            mFlag = false;
         }
         init();
         return v;
@@ -98,14 +96,13 @@ public class Fragment_ShareDiary extends Fragment{
 
     @OnClick(R.id.btnCancel)
     public void cancelBTNClick(){
-        if (mFlag) {
+        if (mSaveBtn.getVisibility() == View.GONE) {
             loadFragment(Fragment_DiaryList.getInstance());
         } else {
             Log.d(TAG, "cancelBTNClick(...)");
             Intent intent = new Intent();
             intent.setClass(getActivity(), MainActivity.class);
             startActivity(intent);
-            loadFragment(Fragment_DiaryList.newInstance());
         }
     }
 
@@ -129,10 +126,9 @@ public class Fragment_ShareDiary extends Fragment{
         loadFragment(Fragment_DiaryList.newInstance());
     }
 
-    private void loadFragment(@NonNull Fragment fragment) {
+    private void loadFragment(@NonNull android.support.v4.app.Fragment fragment) {
         Log.v(TAG, "loadFragment(...)  " + fragment);
         FragmentManager fragmentManager = getFragmentManager();
-
         if (fragmentManager == null) {
             Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
             return;
@@ -143,5 +139,10 @@ public class Fragment_ShareDiary extends Fragment{
                 .replace(R.id.fragment_container, fragment, className)
                 .addToBackStack(className)
                 .commit();
+    }
+
+    public FragmentManager getFragManager(){
+        FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
+        return fragmentManager;
     }
 }

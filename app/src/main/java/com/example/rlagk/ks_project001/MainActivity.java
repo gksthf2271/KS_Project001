@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private List<Fragment_Main> fragments = new ArrayList<>();
 
+    public static MainActivity newInstance() {
+        return new MainActivity();
+    }
+
     public static MainActivity getInstance(){
         if (sInstance == null){
             sInstance = new MainActivity();

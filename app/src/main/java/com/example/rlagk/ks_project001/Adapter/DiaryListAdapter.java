@@ -4,9 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -15,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.R;
-import com.example.rlagk.ks_project001.View.DiaryListItem;
+import com.example.rlagk.ks_project001.Item.DiaryListItem;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -26,8 +24,6 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     private Context mContext;
     private ArrayList<DiaryListItem> mItems;
     private int mLastPosition = -1;
-
-    private final Object mDiaryItemListLock = new Object();
 
     public DiaryListAdapter(ArrayList<DiaryListItem> items, Context context) {
         mItems = items;
