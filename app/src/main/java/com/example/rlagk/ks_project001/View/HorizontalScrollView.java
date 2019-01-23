@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 import com.example.rlagk.ks_project001.Adapter.HorImageViewAdapter;
 import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
-import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -46,6 +43,8 @@ public class HorizontalScrollView extends LinearLayout {
 
     public android.widget.HorizontalScrollView mHorizontalScrollView;
 
+    private showGalleryListener mListener;
+
     public HorizontalScrollView(Context context) {
         super(context);
     }
@@ -62,6 +61,7 @@ public class HorizontalScrollView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cview_horizontal_scroll, this);
         ButterKnife.bind(this);
+        mImageButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -69,59 +69,44 @@ public class HorizontalScrollView extends LinearLayout {
         super.onFinishInflate();
 
         initView();
-
         mHorImageViewList = new ArrayList<>();
     }
 
     @OnClick(R.id.addImageBtn)
     void addImageBtnClick(){
         Log.d(TAG,"addImageBtnClick(...)");
-        mImageButton.setVisibility(View.GONE);
         showGallery();
     }
 
     private void showGallery() {
-        int permissionCheck = ContextCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if(permissionCheck == PackageManager.PERMISSION_DENIED){
-            Log.d(TAG,"Permission check");
-            TedPermission.with(getContext())
-                    .setPermissionListener(permissionlistener)
-                    .setRationaleMessage("갤러리 접근 권한 요청")
-                    .setDeniedMessage("접근 권한 취소\n[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
-                    .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .check();
-            return;
-        }
-        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(getContext())
-                .setOnMultiImageSelectedListener(new TedBottomPicker.OnMultiImageSelectedListener() {
-                    @Override
-                    public void onImagesSelected(ArrayList<Uri> uriList) {
-                        Log.d(TAG, "onImagesSelected");
-                    }
-                })
-                .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
-                    @Override
-                    public void onImageSelected(Uri uri) {
-                        Log.d(TAG, "onImageSeleted");
-                    }
-                })
-                .setPeekHeight(2000)
-                .setSelectMaxCount(5)
-                .setSelectedForeground(R.drawable.icon_selected)
-                .create();
-//        tedBottomPicker.show((MainActivity.getInstance()).getSupportFragmentManager());
-        tedBottomPicker.show(Fragment_ShareDiary.getInstance().getFragManager());
+        Log.d(TAG,"showGallery(...)");
+        showGalleryCallback();
     }
 
-    PermissionListener permissionlistener = new PermissionListener() {
-        @Override
-        public void onPermissionGranted() {
-            Toast.makeText(getContext(), "권한 허가", Toast.LENGTH_SHORT).show();
-        }
 
-        @Override
-        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-            Toast.makeText(getContext(), "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+    public interface showGalleryListener{
+        void showGalleryCallback();
+    }
+
+    private void showGalleryCallback(){
+        if (mListener != null) {
+            mListener.showGalleryCallback();
         }
-    };
+    }
+
+    public void showGalleryCallbackListener(showGalleryListener listener) {
+        mListener = listener;
+    }
+
+    public void updateAddImage(boolean visible){
+        if (visible) {
+            if (mImageButton.getVisibility() == View.GONE) {
+                mImageButton.setVisibility(View.VISIBLE);
+            }
+        } else {
+            if (mImageButton.getVisibility() == View.VISIBLE) {
+                mImageButton.setVisibility(View.GONE);
+            }
+        }
+    }
 }
