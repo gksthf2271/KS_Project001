@@ -31,6 +31,7 @@ import com.gun0912.tedpermission.TedPermission;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +64,10 @@ public class Fragment_ShareDiary extends Fragment{
 
     private static volatile Fragment_ShareDiary sInstance;
 
+    private List<Uri> mImageUriList;
+
     public Fragment_ShareDiary(){
+        mImageUriList = new ArrayList<>();
     }
     public static Fragment_ShareDiary newInstance() {
         return new Fragment_ShareDiary();
@@ -98,6 +102,10 @@ public class Fragment_ShareDiary extends Fragment{
                             Log.d(TAG, "onImagesSelected");
                             if(uriList != null && uriList.size() > 0){
                                 mHorizontalScrollView.updateAddImage(false);
+                                mImageUriList.addAll(uriList);
+                            } else {
+                                Log.d(TAG,"uriList is null");
+                                return;
                             }
                         }
                     })
@@ -107,6 +115,10 @@ public class Fragment_ShareDiary extends Fragment{
                             Log.d(TAG, "onImageSeleted");
                             if(uri != null){
                                 mHorizontalScrollView.updateAddImage(false);
+                                mImageUriList.add(uri);
+                            } else {
+                                Log.d(TAG,"uri is null");
+                                return;
                             }
                         }
                     })
