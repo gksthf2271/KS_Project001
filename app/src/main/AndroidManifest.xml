@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Base.Theme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity" />
+
+
+        <activity android:name=".quote.ListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".quote.ArticleDetailActivity"
+            android:label=""
+            android:parentActivityName=".quote.ListActivity"/>
+        <activity android:name=".ViewSamplesActivity"
+            android:label="Samples"
+            android:parentActivityName=".quote.ListActivity"/>
+        <activity android:name=".SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName=".quote.ListActivity"/>
+
+
+
 
         <!--<activity android:name=".CameraActivity"-->
             <!--android:screenOrientation="landscape">-->

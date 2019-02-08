@@ -4,7 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -213,9 +213,9 @@ public class Fragment_ShareDiary extends Fragment{
         loadFragment(Fragment_DiaryList.newInstance());
     }
 
-    private void loadFragment(@NonNull android.support.v4.app.Fragment fragment) {
+    private void loadFragment(@NonNull BaseFragment fragment) {
         Log.v(TAG, "loadFragment(...)  " + fragment);
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getFragManager();
         if (fragmentManager == null) {
             Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
             return;
@@ -229,7 +229,7 @@ public class Fragment_ShareDiary extends Fragment{
     }
 
     public FragmentManager getFragManager(){
-        FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
+        FragmentManager fragmentManager = MainActivity.getInstance().getFragmentManager();
         return fragmentManager;
     }
 }

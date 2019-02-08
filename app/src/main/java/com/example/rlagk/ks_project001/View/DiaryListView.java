@@ -69,6 +69,9 @@ public class DiaryListView extends LinearLayout {
         mDiaryListViewArrayList = new ArrayList<>();
         List<Contact> itemList = new ArrayList<>();
         DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
+        if (dbHelperUtils == null) {
+            dbHelperUtils = new DBHelperUtils(getContext());
+        }
         itemList.addAll(dbHelperUtils.getAllContacts());
 
         for (int i = 0; i < itemList.size(); i++) {

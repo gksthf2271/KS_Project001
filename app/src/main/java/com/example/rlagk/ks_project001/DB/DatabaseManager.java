@@ -21,6 +21,10 @@ public class DatabaseManager {
         return sInstance;
     }
 
+    public static DatabaseManager newInstance() {
+        return new DatabaseManager();
+    }
+
     public void init(@NonNull Context context) {
         Log.v(TAG, "init(...)");
         mDBHelperUtils = new DBHelperUtils(context);

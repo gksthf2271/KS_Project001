@@ -1,21 +1,18 @@
 package com.example.rlagk.ks_project001;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
 import com.example.rlagk.ks_project001.View.CustPagerTransformer;
@@ -27,12 +24,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
     public static final String TAG = "MainActivity";
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     private static volatile MainActivity sInstance;
-
+    protected static final int NAV_DRAWER_ITEM_INVALID = -1;
+    private DrawerLayout drawerLayout;
+    private Toolbar actionBarToolbar;
     private List<Fragment_Main> fragments = new ArrayList<>();
 
     public static MainActivity newInstance() {
@@ -103,6 +102,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
+    @Override
+    public boolean providesActivityToolbar() {
         return false;
     }
 }

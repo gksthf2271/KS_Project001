@@ -26,6 +26,7 @@ import com.example.rlagk.ks_project001.View.LockView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@SuppressWarnings("unchecked")
 public class Fragment_Main extends Fragment implements DragLayout.GotoDetailListener, DragLayout.OnTouchListener{
     public static final String TAG = "Fragment_Main";
 
