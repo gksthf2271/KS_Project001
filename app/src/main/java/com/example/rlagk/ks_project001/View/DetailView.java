@@ -2,8 +2,8 @@ package com.example.rlagk.ks_project001.View;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -13,19 +13,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 
-import com.example.rlagk.ks_project001.DetailActivity;
 import com.example.rlagk.ks_project001.R;
-
-import org.w3c.dom.Attr;
-
-import java.util.zip.Inflater;
+import com.example.rlagk.ks_project001.ViewSamplesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
@@ -35,6 +30,8 @@ public class DetailView extends LinearLayout {
 
     @BindView(R.id.diaryText)
     EditText mDiaryText;
+
+    private fabClickListener mListener;
 
     public DetailView(Context context) {
         this(context, null, 0);
@@ -58,15 +55,15 @@ public class DetailView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        Window window = ((DetailActivity) getContext()).getWindow();
+        Window window = ((ViewSamplesActivity) getContext()).getWindow();
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        String imageUrl = ((DetailActivity) getContext()).getIntent().getStringExtra(DetailActivity.EXTRA_IMAGE_URL);
+        String imageUrl = ((ViewSamplesActivity) getContext()).getIntent().getStringExtra(ViewSamplesActivity.EXTRA_IMAGE_URL);
 //        ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
-        ViewCompat.setTransitionName(mDiaryText,DetailActivity.ADDRESS1_TRANSITION_NAME);
+        ViewCompat.setTransitionName(mDiaryText,ViewSamplesActivity.ADDRESS1_TRANSITION_NAME);
     }
 
     @Override
@@ -98,5 +95,27 @@ public class DetailView extends LinearLayout {
 
     public String getDescription(){
         return mDiaryText.getText().toString();
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClicked(View view) {
+        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        onClickFab();
+    }
+
+
+    public void setListener(fabClickListener fabClickListener) {
+        Log.d(TAG,"fabClickListener(...)");
+        this.mListener = fabClickListener;
+    }
+    public interface fabClickListener {
+        public void clickFab();
+    }
+
+    private void onClickFab() {
+        Log.d(TAG,"onClickFab(...)");
+        if (null != mListener) {
+            mListener.clickFab();
+        }
     }
 }

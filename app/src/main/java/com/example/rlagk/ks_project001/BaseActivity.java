@@ -2,10 +2,7 @@ package com.example.rlagk.ks_project001;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
+import com.example.rlagk.ks_project001.quote.ArticleDetailActivity;
+import com.example.rlagk.ks_project001.quote.ArticleDetailFragment;
 import com.example.rlagk.ks_project001.quote.ListActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -29,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
+        DatabaseManager.getInstance().init(this);
     }
 
     private void setupNavDrawer() {
@@ -86,6 +86,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.nav_write:
+                startActivity(new Intent(this, ArticleDetailActivity.class));
                 break;
         }
     }

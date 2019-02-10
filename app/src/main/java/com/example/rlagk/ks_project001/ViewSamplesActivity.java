@@ -1,14 +1,18 @@
 package com.example.rlagk.ks_project001;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.example.rlagk.ks_project001.DB.Contact;
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
+import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 
 /**
  * Activity demonstrates some GUI functionalities from the Android support library.
@@ -17,18 +21,23 @@ import butterknife.OnClick;
  */
 public class ViewSamplesActivity extends BaseActivity {
 
+    public static long ID = 0;
+    private DBHelperUtils mDBHelperUtils;
+
+    public static final String EXTRA_IMAGE_URL = "detailImageUrl";
+    public static final String ADDRESS1_TRANSITION_NAME = "address1";
+    public static final String RATINGBAR_TRANSITION_NAME = "ratingBar";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_samples);
-        ButterKnife.bind(this);
         setupToolbar();
+        Fragment_ShareDiary fragment =  Fragment_ShareDiary.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        mDBHelperUtils = DatabaseManager.getInstance().getDB();
     }
 
-    @OnClick(R.id.fab)
-    public void onFabClicked(View view) {
-        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-    }
 
     private void setupToolbar() {
         final ActionBar ab = getActionBarToolbar();
@@ -60,5 +69,29 @@ public class ViewSamplesActivity extends BaseActivity {
     @Override
     public boolean providesActivityToolbar() {
         return true;
+    }
+
+    private void saveDiary(View view){
+        Log.d(TAG,"saveBTNClick(...) ");
+        ID++;
+
+        EditText diaryTitle = view.findViewById(R.id.diaryTitle);
+        EditText diaryDate = view.findViewById(R.id.diaryDate);
+        EditText diaryText = view.findViewById(R.id.diaryText);
+        Contact contact = new Contact();
+
+        contact.setDate(diaryDate.getText().toString());
+        contact.setTitle(diaryTitle.getText().toString());
+        contact.setDescription(diaryText.getText().toString());
+        contact.setId(String.valueOf(SystemClock.currentThreadTimeMillis()));
+
+        if(mDBHelperUtils == null){
+            mDBHelperUtils = DatabaseManager.getInstance().getDB();
+        }
+        mDBHelperUtils.addContact(contact);
+
+        diaryText.setText("");
+        diaryDate.setText("");
+        diaryTitle.setText("");
     }
 }

@@ -1,25 +1,20 @@
 package com.example.rlagk.ks_project001.Fragment;
 
-import android.content.Intent;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
-import com.example.rlagk.ks_project001.MainActivity;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
 import com.example.rlagk.ks_project001.quote.ArticleDetailFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by rlagk on 2018-04-10.
@@ -30,10 +25,10 @@ public class Fragment_DiaryList extends BaseFragment {
     private static volatile Fragment_DiaryList sInstance;
 
     public static final String TAG = Fragment_ShareDiary.class.getName();
-    @BindView(R.id.btnCancel)
-    Button mCancelBtn;
-    @BindView(R.id.btnSave)
-    Button mSaveBtn;
+//    @BindView(R.id.btnCancel)
+//    Button mCancelBtn;
+//    @BindView(R.id.btnSave)
+//    Button mSaveBtn;
     @BindView(R.id.cDiaryListView)
     DiaryListView mDiaryListView;
 
@@ -65,13 +60,13 @@ public class Fragment_DiaryList extends BaseFragment {
         mDiaryListView.setDiaryListener(mSelectListener);
     }
 
-    @OnClick(R.id.btnCancel)
-    public void onCancelButtonClick(){
-        Log.d(TAG,"cancelBTNClick");
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        getActivity().startActivity(intent);
-//        popBackStack();
-    }
+//    @OnClick(R.id.btnCancel)
+//    public void onCancelButtonClick(){
+//        Log.d(TAG,"cancelBTNClick");
+//        Intent intent = new Intent(getActivity(), MainActivity.class);
+//        getActivity().startActivity(intent);
+////        popBackStack();
+//    }
 
     private void popBackStack() {
         FragmentManager fragmentManager = getFragmentManager();

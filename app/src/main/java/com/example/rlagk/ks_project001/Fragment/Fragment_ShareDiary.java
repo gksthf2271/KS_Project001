@@ -3,12 +3,13 @@ package com.example.rlagk.ks_project001.Fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,12 +43,8 @@ import gun0912.tedbottompicker.TedBottomPicker;
  * Created by rlagk on 2018-04-10.
  */
 
-public class Fragment_ShareDiary extends Fragment{
+public class Fragment_ShareDiary extends Fragment {
     public static final String TAG = Fragment_ShareDiary.class.getName();
-    @BindView(R.id.btnCancel)
-    Button mCancelBtn;
-    @BindView(R.id.btnSave)
-    Button mSaveBtn;
     @BindView(R.id.cDetailView)
     DetailView mDetailView;
     @BindView(R.id.cHorizontalScrollView)
@@ -79,6 +76,34 @@ public class Fragment_ShareDiary extends Fragment{
         }
         return sInstance;
     }
+
+    private DetailView.fabClickListener onFabClickListener = new DetailView.fabClickListener() {
+        @Override
+        public void clickFab() {
+            Log.d(TAG, "saveBTNClick(...) ");
+            ID++;
+
+            EditText diaryTitle = mDetailView.findViewById(R.id.diaryTitle);
+            EditText diaryDate = mDetailView.findViewById(R.id.diaryDate);
+            EditText diaryText = mDetailView.findViewById(R.id.diaryText);
+            Contact contact = new Contact();
+
+            contact.setDate(diaryDate.getText().toString());
+            contact.setTitle(diaryTitle.getText().toString());
+            contact.setDescription(diaryText.getText().toString());
+            contact.setId(String.valueOf(SystemClock.currentThreadTimeMillis()));
+
+            if (mDBHelperUtils == null) {
+                mDBHelperUtils = DatabaseManager.getInstance().getDB();
+            }
+            mDBHelperUtils.addContact(contact);
+
+            diaryText.setText("");
+            diaryDate.setText("");
+            diaryTitle.setText("");
+
+        }
+    };
 
     private HorizontalScrollView.showGalleryListener showGalleryCallbackListener = new HorizontalScrollView.showGalleryListener() {
         @Override
@@ -160,9 +185,6 @@ public class Fragment_ShareDiary extends Fragment{
             mText = (String) getArguments().get("Text");
             mImageResId = (Integer) getArguments().get("ImageResId");
             mDescription = (String) getArguments().get("Description");
-            mSaveBtn.setVisibility(View.GONE);
-        } else {
-            mSaveBtn.setVisibility(View.VISIBLE);
         }
         init();
         return v;
@@ -179,38 +201,7 @@ public class Fragment_ShareDiary extends Fragment{
 
     private void init(){
         mDBHelperUtils = DatabaseManager.getInstance().getDB();
-    }
-
-    @OnClick(R.id.btnCancel)
-    public void cancelBTNClick(){
-        if (mSaveBtn.getVisibility() == View.GONE) {
-            loadFragment(Fragment_DiaryList.getInstance());
-        } else {
-            Log.d(TAG, "cancelBTNClick(...)");
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), MainActivity.class);
-            startActivity(intent);
-        }
-    }
-
-    @OnClick(R.id.btnSave)
-    public void saveBTNClick(){
-        Log.d(TAG,"saveBTNClick(...) ");
-        ID++;
-        long nowTime = System.currentTimeMillis();
-        Date date = new Date(nowTime);
-        EditText diaryText = mDetailView.findViewById(R.id.diaryText);
-        SimpleDateFormat idFormat = new SimpleDateFormat("yyyyMMddss");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Contact contact = new Contact();
-        contact.setDate(simpleDateFormat.format(date));
-        contact.setTitle(diaryText.getText().toString());
-        contact.setDescription(diaryText.getText().toString());
-//        contact.setId(String.valueOf(idFormat.format(date)) + ID);
-        contact.setId(String.valueOf(SystemClock.currentThreadTimeMillis()));
-        mDBHelperUtils.addContact(contact);
-        diaryText.setText("");
-        loadFragment(Fragment_DiaryList.newInstance());
+        mDetailView.setListener(onFabClickListener);
     }
 
     private void loadFragment(@NonNull BaseFragment fragment) {

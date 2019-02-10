@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paper_background"
     android:orientation="vertical">
 
 
@@ -10,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:id="@+id/cHorizontalScrollView"
-        android:background="#aaff00">
+        android:id="@+id/cHorizontalScrollView">
     </com.example.rlagk.ks_project001.View.HorizontalScrollView>
 
 
@@ -20,30 +18,4 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:gravity="bottom"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#ffffff"
-            android:text="CANCEL"
-            android:textColor="#000000" />
-
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#ffffff"
-            android:text="SAVE"
-            android:textColor="#000000" />
-    </LinearLayout>
 </LinearLayout>

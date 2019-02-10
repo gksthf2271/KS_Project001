@@ -19,6 +19,7 @@
     <item android:title="@string/navigation_sub_items">
         <menu>
             <item
+                android:id="@+id/nav_write"
                 android:icon="@drawable/ic_dashboard"
                 android:title="@string/navigation_dummy_item_1" />
             <item
