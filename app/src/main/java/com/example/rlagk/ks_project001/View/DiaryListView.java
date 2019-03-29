@@ -76,12 +76,11 @@ public class DiaryListView extends LinearLayout {
 
         for (int i = 0; i < itemList.size(); i++) {
 //            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
-            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getDescription() ,itemList.get(i).getTitle()));
+            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getTitle(), itemList.get(i).getDescription(), itemList.get(i).getDate()));
         }
 
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
-        LinearLayoutManager lim = new LinearLayoutManager(getContext());
-        lim.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setAdapter(mDiaryListAdapter);

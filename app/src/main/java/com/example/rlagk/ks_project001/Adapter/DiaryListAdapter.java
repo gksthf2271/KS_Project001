@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 
+import org.w3c.dom.Text;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -44,6 +46,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         holder.mDiaryImg.setImageResource(mItems.get(position).getImage());
         holder.mDiaryText_date.setText(mItems.get(position).getDate());
         holder.mDiaryText_title.setText(mItems.get(position).getTitle());
+        holder.mDiaryText_description.setText(mItems.get(position).getDescription());
         setAnimation(holder.mDiaryImg, position);
 //        mViewHolder = holder;
 //        mPosition = position;
@@ -61,12 +64,14 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         public ImageView mDiaryImg;
         public TextView mDiaryText_date;
         public TextView mDiaryText_title;
+        public TextView mDiaryText_description;
 
         ViewHolder(@NonNull View itemView, DiaryListAdapter diaryListAdapter) {
             super(itemView);
             mDiaryImg = (ImageView) itemView.findViewById(R.id.diaryImg);
             mDiaryText_date = (TextView) itemView.findViewById(R.id.diaryText_date);
             mDiaryText_title = (TextView) itemView.findViewById(R.id.diaryText_title);
+            mDiaryText_description = (TextView) itemView.findViewById(R.id.diaryText_description);
             mWeakReference = new WeakReference<>(diaryListAdapter);
         }
     }
