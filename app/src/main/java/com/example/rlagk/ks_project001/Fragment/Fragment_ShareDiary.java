@@ -92,6 +92,7 @@ public class Fragment_ShareDiary extends Fragment {
             contact.setTitle(diaryTitle.getText().toString());
             contact.setDescription(diaryText.getText().toString());
             contact.setId(String.valueOf(SystemClock.currentThreadTimeMillis()));
+            contact.setImageUriList(mImageUriList.toString());
 
             if (mDBHelperUtils == null) {
                 mDBHelperUtils = DatabaseManager.getInstance().getDB();
@@ -200,6 +201,7 @@ public class Fragment_ShareDiary extends Fragment {
     }
 
     private void init(){
+        mImageUriList.clear();
         mDBHelperUtils = DatabaseManager.getInstance().getDB();
         mDetailView.setListener(onFabClickListener);
     }

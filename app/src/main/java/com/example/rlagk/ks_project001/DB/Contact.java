@@ -7,15 +7,17 @@ public class Contact {
     String mDate;
     String mTitle;
     String mDescription;
+    String mImageUriList;
 
     public Contact(){
 
     }
-    public Contact(String id, String date, String title, String description){
+    public Contact(String id, String date, String title, String description, String imageUri){
         this.mId = id;
         this.mDate = date;
         this.mTitle = title;
         this.mDescription = description;
+        this.mImageUriList = imageUri;
     }
 
     public String getDate() {
@@ -26,6 +28,7 @@ public class Contact {
         this.mDate = mDate;
     }
 
+
     public String getTitle() {
         return mTitle;
     }
@@ -33,6 +36,7 @@ public class Contact {
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
+
 
     public String getDescription() {
         return mDescription;
@@ -42,12 +46,21 @@ public class Contact {
         this.mDescription = mDescription;
     }
 
+
     public String getId() {
         return mId;
     }
 
     public void setId(String mId) {
         this.mId = mId;
+    }
+
+    public String getImageUriList() {
+        return mImageUriList;
+    }
+
+    public void setImageUriList(String mImageUriList) {
+        this.mImageUriList = mImageUriList;
     }
 
 }

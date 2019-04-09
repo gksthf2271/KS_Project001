@@ -31,6 +31,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
     private static final String KEY_DATE = "date";
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_IMAGE_URI_LIST = "uri_list";
 
     private static volatile DBHelperUtils sInstance;
 
@@ -47,9 +48,11 @@ public class DBHelperUtils extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE "
+                + TABLE_CONTACTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DATE + " TEXT," + KEY_TITLE + " TEXT,"
-                + KEY_DESCRIPTION + " TEXT" + ")";
+                + KEY_DESCRIPTION + " TEXT,"
+                + KEY_IMAGE_URI_LIST + " TEXT" +")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -76,6 +79,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         values.put(KEY_DATE, String.valueOf(contact.getDate()));
         values.put(KEY_TITLE, contact.getTitle());
         values.put(KEY_DESCRIPTION, contact.getDescription());
+        values.put(KEY_IMAGE_URI_LIST, contact.getImageUriList());
 
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
@@ -93,7 +97,10 @@ public class DBHelperUtils extends SQLiteOpenHelper{
             cursor.moveToFirst();
 
         Contact contact = new Contact(cursor.getString(0),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
         // return contact
         return contact;
     }
@@ -114,6 +121,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 contact.setDate(cursor.getString(1));
                 contact.setTitle(cursor.getString(2));
                 contact.setDescription(cursor.getString(3));
+                contact.setImageUriList(cursor.getString(4));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -132,6 +140,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         values.put(KEY_TITLE, contact.getTitle());
         values.put(KEY_DATE, contact.getDate());
         values.put(KEY_DESCRIPTION, contact.getDescription());
+        values.put(KEY_IMAGE_URI_LIST, contact.getImageUriList());
 
         // updating row
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
