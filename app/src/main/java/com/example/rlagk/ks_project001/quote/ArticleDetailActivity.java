@@ -36,7 +36,7 @@ public class ArticleDetailActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {
             DiaryListItem diaryListItem = new DiaryListItem(
-                    getIntent().getIntExtra("ImageResId", -1),
+                    getIntent().getStringExtra("ImageUri"),
                     getIntent().getStringExtra("Title")
                     , getIntent().getStringExtra("Description")
                     , getIntent().getStringExtra("Date"));

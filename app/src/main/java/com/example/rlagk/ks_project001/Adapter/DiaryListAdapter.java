@@ -12,8 +12,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import org.w3c.dom.Text;
 
@@ -43,7 +45,14 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull DiaryListAdapter.ViewHolder holder, int position) {
         Log.d(TAG,"onBindViewHolder(...)");
-        holder.mDiaryImg.setImageResource(mItems.get(position).getImage());
+        String firstImage = Utils.firstUri(mItems.get(position).getImageUri());
+        if(firstImage == null) {
+            return;
+        }
+        Glide.with(mContext)
+                .load(firstImage)
+                .centerCrop()
+                .into(holder.mDiaryImg);
         holder.mDiaryText_date.setText(mItems.get(position).getDate());
         holder.mDiaryText_title.setText(mItems.get(position).getTitle());
         holder.mDiaryText_description.setText(mItems.get(position).getDescription());

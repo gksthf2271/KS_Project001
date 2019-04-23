@@ -154,7 +154,7 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
             Intent detailIntent = new Intent(this, ArticleDetailActivity.class);
             detailIntent.putExtra("Title",item.getTitle());
             detailIntent.putExtra("Date", item.getDate());
-            detailIntent.putExtra("ImageResId",item.getImage());
+            detailIntent.putExtra("ImageUri",item.getImage());
             detailIntent.putExtra("Description", item.getDescription());
             startActivity(detailIntent);
         }

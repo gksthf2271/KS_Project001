@@ -76,7 +76,7 @@ public class DiaryListView extends LinearLayout {
 
         for (int i = 0; i < itemList.size(); i++) {
 //            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
-            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getTitle(), itemList.get(i).getDescription(), itemList.get(i).getDate()));
+            mDiaryListViewArrayList.add(new DiaryListItem(itemList.get(i).getImageUriList(), itemList.get(i).getTitle(), itemList.get(i).getDescription(), itemList.get(i).getDate()));
         }
 
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
@@ -93,11 +93,11 @@ public class DiaryListView extends LinearLayout {
             @Override
             public void onItemClick(View view, int position) {
                 Log.d(TAG, "onItemClick");
-                int imageRecId = mDiaryListViewArrayList.get(position).getImage();
+                String imageUri = mDiaryListViewArrayList.get(position).getImageUri();
                 String title = mDiaryListViewArrayList.get(position).getTitle();
                 String date = mDiaryListViewArrayList.get(position).getDate();
                 String description = mDiaryListViewArrayList.get(position).getDescription();
-                DiaryListItem item = new DiaryListItem(imageRecId, title, description, date);
+                DiaryListItem item = new DiaryListItem(imageUri, title, description, date);
                 notifyItemSelected(view, item, position);
             }
 

@@ -91,7 +91,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
-                        KEY_DATE, KEY_TITLE, KEY_DESCRIPTION }, KEY_ID + "=?",
+                        KEY_DATE, KEY_TITLE, KEY_DESCRIPTION, KEY_IMAGE_URI_LIST }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();

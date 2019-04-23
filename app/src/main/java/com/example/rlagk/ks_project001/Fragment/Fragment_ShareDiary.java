@@ -55,7 +55,7 @@ public class Fragment_ShareDiary extends Fragment {
 
     private String mTitle;
     private String mText;
-    private int mImageResId;
+    private String mImageUri;
     private String mDescription;
     private boolean mFlag = false;
 
@@ -102,6 +102,7 @@ public class Fragment_ShareDiary extends Fragment {
             diaryText.setText("");
             diaryDate.setText("");
             diaryTitle.setText("");
+
 
         }
     };
@@ -184,7 +185,7 @@ public class Fragment_ShareDiary extends Fragment {
         if (getArguments() != null) {
             mTitle = (String) getArguments().get("Title");
             mText = (String) getArguments().get("Text");
-            mImageResId = (Integer) getArguments().get("ImageResId");
+            mImageUriList = (List<Uri>) getArguments().get("ImageUri");
             mDescription = (String) getArguments().get("Description");
         }
         init();

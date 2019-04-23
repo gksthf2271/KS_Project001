@@ -1,5 +1,6 @@
 package com.example.rlagk.ks_project001.quote;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import com.example.rlagk.ks_project001.Fragment.BaseFragment;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +86,15 @@ public class ArticleDetailFragment extends BaseFragment {
     }
 
     private void loadBackdrop() {
-        Glide.with(this).load(mBundle.getInt("ImageResId")).centerCrop().into(backdropImg);
+        String bundleString = mBundle.getString("ImageUri");
+        String firstImage = Utils.firstUri(bundleString);
+        if(firstImage == null){
+            return;
+        }
+        Glide.with(this)
+                .load(firstImage)
+                .centerCrop()
+                .into(backdropImg);
     }
 
     @Override
@@ -109,7 +119,7 @@ public class ArticleDetailFragment extends BaseFragment {
         Bundle bundle = new Bundle();
         bundle.putString("Title",item.getTitle());
         bundle.putString("Date", item.getDate());
-        bundle.putInt("ImageResId",item.getImage());
+        bundle.putString("ImageUri",item.getImageUri());
         bundle.putString("Description", item.getDescription());
         args.putBundle(ArticleDetailFragment.ARG_ITEM_ID, bundle);
         fragment.setArguments(args);
