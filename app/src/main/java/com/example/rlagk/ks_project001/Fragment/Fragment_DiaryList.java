@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
-import com.example.rlagk.ks_project001.quote.ArticleDetailFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

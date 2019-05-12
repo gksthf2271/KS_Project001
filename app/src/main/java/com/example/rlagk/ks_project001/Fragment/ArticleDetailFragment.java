@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001.quote;
+package com.example.rlagk.ks_project001.Fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -14,8 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.rlagk.ks_project001.BaseActivity;
-import com.example.rlagk.ks_project001.Fragment.BaseFragment;
+import com.example.rlagk.ks_project001.Activity.BaseActivity;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.dummy.DummyContent;

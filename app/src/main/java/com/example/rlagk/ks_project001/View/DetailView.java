@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.rlagk.ks_project001.R;
-import com.example.rlagk.ks_project001.ViewSamplesActivity;
+import com.example.rlagk.ks_project001.Activity.ViewSamplesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

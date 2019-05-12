@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import com.example.rlagk.ks_project001.MainActivity;
+import com.example.rlagk.ks_project001.Activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

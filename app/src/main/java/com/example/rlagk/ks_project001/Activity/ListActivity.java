@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001.quote;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -12,24 +12,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.example.rlagk.ks_project001.BaseActivity;
 import com.example.rlagk.ks_project001.Fragment.BaseFragment;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
+import com.example.rlagk.ks_project001.Fragment.ArticleDetailFragment;
 
 import butterknife.BindView;
 
-/**
- * Lists all available quotes. This Activity supports a single pane (= smartphones) and a two pane mode (= large screens with >= 600dp width).
- *
- * Created by Andreas Schrade on 14.12.2015.
- */
 public class ListActivity extends BaseActivity implements DiaryListView.OnSelectListener {
-    /**
-     * Whether or not the activity is running on a device with a large screen
-     */
+
     public static final String TAG = ListActivity.class.getName();
     private boolean twoPaneMode;
     @BindView(R.id.fragment_container)
@@ -55,25 +48,6 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
         }
     }
 
-//    /**
-//     * Called when an item has been selected
-//     *
-//     * @param id the selected mQuote ID
-//     */
-//    @Override
-//    public void onItemSelected(String id) {
-//        if (twoPaneMode) {
-//            // Show the mQuote detail information by replacing the DetailFragment via transaction.
-//            ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(id);
-//            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-//        } else {
-//            // Start the detail activity in single pane mode.
-//            Intent detailIntent = new Intent(this, ArticleDetailActivity.class);
-//            detailIntent.putExtra(ArticleDetailFragment.ARG_ITEM_ID, id);
-//            startActivity(detailIntent);
-//        }
-//    }
-
     private void setupToolbar() {
         final ActionBar ab = getActionBarToolbar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -81,25 +55,13 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
     }
 
     private void setupDetailFragment() {
-//        ArticleDetailFragment fragment =  ArticleDetailFragment.newInstance(DummyContent.ITEMS.get(0).id);
-//        getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         loadFragment(Fragment_DiaryList.newInstance());
     }
 
-    /**
-     * Enables the functionality that selected items are automatically highlighted.
-     */
     private void enableActiveItemState() {
-//        ArticleListFragment fragmentById = (ArticleListFragment) getFragmentManager().findFragmentById(R.id.article_list);
-//        fragmentById.getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         loadFragment(Fragment_DiaryList.newInstance());
     }
 
-    /**
-     * Is the container present? If so, we are using the two-pane layout.
-     *
-     * @return true if the two pane layout is used.
-     */
     private boolean isTwoPaneLayoutUsed() {
         return findViewById(R.id.fragment_container) != null;
     }

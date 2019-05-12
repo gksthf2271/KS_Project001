@@ -1,17 +1,12 @@
-package com.example.rlagk.ks_project001.quote;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
 
-import com.example.rlagk.ks_project001.BaseActivity;
+import com.example.rlagk.ks_project001.Fragment.ArticleDetailFragment;
 import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 
-/**
- * Simple wrapper for {@link ArticleDetailFragment}
- * This wrapper is only used in single pan mode (= on smartphones)
- * Created by Andreas Schrade on 14.12.2015.
- */
 public class ArticleDetailActivity extends BaseActivity {
     public static final String TAG = ArticleDetailActivity.class.getName();
 

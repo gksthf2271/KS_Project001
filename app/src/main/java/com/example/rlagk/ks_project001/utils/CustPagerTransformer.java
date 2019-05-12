@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001.View;
+package com.example.rlagk.ks_project001.utils;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

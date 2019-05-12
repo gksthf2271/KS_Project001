@@ -1,19 +1,19 @@
-package com.example.rlagk.ks_project001;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
+import com.example.rlagk.ks_project001.R;
 
 import butterknife.BindView;
 
-public class DetailActivity extends FragmentActivity {
+public class DetailActivity extends BaseActivity {
     public static final String TAG = "DetailActivity";
 
     public static final String EXTRA_IMAGE_URL = "detailImageUrl";
@@ -50,4 +50,8 @@ public class DetailActivity extends FragmentActivity {
                 .commit();
     }
 
+    @Override
+    public boolean providesActivityToolbar() {
+        return false;
+    }
 }

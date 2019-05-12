@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
-import com.example.rlagk.ks_project001.quote.ArticleDetailActivity;
-import com.example.rlagk.ks_project001.quote.ArticleDetailFragment;
-import com.example.rlagk.ks_project001.quote.ListActivity;
+import com.example.rlagk.ks_project001.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getName();

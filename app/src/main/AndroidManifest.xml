@@ -15,16 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".Activity.DetailActivity" />
 
 
-        <activity android:name=".quote.ListActivity">
+        <activity android:name=".Activity.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -32,15 +32,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".quote.ArticleDetailActivity"
+        <activity android:name=".Activity.ArticleDetailActivity"
             android:label=""
-            android:parentActivityName=".quote.ListActivity"/>
-        <activity android:name=".ViewSamplesActivity"
+            android:parentActivityName=".Activity.ListActivity"/>
+        <activity android:name=".Activity.ViewSamplesActivity"
             android:label="Samples"
-            android:parentActivityName=".quote.ListActivity"/>
-        <activity android:name=".SettingsActivity"
+            android:parentActivityName=".Activity.ListActivity"/>
+        <activity android:name=".Activity.SettingsActivity"
             android:label="Settings"
-            android:parentActivityName=".quote.ListActivity"/>
+            android:parentActivityName=".Activity.ListActivity"/>
 
 
 

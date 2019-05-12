@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -13,6 +13,7 @@ import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
+import com.example.rlagk.ks_project001.R;
 
 /**
  * Activity demonstrates some GUI functionalities from the Android support library.

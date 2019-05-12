@@ -1,4 +1,4 @@
-package com.example.rlagk.ks_project001;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+
+import com.example.rlagk.ks_project001.R;
 
 /**
  * This Activity provides several settings. Activity contains {@link PreferenceFragment} as inner class.

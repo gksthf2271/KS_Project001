@@ -1,26 +1,19 @@
-package com.example.rlagk.ks_project001;
+package com.example.rlagk.ks_project001.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
-import com.example.rlagk.ks_project001.Fragment.Fragment_Main;
-import com.example.rlagk.ks_project001.View.CustPagerTransformer;
-import com.example.rlagk.ks_project001.View.DragLayout;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.utils.CustPagerTransformer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +26,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected static final int NAV_DRAWER_ITEM_INVALID = -1;
     private DrawerLayout drawerLayout;
     private Toolbar actionBarToolbar;
-    private List<Fragment_Main> fragments = new ArrayList<>();
 
     public static MainActivity newInstance() {
         return new MainActivity();
@@ -60,26 +52,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void init(Context context) {
         Log.d(TAG, "init(...)");
         DatabaseManager.getInstance().init(this);
-
         viewPager.setPageTransformer(false, new CustPagerTransformer(this));
-        Fragment_Main.STATE_PWD = DragLayout.STATE_PWD_FAILED;
-        for (int i = 0; i < 1; i++) {
-            fragments.add(new Fragment_Main());
-        }
-
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                Fragment_Main fragment = fragments.get(position);
-                //fragment.bindData(imageArray[position % imageArray.length]);
-                return fragment;
-            }
-
-            @Override
-            public int getCount() {
-                return 1;
-            }
-        });
     }
 
     private void fillViewPager() {
