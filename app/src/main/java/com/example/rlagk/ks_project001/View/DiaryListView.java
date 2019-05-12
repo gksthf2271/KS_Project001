@@ -80,7 +80,7 @@ public class DiaryListView extends LinearLayout {
         }
 
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
-        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setAdapter(mDiaryListAdapter);

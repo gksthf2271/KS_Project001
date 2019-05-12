@@ -4,19 +4,15 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.rlagk.ks_project001.R;
-import com.example.rlagk.ks_project001.Activity.ViewSamplesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,16 +50,6 @@ public class DetailView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
-        Window window = ((ViewSamplesActivity) getContext()).getWindow();
-        window.setFlags(
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        String imageUrl = ((ViewSamplesActivity) getContext()).getIntent().getStringExtra(ViewSamplesActivity.EXTRA_IMAGE_URL);
-//        ImageLoader.getInstance().displayImage(imageUrl, imageView);
-
-        ViewCompat.setTransitionName(mDiaryText,ViewSamplesActivity.ADDRESS1_TRANSITION_NAME);
     }
 
     @Override

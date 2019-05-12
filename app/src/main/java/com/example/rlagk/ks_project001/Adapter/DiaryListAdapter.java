@@ -1,7 +1,10 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,15 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
+import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.utils.Utils;
-
-import org.w3c.dom.Text;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,6 +47,9 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull DiaryListAdapter.ViewHolder holder, int position) {
         Log.d(TAG,"onBindViewHolder(...)");
+//        GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams)holder.itemView.getLayoutParams();
+//        layoutParams.height = layoutParams.width;
+//        holder.itemView.requestLayout();
         String firstImage = Utils.firstUri(mItems.get(position).getImageUri());
         if(firstImage == null) {
             return;
@@ -52,11 +57,14 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         Glide.with(mContext)
                 .load(firstImage)
                 .centerCrop()
-                .into(holder.mDiaryImg);
+                .into(holder.mDiaryBackground);
+
+        holder.mDiaryBackground.setAlpha(100);
+
         holder.mDiaryText_date.setText(mItems.get(position).getDate());
         holder.mDiaryText_title.setText(mItems.get(position).getTitle());
         holder.mDiaryText_description.setText(mItems.get(position).getDescription());
-        setAnimation(holder.mDiaryImg, position);
+        setAnimation(holder.mDiaryBackground, position);
 //        mViewHolder = holder;
 //        mPosition = position;
     }
@@ -70,14 +78,14 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         private static final String TAG = DiaryListAdapter.TAG + ".ViewHolder";
         private final WeakReference<DiaryListAdapter> mWeakReference;
         private int mPosition;
-        public ImageView mDiaryImg;
+        public ImageView mDiaryBackground;
         public TextView mDiaryText_date;
         public TextView mDiaryText_title;
         public TextView mDiaryText_description;
 
         ViewHolder(@NonNull View itemView, DiaryListAdapter diaryListAdapter) {
             super(itemView);
-            mDiaryImg = (ImageView) itemView.findViewById(R.id.diaryImg);
+            mDiaryBackground = (ImageView) itemView.findViewById(R.id.diaryImg);
             mDiaryText_date = (TextView) itemView.findViewById(R.id.diaryText_date);
             mDiaryText_title = (TextView) itemView.findViewById(R.id.diaryText_title);
             mDiaryText_description = (TextView) itemView.findViewById(R.id.diaryText_description);

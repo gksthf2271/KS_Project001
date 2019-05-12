@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.rlagk.ks_project001.Adapter.HorImageViewAdapter;
+import com.example.rlagk.ks_project001.Adapter.AddDiaryImageAdapter;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 
@@ -32,7 +32,7 @@ public class HorizontalScrollView extends LinearLayout {
     @BindView(R.id.addImageBtn)
     ImageButton mImageButton;
 
-    private HorImageViewAdapter mHorImageViewAdapter;
+    private AddDiaryImageAdapter mHorImageViewAdapter;
     private ArrayList<HorImageItem> mHorImageViewList;
 
     public android.widget.HorizontalScrollView mHorizontalScrollView;
@@ -111,7 +111,7 @@ public class HorizontalScrollView extends LinearLayout {
     }
 
     private void updateView(){
-        mHorImageViewAdapter = new HorImageViewAdapter(mHorImageViewList, getContext());
+        mHorImageViewAdapter = new AddDiaryImageAdapter(mHorImageViewList, getContext());
         LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
