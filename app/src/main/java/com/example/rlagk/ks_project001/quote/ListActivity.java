@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.rlagk.ks_project001.BaseActivity;
@@ -37,6 +38,8 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_list);
 
         setupToolbar();
@@ -55,12 +58,12 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
 //    /**
 //     * Called when an item has been selected
 //     *
-//     * @param id the selected quote ID
+//     * @param id the selected mQuote ID
 //     */
 //    @Override
 //    public void onItemSelected(String id) {
 //        if (twoPaneMode) {
-//            // Show the quote detail information by replacing the DetailFragment via transaction.
+//            // Show the mQuote detail information by replacing the DetailFragment via transaction.
 //            ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(id);
 //            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 //        } else {
@@ -146,7 +149,7 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
     @Override
     public void onItemClick(View v, int position, DiaryListItem item) {
         if (twoPaneMode) {
-            // Show the quote detail information by replacing the DetailFragment via transaction.
+            // Show the mQuote detail information by replacing the DetailFragment via transaction.
             ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(item);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {

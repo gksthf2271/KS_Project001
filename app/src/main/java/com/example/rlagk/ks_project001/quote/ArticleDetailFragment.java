@@ -1,8 +1,8 @@
 package com.example.rlagk.ks_project001.quote;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,9 +23,10 @@ import com.example.rlagk.ks_project001.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
- * Shows the quote detail page.
+ * Shows the mQuote detail page.
  *
  * Created by Andreas Schrade on 14.12.2015.
  */
@@ -44,16 +45,19 @@ public class ArticleDetailFragment extends BaseFragment {
     private Bundle mBundle;
 
     @BindView(R.id.quote)
-    TextView quote;
+    TextView mQuote;
 
     @BindView(R.id.author)
-    TextView author;
+    TextView mAuthor;
 
     @BindView(R.id.backdrop)
-    ImageView backdropImg;
+    ImageView mBackdropImg;
 
     @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbar;
+    CollapsingToolbarLayout mCollapsingToolbar;
+
+    @BindView(R.id.floatBtn)
+    FloatingActionButton mFloatingBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,9 +82,9 @@ public class ArticleDetailFragment extends BaseFragment {
 
         if (mBundle != null) {
             loadBackdrop();
-            collapsingToolbar.setTitle(mBundle.getString("Title"));
-            author.setText(mBundle.getString("Date"));
-            quote.setText(mBundle.getString("Description"));
+            mCollapsingToolbar.setTitle(mBundle.getString("Title"));
+            mAuthor.setText(mBundle.getString("Date"));
+            mQuote.setText(mBundle.getString("Description"));
         }
         return rootView;
     }
@@ -94,7 +98,7 @@ public class ArticleDetailFragment extends BaseFragment {
         Glide.with(this)
                 .load(firstImage)
                 .centerCrop()
-                .into(backdropImg);
+                .into(mBackdropImg);
     }
 
     @Override
@@ -127,4 +131,9 @@ public class ArticleDetailFragment extends BaseFragment {
     }
 
     public ArticleDetailFragment() {}
+
+    @OnClick(R.id.floatBtn)
+    public void onCLickFloatBtn(View view){
+
+    }
 }

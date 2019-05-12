@@ -102,7 +102,7 @@ public class Fragment_ShareDiary extends Fragment {
             diaryText.setText("");
             diaryDate.setText("");
             diaryTitle.setText("");
-
+            mHorizontalScrollView.clearView();
 
         }
     };
@@ -128,7 +128,7 @@ public class Fragment_ShareDiary extends Fragment {
                         public void onImagesSelected(ArrayList<Uri> uriList) {
                             Log.d(TAG, "onImagesSelected");
                             if(uriList != null && uriList.size() > 0){
-                                mHorizontalScrollView.updateAddImage(false);
+                                mHorizontalScrollView.updateAddImage(false, uriList);
                                 mImageUriList.addAll(uriList);
                             } else {
                                 Log.d(TAG,"uriList is null");
@@ -141,7 +141,9 @@ public class Fragment_ShareDiary extends Fragment {
                         public void onImageSelected(Uri uri) {
                             Log.d(TAG, "onImageSeleted");
                             if(uri != null){
-                                mHorizontalScrollView.updateAddImage(false);
+                                List<Uri> uris = new ArrayList<>();
+                                uris.add(uri);
+                                mHorizontalScrollView.updateAddImage(false,uris);
                                 mImageUriList.add(uri);
                             } else {
                                 Log.d(TAG,"uri is null");
@@ -226,4 +228,18 @@ public class Fragment_ShareDiary extends Fragment {
         FragmentManager fragmentManager = MainActivity.getInstance().getFragmentManager();
         return fragmentManager;
     }
+
+//    public interface showGalleryImageCallbackListener{
+//        void showGalleryImageCallback(List<Uri> uriList);
+//    }
+//
+//    private void showGalleryImageCallback(){
+//        if (mListener != null) {
+//            mListener.showGalleryImageCallback(mImageUriList);
+//        }
+//    }
+//
+//    public void setImageCallbackListener(showGalleryImageCallbackListener listener) {
+//        mListener = listener;
+//    }
 }

@@ -1,7 +1,9 @@
 package com.example.rlagk.ks_project001.View;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -10,11 +12,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.Adapter.HorImageViewAdapter;
+import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +58,7 @@ public class HorizontalScrollView extends LinearLayout {
         inflater.inflate(R.layout.cview_horizontal_scroll, this);
         ButterKnife.bind(this);
         mImageButton.setVisibility(View.VISIBLE);
+//        Fragment_ShareDiary.getInstance().setImageCallbackListener(mImageCallbackListener);
     }
 
     @Override
@@ -89,15 +95,43 @@ public class HorizontalScrollView extends LinearLayout {
         mListener = listener;
     }
 
-    public void updateAddImage(boolean visible){
+    public void updateAddImage(boolean visible, List<Uri> imageUri){
         if (visible) {
             if (mImageButton.getVisibility() == View.GONE) {
+                mRecyclerView.setVisibility(View.GONE);
                 mImageButton.setVisibility(View.VISIBLE);
             }
         } else {
             if (mImageButton.getVisibility() == View.VISIBLE) {
                 mImageButton.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                for (Uri uri : imageUri)
+                mHorImageViewList.add(new HorImageItem(uri));
+                updateView();
             }
         }
     }
+
+    private void updateView(){
+        mHorImageViewAdapter = new HorImageViewAdapter(mHorImageViewList, getContext());
+        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(lim);
+        mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.setAdapter(mHorImageViewAdapter);
+    }
+
+    public void clearView(){
+        if (mImageButton.getVisibility() == View.GONE) {
+            mHorImageViewList.clear();
+            mRecyclerView.setVisibility(View.GONE);
+            mImageButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+//    private Fragment_ShareDiary.showGalleryImageCallbackListener mImageCallbackListener = new Fragment_ShareDiary.showGalleryImageCallbackListener() {
+//        @Override
+//        public void showGalleryImageCallback(List<Uri> uriList) {
+//            Log.d(TAG,"showGalleryImageCallback(...)");
+//        }
+//    };
 }

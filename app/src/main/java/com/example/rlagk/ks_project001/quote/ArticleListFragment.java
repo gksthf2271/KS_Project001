@@ -1,4 +1,4 @@
-//package com.example.rlagk.ks_project001.quote;
+//package com.example.rlagk.ks_project001.mQuote;
 //
 //import android.annotation.TargetApi;
 //import android.app.Activity;
@@ -121,7 +121,7 @@
 //
 //            final DummyContent.DummyItem item = (DummyContent.DummyItem) getItem(position);
 //            ((TextView) convertView.findViewById(R.id.article_title)).setText(item.title);
-//            ((TextView) convertView.findViewById(R.id.article_subtitle)).setText(item.author);
+//            ((TextView) convertView.findViewById(R.id.article_subtitle)).setText(item.mAuthor);
 //            final ImageView img = (ImageView) convertView.findViewById(R.id.thumbnail);
 //            Glide.with(getActivity()).load(item.photoId).asBitmap().fitCenter().into(new BitmapImageViewTarget(img) {
 //                @Override

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.quote.ArticleDetailActivity;
@@ -27,7 +28,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setupNavDrawer();
+
         DatabaseManager.getInstance().init(this);
     }
 
@@ -83,12 +87,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             case R.id.nav_samples:
                 startActivity(new Intent(this, ViewSamplesActivity.class));
+                finish();
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                finish();
                 break;
             case R.id.nav_write:
                 startActivity(new Intent(this, ArticleDetailActivity.class));
+                finish();
                 break;
         }
     }
