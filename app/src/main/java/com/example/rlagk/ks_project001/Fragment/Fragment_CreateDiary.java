@@ -37,8 +37,8 @@ import gun0912.tedbottompicker.TedBottomPicker;
  * Created by rlagk on 2018-04-10.
  */
 
-public class Fragment_ShareDiary extends Fragment {
-    public static final String TAG = Fragment_ShareDiary.class.getName();
+public class Fragment_CreateDiary extends Fragment {
+    public static final String TAG = Fragment_CreateDiary.class.getName();
     @BindView(R.id.cDetailView)
     DetailView mDetailView;
     @BindView(R.id.cHorizontalScrollView)
@@ -53,20 +53,20 @@ public class Fragment_ShareDiary extends Fragment {
     private String mDescription;
     private boolean mFlag = false;
 
-    private static volatile Fragment_ShareDiary sInstance;
+    private static volatile Fragment_CreateDiary sInstance;
 
     private List<Uri> mImageUriList;
 
-    public Fragment_ShareDiary(){
+    public Fragment_CreateDiary(){
         mImageUriList = new ArrayList<>();
     }
-    public static Fragment_ShareDiary newInstance() {
-        return new Fragment_ShareDiary();
+    public static Fragment_CreateDiary newInstance() {
+        return new Fragment_CreateDiary();
     }
 
-    public static Fragment_ShareDiary getInstance(){
+    public static Fragment_CreateDiary getInstance(){
         if (sInstance == null){
-            sInstance = new Fragment_ShareDiary();
+            sInstance = new Fragment_CreateDiary();
         }
         return sInstance;
     }

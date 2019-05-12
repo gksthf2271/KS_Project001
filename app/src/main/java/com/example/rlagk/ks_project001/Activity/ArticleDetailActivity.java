@@ -2,8 +2,8 @@ package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
 
-import com.example.rlagk.ks_project001.Fragment.ArticleDetailFragment;
-import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
+import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 
@@ -27,7 +27,7 @@ public class ArticleDetailActivity extends BaseActivity {
         }
 
         if (getIntent().getStringExtra("Title") == null){
-            Fragment_ShareDiary fragment =  Fragment_ShareDiary.newInstance();
+            Fragment_CreateDiary fragment =  Fragment_CreateDiary.newInstance();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {
             DiaryListItem diaryListItem = new DiaryListItem(
@@ -35,7 +35,7 @@ public class ArticleDetailActivity extends BaseActivity {
                     getIntent().getStringExtra("Title")
                     , getIntent().getStringExtra("Description")
                     , getIntent().getStringExtra("Date"));
-            ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(diaryListItem);
+            Fragment_DiaryDetail fragment = Fragment_DiaryDetail.newInstance(diaryListItem);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
     }

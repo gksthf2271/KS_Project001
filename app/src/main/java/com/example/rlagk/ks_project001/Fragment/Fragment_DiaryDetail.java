@@ -29,7 +29,7 @@ import butterknife.OnClick;
  *
  * Created by Andreas Schrade on 14.12.2015.
  */
-public class ArticleDetailFragment extends BaseFragment {
+public class Fragment_DiaryDetail extends BaseFragment {
 
     /**
      * The argument represents the dummy item ID of this fragment.
@@ -116,20 +116,20 @@ public class ArticleDetailFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public static ArticleDetailFragment newInstance(DiaryListItem item) {
-        ArticleDetailFragment fragment = new ArticleDetailFragment();
+    public static Fragment_DiaryDetail newInstance(DiaryListItem item) {
+        Fragment_DiaryDetail fragment = new Fragment_DiaryDetail();
         Bundle args = new Bundle();
         Bundle bundle = new Bundle();
         bundle.putString("Title",item.getTitle());
         bundle.putString("Date", item.getDate());
         bundle.putString("ImageUri",item.getImageUri());
         bundle.putString("Description", item.getDescription());
-        args.putBundle(ArticleDetailFragment.ARG_ITEM_ID, bundle);
+        args.putBundle(Fragment_DiaryDetail.ARG_ITEM_ID, bundle);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ArticleDetailFragment() {}
+    public Fragment_DiaryDetail() {}
 
     @OnClick(R.id.floatBtn)
     public void onCLickFloatBtn(View view){

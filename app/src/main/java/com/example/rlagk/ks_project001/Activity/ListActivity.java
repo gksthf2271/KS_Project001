@@ -13,11 +13,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.rlagk.ks_project001.Fragment.BaseFragment;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
-import com.example.rlagk.ks_project001.Fragment.ArticleDetailFragment;
 
 import butterknife.BindView;
 
@@ -112,7 +112,7 @@ public class ListActivity extends BaseActivity implements DiaryListView.OnSelect
     public void onItemClick(View v, int position, DiaryListItem item) {
         if (twoPaneMode) {
             // Show the mQuote detail information by replacing the DetailFragment via transaction.
-            ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(item);
+            Fragment_DiaryDetail fragment = Fragment_DiaryDetail.newInstance(item);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {
             // Start the detail activity in single pane mode.

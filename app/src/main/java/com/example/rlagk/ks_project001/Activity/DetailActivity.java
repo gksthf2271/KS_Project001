@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
+import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
 import com.example.rlagk.ks_project001.R;
 
 import butterknife.BindView;
@@ -30,7 +30,7 @@ public class DetailActivity extends BaseActivity {
         Log.d(TAG,"onCreate(...)");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        loadFragment(Fragment_ShareDiary.newInstance());
+        loadFragment(Fragment_CreateDiary.newInstance());
     }
 
 

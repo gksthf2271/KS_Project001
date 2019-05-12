@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.Adapter.HorImageViewAdapter;
-import com.example.rlagk.ks_project001.Fragment.Fragment_ShareDiary;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 
@@ -58,7 +56,7 @@ public class HorizontalScrollView extends LinearLayout {
         inflater.inflate(R.layout.cview_horizontal_scroll, this);
         ButterKnife.bind(this);
         mImageButton.setVisibility(View.VISIBLE);
-//        Fragment_ShareDiary.getInstance().setImageCallbackListener(mImageCallbackListener);
+//        Fragment_CreateDiary.getInstance().setImageCallbackListener(mImageCallbackListener);
     }
 
     @Override
@@ -128,7 +126,7 @@ public class HorizontalScrollView extends LinearLayout {
         }
     }
 
-//    private Fragment_ShareDiary.showGalleryImageCallbackListener mImageCallbackListener = new Fragment_ShareDiary.showGalleryImageCallbackListener() {
+//    private Fragment_CreateDiary.showGalleryImageCallbackListener mImageCallbackListener = new Fragment_CreateDiary.showGalleryImageCallbackListener() {
 //        @Override
 //        public void showGalleryImageCallback(List<Uri> uriList) {
 //            Log.d(TAG,"showGalleryImageCallback(...)");
