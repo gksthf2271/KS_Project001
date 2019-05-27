@@ -8,7 +8,7 @@
     <com.example.rlagk.ks_project001.View.HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="5"
         android:id="@+id/cHorizontalScrollView">
     </com.example.rlagk.ks_project001.View.HorizontalScrollView>
 
@@ -17,5 +17,5 @@
         android:id="@+id/cDetailView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"/>
+        android:layout_weight="4"/>
 </LinearLayout>
