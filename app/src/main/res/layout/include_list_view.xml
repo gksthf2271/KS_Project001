@@ -6,5 +6,5 @@
     android:name="com.example.rlagk.ks_project001.quote.ArticleListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rlagk.ks_project001.Activity.ListActivity"
+    tools:context="com.example.rlagk.ks_project001.Activity.Fragment_BaseList"
     tools:layout="@android:layout/list_content"/>

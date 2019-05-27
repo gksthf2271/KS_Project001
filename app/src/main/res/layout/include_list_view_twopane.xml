@@ -6,7 +6,7 @@
     android:divider="@drawable/divider"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.example.rlagk.ks_project001.Activity.ListActivity"
+    tools:context="com.example.rlagk.ks_project001.Activity.Fragment_BaseList"
     android:baselineAligned="false">
 
     <fragment

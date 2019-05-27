@@ -3,11 +3,10 @@ package com.example.rlagk.ks_project001.Fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +15,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.rlagk.ks_project001.Activity.MainActivity;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
-import com.example.rlagk.ks_project001.Activity.MainActivity;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DetailView;
 import com.example.rlagk.ks_project001.View.HorizontalScrollView;
@@ -203,23 +202,9 @@ public class Fragment_CreateDiary extends Fragment {
         mDetailView.setListener(onFabClickListener);
     }
 
-    private void loadFragment(@NonNull BaseFragment fragment) {
-        Log.v(TAG, "loadFragment(...)  " + fragment);
-        FragmentManager fragmentManager = getFragManager();
-        if (fragmentManager == null) {
-            Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
-            return;
-        }
 
-        String className = fragment.getClass().getName();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment, className)
-                .addToBackStack(className)
-                .commit();
-    }
-
-    public FragmentManager getFragManager(){
-        FragmentManager fragmentManager = MainActivity.getInstance().getFragmentManager();
+    public android.support.v4.app.FragmentManager getFragManager(){
+        FragmentManager fragmentManager = getFragmentManager();
         return fragmentManager;
     }
 

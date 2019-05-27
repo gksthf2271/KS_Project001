@@ -21,26 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.DetailActivity" />
-
-
-        <activity android:name=".Activity.ListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <activity android:name=".Activity.ArticleDetailActivity"
-            android:label=""
-            android:parentActivityName=".Activity.ListActivity"/>
-        <activity android:name=".Activity.ViewSamplesActivity"
-            android:label="Samples"
-            android:parentActivityName=".Activity.ListActivity"/>
+            android:label="" />
+
         <activity android:name=".Activity.SettingsActivity"
-            android:label="Settings"
-            android:parentActivityName=".Activity.ListActivity"/>
+            android:label="Settings" />
 
 
 

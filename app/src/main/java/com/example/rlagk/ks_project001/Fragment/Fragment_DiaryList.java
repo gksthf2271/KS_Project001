@@ -1,8 +1,7 @@
 package com.example.rlagk.ks_project001.Fragment;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,23 +63,7 @@ public class Fragment_DiaryList extends BaseFragment {
         @Override
         public void onItemClick(View v, int position, DiaryListItem item) {
             Log.d(TAG,"onItemClick!!! ::: " + position + "\n item ::: " + item);
-            loadFragment(Fragment_DiaryDetail.newInstance(item));
+            Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(item), R.id.fragment_container);
         }
     };
-
-
-    private void loadFragment(@NonNull BaseFragment fragment) {
-        Log.v(TAG, "loadFragment(...)  " + fragment);
-        FragmentManager fragmentManager = getFragmentManager();
-
-        if (fragmentManager == null) {
-            Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
-            return;
-        }
-        String className = fragment.getClass().getName();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment, className)
-                .addToBackStack(className)
-                .commit();
-    }
 }

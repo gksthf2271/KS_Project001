@@ -85,7 +85,7 @@ public class DetailView extends LinearLayout {
 
     @OnClick(R.id.fab)
     public void onFabClicked(View view) {
-        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         onClickFab();
     }
 

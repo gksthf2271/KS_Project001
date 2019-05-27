@@ -1,5 +1,8 @@
 package com.example.rlagk.ks_project001.utils;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 public class Utils {
@@ -13,4 +16,28 @@ public class Utils {
         }
         return result[0];
     }
+
+    public static void loadFragment(FragmentManager manager, Fragment fragment, int container_id, boolean stack) {
+        Log.v(TAG, "loadFragment(...)  " + fragment);
+
+        if (manager == null) {
+            Log.w(TAG, "Fragment manager is null");
+            return;
+        }
+
+        String className = fragment.getClass().getName();
+        FragmentTransaction fragmentTransaction= manager.beginTransaction();
+        fragmentTransaction.replace(container_id, fragment, className);
+
+        if (stack)
+            fragmentTransaction.addToBackStack(className);
+
+        fragmentTransaction.commit();
+    }
+
+    public static void loadFragment(FragmentManager manager, Fragment fragment, int container_id) {
+        loadFragment(manager, fragment, container_id, true);
+    }
+
+
 }

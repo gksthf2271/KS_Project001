@@ -2,6 +2,7 @@ package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,13 +23,6 @@ public class SettingsActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
-        setupToolbar();
-    }
-
-    private void setupToolbar() {
-        final ActionBar ab = getActionBarToolbar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -38,23 +32,13 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                openDrawer();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
     }
 
     @Override
-    protected int getSelfNavDrawerItem() {
-        return R.id.nav_settings;
-    }
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
-    @Override
-    public boolean providesActivityToolbar() {
-        return true;
     }
 
     public static class SettingsFragment extends PreferenceFragment {

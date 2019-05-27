@@ -1,6 +1,8 @@
 package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.MenuItem;
 
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
@@ -36,12 +38,17 @@ public class ArticleDetailActivity extends BaseActivity {
                     , getIntent().getStringExtra("Description")
                     , getIntent().getStringExtra("Date"));
             Fragment_DiaryDetail fragment = Fragment_DiaryDetail.newInstance(diaryListItem);
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
     }
 
     @Override
-    public boolean providesActivityToolbar() {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

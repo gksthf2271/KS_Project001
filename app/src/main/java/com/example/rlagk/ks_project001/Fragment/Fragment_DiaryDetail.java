@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.rlagk.ks_project001.Activity.BaseActivity;
+import com.example.rlagk.ks_project001.Activity.MainActivity;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
@@ -74,10 +75,6 @@ public class Fragment_DiaryDetail extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflateAndBind(inflater, container, R.layout.fragment_article_detail);
         ButterKnife.bind(this.getActivity());
-        if (!((BaseActivity) getActivity()).providesActivityToolbar()) {
-            // No Toolbar present. Set include_toolbar:
-            ((BaseActivity) getActivity()).setToolbar((Toolbar) rootView.findViewById(R.id.toolbar));
-        }
 
         if (mBundle != null) {
             loadBackdrop();
