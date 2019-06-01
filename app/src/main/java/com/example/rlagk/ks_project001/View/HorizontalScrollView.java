@@ -121,6 +121,7 @@ public class HorizontalScrollView extends LinearLayout {
     public void clearView(){
         if (mImageButton.getVisibility() == View.GONE) {
             mHorImageViewList.clear();
+            updateView();
             mRecyclerView.setVisibility(View.GONE);
             mImageButton.setVisibility(View.VISIBLE);
         }

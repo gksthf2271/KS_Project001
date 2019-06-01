@@ -59,8 +59,6 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                 .centerCrop()
                 .into(holder.mDiaryBackground);
 
-        holder.mDiaryBackground.setAlpha(100);
-
         holder.mDiaryText_date.setText(mItems.get(position).getDate());
         holder.mDiaryText_title.setText(mItems.get(position).getTitle());
         holder.mDiaryText_description.setText(mItems.get(position).getDescription());

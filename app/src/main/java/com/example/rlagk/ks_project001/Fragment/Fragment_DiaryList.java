@@ -27,9 +27,6 @@ public class Fragment_DiaryList extends BaseFragment {
     public Fragment_DiaryList(){
 
     }
-    public static Fragment_DiaryList newInstance() {
-        return new Fragment_DiaryList();
-    }
 
     public static Fragment_DiaryList getInstance(){
         if (sInstance == null){
