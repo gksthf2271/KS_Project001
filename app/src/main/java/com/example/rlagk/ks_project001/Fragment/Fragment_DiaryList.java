@@ -49,6 +49,10 @@ public class Fragment_DiaryList extends BaseFragment {
         mDiaryListView.setDiaryListener(mSelectListener);
     }
 
+    private void selectDate() {
+
+    }
+
     private void popBackStack() {
         FragmentManager fragmentManager = getFragmentManager();
         if (fragmentManager != null) {
