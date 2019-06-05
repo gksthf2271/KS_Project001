@@ -1,8 +1,9 @@
 package com.example.rlagk.ks_project001.DB;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 public class DatabaseManager {
     private static final String TAG = "DatabaseManager";

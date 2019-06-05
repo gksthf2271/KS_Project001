@@ -1,8 +1,6 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,9 @@ import com.example.rlagk.ks_project001.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AddDiaryImageAdapter extends RecyclerView.Adapter<AddDiaryImageAdapter.ViewHolder>{
 
@@ -43,7 +44,6 @@ public class AddDiaryImageAdapter extends RecyclerView.Adapter<AddDiaryImageAdap
         Log.d(TAG,"onBindViewHolder(...)");
         Glide.with(mContext)
                 .load(mItems.get(position).getUri())
-                .centerCrop()
                 .into(holder.mImageView);
 
     }

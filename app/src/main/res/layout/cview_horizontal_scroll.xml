@@ -14,10 +14,10 @@
             android:layout_centerInParent="true"
             android:src="@drawable/icon_image_add" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/horizontalImageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+            android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 </LinearLayout>

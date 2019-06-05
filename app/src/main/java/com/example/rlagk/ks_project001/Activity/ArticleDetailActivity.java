@@ -1,13 +1,14 @@
 package com.example.rlagk.ks_project001.Activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
+
+import androidx.annotation.NonNull;
 
 public class ArticleDetailActivity extends BaseActivity {
     public static final String TAG = ArticleDetailActivity.class.getName();
@@ -24,8 +25,8 @@ public class ArticleDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_detail);
 
         // Show the Up button in the action bar.
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         if (getIntent().getStringExtra("Title") == null){

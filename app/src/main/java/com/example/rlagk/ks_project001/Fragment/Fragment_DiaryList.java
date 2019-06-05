@@ -1,7 +1,6 @@
 package com.example.rlagk.ks_project001.Fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.DiaryListView;
 import com.example.rlagk.ks_project001.utils.Utils;
 
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

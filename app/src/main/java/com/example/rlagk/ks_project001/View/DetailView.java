@@ -1,19 +1,23 @@
 package com.example.rlagk.ks_project001.View;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.R;
 
+import java.util.Calendar;
+
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +52,7 @@ public class DetailView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cview_detail, this);
         ButterKnife.bind(this);
-//        mDiaryDate.setOnClickListener(mEditTextClickListener);
+        mDiaryDate.setOnClickListener(mEditTextClickListener);
     }
 
     @Override
@@ -110,26 +114,26 @@ public class DetailView extends LinearLayout {
         }
     }
 
-//    DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
-//        @Override
-//        public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-//            String time = year +"/" + monthOfYear +"/" + dayOfMonth;
-//            mDiaryDate.setText(time);
-//        }
-//    };
-//
-//    TextView.OnClickListener mEditTextClickListener = new OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Calendar now = Calendar.getInstance();
-//            DatePickerDialog dpd = DatePickerDialog.newInstance(
-//                    mDatePickerListener,
-//                    now.get(Calendar.YEAR),
-//                    now.get(Calendar.MONTH),
-//                    now.get(Calendar.DAY_OF_MONTH)
-//            );
-//            dpd.setVersion(DatePickerDialog.Version.VERSION_2);
-////            dpd.show(getFragment, "Datepickerdialog");
-//        }
-//    };
+    DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            String time = year +"/" + month +"/" + dayOfMonth;
+            mDiaryDate.setText(time);
+        }
+    };
+
+    TextView.OnClickListener mEditTextClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Calendar now = Calendar.getInstance();
+            DatePickerDialog dpd = new DatePickerDialog(
+                    getContext(),
+                    mDatePickerListener,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+//            dpd.show(getFragment, "Datepickerdialog");
+        }
+    };
 }

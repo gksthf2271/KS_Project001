@@ -1,8 +1,9 @@
 package com.example.rlagk.ks_project001.utils;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 public class CustPagerTransformer implements ViewPager.PageTransformer {
 

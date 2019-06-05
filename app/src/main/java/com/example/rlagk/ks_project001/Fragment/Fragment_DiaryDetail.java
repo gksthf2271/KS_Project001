@@ -1,9 +1,6 @@
 package com.example.rlagk.ks_project001.Fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +17,8 @@ import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
 import com.example.rlagk.ks_project001.utils.Utils;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,9 +98,8 @@ public class Fragment_DiaryDetail extends BaseFragment {
         if(firstImage == null){
             return;
         }
-        Glide.with(this)
+        Glide.with(getContext())
                 .load(firstImage)
-                .centerCrop()
                 .into(mBackdropImg);
     }
 

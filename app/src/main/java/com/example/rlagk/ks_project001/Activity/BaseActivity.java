@@ -1,7 +1,10 @@
 package com.example.rlagk.ks_project001.Activity;
 
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
+
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     public static final String TAG = BaseActivity.class.getName();

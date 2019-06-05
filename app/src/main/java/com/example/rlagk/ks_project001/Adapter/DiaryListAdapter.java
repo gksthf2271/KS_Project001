@@ -1,18 +1,12 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +17,9 @@ import com.example.rlagk.ks_project001.utils.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.ViewHolder>{
 
@@ -56,7 +53,6 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         }
         Glide.with(mContext)
                 .load(firstImage)
-                .centerCrop()
                 .into(holder.mDiaryBackground);
 
         holder.mDiaryText_date.setText(mItems.get(position).getDate());

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="180dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
             app:layout_constraintRight_toRightOf="parent" />
 
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -40,7 +40,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_date"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -68,9 +68,9 @@
                     android:maxLines="1"
                     app:layout_constraintLeft_toRightOf="@+id/diaryText_date_title"
                     app:layout_constraintTop_toTopOf="@+id/diaryText_date_title" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_title"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -99,9 +99,9 @@
                     android:maxLines="1"
                     app:layout_constraintLeft_toRightOf="@+id/diaryText_title_title"
                     app:layout_constraintTop_toTopOf="@+id/diaryText_title_title" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_description"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -131,8 +131,8 @@
                     android:text="description"
                     android:textSize="10dp"
                     app:layout_constraintLeft_toLeftOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
