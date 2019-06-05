@@ -58,6 +58,14 @@ public class Fragment_DiaryDetail extends BaseFragment {
 
     @BindView(R.id.floatBtn)
     FloatingActionButton mFloatingBtn;
+    private static volatile Fragment_DiaryDetail sInstance;
+
+    public static Fragment_DiaryDetail getInstance(){
+        if (sInstance == null){
+            sInstance = new Fragment_DiaryDetail();
+        }
+        return sInstance;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
@@ -34,6 +35,8 @@ public class DiaryListView extends LinearLayout {
 
     @BindView(R.id.recyclerview_list)
     RecyclerView mRecyclerView;
+    @BindView(R.id.diaryText_title)
+    TextView mTitleView;
     
     private DiaryListAdapter mDiaryListAdapter;
     private ArrayList<DiaryListItem> mDiaryListViewArrayList;
@@ -85,9 +88,9 @@ public class DiaryListView extends LinearLayout {
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setAdapter(mDiaryListAdapter);
 
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(getContext(),new LinearLayoutManager(getContext()).getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration =
+//                new DividerItemDecoration(getContext(),new LinearLayoutManager(getContext()).getOrientation());
+//        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
             @Override

@@ -35,7 +35,7 @@
             app:layout_constraintLeft_toRightOf="@+id/group_title"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <TextView
                 android:id="@+id/diaryDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
