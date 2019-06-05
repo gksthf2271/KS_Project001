@@ -27,7 +27,7 @@
     <string name="write_date">Date</string>
     <string name="write_text">Text</string>
     <string name="write_hint_title">Title</string>
-    <string name="write_hint_date">Date</string>
+    <string name="write_hint_date">Select Date</string>
     <string name="write_hint_text">Text</string>
 
     <string name="drawer_open">drawer_open</string>

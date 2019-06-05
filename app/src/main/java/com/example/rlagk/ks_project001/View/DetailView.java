@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
@@ -30,6 +31,9 @@ public class DetailView extends LinearLayout {
 
     @BindView(R.id.diaryText)
     EditText mDiaryText;
+
+    @BindView(R.id.group_date)
+    TextInputLayout mDateInputLayout;
 
     @BindView(R.id.diaryDate)
     TextView mDiaryDate;
@@ -52,7 +56,7 @@ public class DetailView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cview_detail, this);
         ButterKnife.bind(this);
-        mDiaryDate.setOnClickListener(mEditTextClickListener);
+        mDiaryDate.setOnClickListener(mDateClickListener);
     }
 
     @Override
@@ -122,7 +126,7 @@ public class DetailView extends LinearLayout {
         }
     };
 
-    TextView.OnClickListener mEditTextClickListener = new OnClickListener() {
+    TextView.OnClickListener mDateClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Calendar now = Calendar.getInstance();
@@ -133,7 +137,7 @@ public class DetailView extends LinearLayout {
                     now.get(Calendar.MONTH),
                     now.get(Calendar.DAY_OF_MONTH)
             );
-//            dpd.show(getFragment, "Datepickerdialog");
+            dpd.show();
         }
     };
 }
