@@ -84,7 +84,7 @@ public class Fragment_CreateDiary extends Fragment {
             contact.setDate(diaryDate.getText().toString());
             contact.setTitle(diaryTitle.getText().toString());
             contact.setDescription(diaryText.getText().toString());
-            contact.setId(String.valueOf(System.currentTimeMillis()));
+            contact.setId(System.currentTimeMillis());
             contact.setImageUriList(mImageUriList.toString());
 
             if (mDBHelperUtils == null) {

@@ -3,14 +3,14 @@ package com.example.rlagk.ks_project001.Item;
 public class DiaryListItem {
 //    private static final String TAG = DiaryListItem.class.getName();
 
-    int mImage;
+    long mId;
     String mTitle;
     String mDate;
     String mDescription;
     String mImageUri;
 
-    public int getImage() {
-        return mImage;
+    public long getId() {
+        return mId;
     }
 
     public String getTitle() {
@@ -35,7 +35,8 @@ public class DiaryListItem {
         this.mDate = date;
     }
 
-    public DiaryListItem(String image, String title, String description, String date) {
+    public DiaryListItem(long id, String image, String title, String description, String date) {
+        this.mId = id;
         this.mImageUri = image;
         this.mTitle = title;
         this.mDescription = description;

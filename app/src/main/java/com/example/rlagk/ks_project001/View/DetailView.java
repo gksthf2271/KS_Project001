@@ -122,6 +122,7 @@ public class DetailView extends LinearLayout {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             String time = year +"/" + month +"/" + dayOfMonth;
+            Log.d(TAG,"date ::: " + time);
             mDiaryDate.setText(time);
         }
     };

@@ -85,8 +85,33 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         db.close(); // Closing database connection
     }
 
+    public List<Contact> getContacts(String date) {
+        List<Contact> contactList = new ArrayList<Contact>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE date = " + date;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Contact contact = new Contact();
+                contact.setId(cursor.getLong(0));
+                contact.setDate(cursor.getString(1));
+                contact.setTitle(cursor.getString(2));
+                contact.setDescription(cursor.getString(3));
+                contact.setImageUriList(cursor.getString(4));
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
+    }
+
     // id 에 해당하는 Contact 객체 가져오기
-    public Contact getContact(int id) {
+    public Contact getContact(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
@@ -95,7 +120,8 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         if (cursor != null)
             cursor.moveToFirst();
 
-        Contact contact = new Contact(cursor.getString(0),
+        Contact contact = new Contact(
+                cursor.getLong(0),
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
@@ -103,6 +129,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         // return contact
         return contact;
     }
+
 
     // 모든 Contact 정보 가져오기
     public List<Contact> getAllContacts() {
@@ -116,7 +143,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Contact contact = new Contact();
-                contact.setId(cursor.getString(0));
+                contact.setId(cursor.getLong(0));
                 contact.setDate(cursor.getString(1));
                 contact.setTitle(cursor.getString(2));
                 contact.setDescription(cursor.getString(3));
@@ -145,6 +172,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getId()) });
     }
+
 
     // Contact 정보 삭제하기
     public void deleteContact(Contact contact) {

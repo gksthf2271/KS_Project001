@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.rlagk.ks_project001.Activity.BaseActivity;
 import com.example.rlagk.ks_project001.Activity.MainActivity;
+import com.example.rlagk.ks_project001.DB.Contact;
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
@@ -40,6 +43,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
      * The dummy content of this fragment.
      */
     private DummyContent.DummyItem dummyItem;
+    private static DiaryListItem mDiaryListItem;
 
     private Bundle mBundle;
 
@@ -120,6 +124,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
     }
 
     public static Fragment_DiaryDetail newInstance(DiaryListItem item) {
+        mDiaryListItem = item;
         Fragment_DiaryDetail fragment = new Fragment_DiaryDetail();
         Bundle args = new Bundle();
         Bundle bundle = new Bundle();
@@ -136,6 +141,9 @@ public class Fragment_DiaryDetail extends BaseFragment {
 
     @OnClick(R.id.floatBtn)
     public void onCLickFloatBtn(View view){
-
+        DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
+        Contact contact = dbHelperUtils.getContact(mDiaryListItem.getId());
+        dbHelperUtils.deleteContact(contact);
+        getFragmentManager().popBackStack();
     }
 }

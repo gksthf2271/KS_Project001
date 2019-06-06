@@ -3,7 +3,7 @@ package com.example.rlagk.ks_project001.DB;
 import java.util.Date;
 
 public class Contact {
-    String mId;
+    Long mId;
     String mDate;
     String mTitle;
     String mDescription;
@@ -12,7 +12,7 @@ public class Contact {
     public Contact(){
 
     }
-    public Contact(String id, String date, String title, String description, String imageUri){
+    public Contact(Long id, String date, String title, String description, String imageUri){
         this.mId = id;
         this.mDate = date;
         this.mTitle = title;
@@ -47,11 +47,11 @@ public class Contact {
     }
 
 
-    public String getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(String mId) {
+    public void setId(Long mId) {
         this.mId = mId;
     }
 

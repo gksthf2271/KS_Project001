@@ -34,10 +34,11 @@ public class ArticleDetailActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {
             DiaryListItem diaryListItem = new DiaryListItem(
+                    getIntent().getLongExtra("Id",0),
                     getIntent().getStringExtra("ImageUri"),
-                    getIntent().getStringExtra("Title")
-                    , getIntent().getStringExtra("Description")
-                    , getIntent().getStringExtra("Date"));
+                    getIntent().getStringExtra("Title"),
+                    getIntent().getStringExtra("Description"),
+                    getIntent().getStringExtra("Date"));
             Fragment_DiaryDetail fragment = Fragment_DiaryDetail.newInstance(diaryListItem);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
