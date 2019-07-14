@@ -12,6 +12,7 @@
 
 
     <string name="navigation_title">NEMO</string>
+    <string name="navigation_home">NEMO Home</string>
     <string name="navigation_list">NEMO List</string>
     <string name="navigation_write">NEMO Write</string>
     <string name="navigation_settings">Settings</string>

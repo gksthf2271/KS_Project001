@@ -11,6 +11,7 @@ import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList_DateSelect;
+import com.example.rlagk.ks_project001.Fragment.Fragment_Home;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
@@ -57,6 +58,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -75,6 +77,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_home:
+                Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
+                break;
             case R.id.nav_list:
                 Utils.loadFragment(getSupportFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container, false);
                 break;

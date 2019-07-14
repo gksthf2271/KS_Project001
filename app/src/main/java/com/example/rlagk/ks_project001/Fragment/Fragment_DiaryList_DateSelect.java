@@ -1,6 +1,7 @@
 package com.example.rlagk.ks_project001.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +51,12 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
         showDatePicker();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDatePickerDialog = null;
+    }
+
     DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -57,6 +64,14 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
             String time = Integer.toString(year) + Integer.toString(month) + Integer.toString(dayOfMonth);
             Log.d(TAG,"date ::: " + time);
             mClickListener.onClickDate(time);
+            mDatePickerDialog = null;
+        }
+    };
+
+    DatePickerDialog.OnCancelListener mDatePickerCancelListener = new DialogInterface.OnCancelListener() {
+        @Override
+        public void onCancel(DialogInterface dialog) {
+            Log.d(TAG,"onCancel");
             mDatePickerDialog = null;
         }
     };
@@ -75,6 +90,7 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
+        mDatePickerDialog.setOnCancelListener(mDatePickerCancelListener);
         mDatePickerDialog.show();
     }
 

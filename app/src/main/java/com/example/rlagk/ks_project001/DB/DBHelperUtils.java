@@ -86,6 +86,34 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         db.close(); // Closing database connection
     }
 
+    public List<Contact> getContacts(int maxCount) {
+        List<Contact> contactList = new ArrayList<Contact>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        Log.d(TAG,"selectQuery ::: " + selectQuery );
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            Log.d(TAG,"cursor ::: " + cursor.toString());
+            do {
+                Contact contact = new Contact();
+                contact.setId(cursor.getLong(0));
+                contact.setDate(cursor.getString(1));
+                contact.setTitle(cursor.getString(2));
+                contact.setDescription(cursor.getString(3));
+                contact.setImageUriList(cursor.getString(4));
+                // Adding contact to list
+                Log.d(TAG,"contact ::: " + contact.toString());
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
+    }
+
     public List<Contact> getContacts(String date) {
         List<Contact> contactList = new ArrayList<Contact>();
         // Select All Query
