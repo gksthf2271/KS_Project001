@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.rlagk.ks_project001.Activity.MainActivity;
 
@@ -88,12 +89,14 @@ public class DBHelperUtils extends SQLiteOpenHelper{
     public List<Contact> getContacts(String date) {
         List<Contact> contactList = new ArrayList<Contact>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE date = " + date;
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE " + KEY_DATE + " = " + date.toString();
+        Log.d(TAG,"selectQuery ::: " + selectQuery );
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
+            Log.d(TAG,"cursor ::: " + cursor.toString());
             do {
                 Contact contact = new Contact();
                 contact.setId(cursor.getLong(0));
@@ -102,6 +105,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 contact.setDescription(cursor.getString(3));
                 contact.setImageUriList(cursor.getString(4));
                 // Adding contact to list
+                Log.d(TAG,"contact ::: " + contact.toString());
                 contactList.add(contact);
             } while (cursor.moveToNext());
         }

@@ -15,6 +15,7 @@ import com.example.rlagk.ks_project001.Adapter.DiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
 
@@ -40,7 +41,7 @@ public class DiaryListView extends LinearLayout {
     private DiaryListAdapter mDiaryListAdapter;
     private ArrayList<DiaryListItem> mDiaryListViewArrayList;
 
-    private OnSelectListener mSelectListener;
+    private ListViewListener mSelectListener;
 
 
     public DiaryListView(Context context) {
@@ -67,30 +68,13 @@ public class DiaryListView extends LinearLayout {
         Log.d(TAG,"onFinishInflate(...)");
 
         initView();
-
-        mDiaryListViewArrayList = new ArrayList<>();
-        List<Contact> itemList = new ArrayList<>();
-        DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
-        if (dbHelperUtils == null) {
-            dbHelperUtils = new DBHelperUtils(getContext());
-        }
-        itemList.addAll(dbHelperUtils.getAllContacts());
-//        itemList.addAll(dbHelperUtils.getContacts("2019/6/6"));
-
-        for (int i = 0; i < itemList.size(); i++) {
-//            mDiaryListViewArrayList.add(new DiaryListItem(R.drawable.image5, itemList.get(i).getDate(), itemList.get(i).getTitle()));
-            mDiaryListViewArrayList.add(new DiaryListItem(itemList.get(i).getId(), itemList.get(i).getImageUriList(), itemList.get(i).getTitle(), itemList.get(i).getDescription(), itemList.get(i).getDate()));
-        }
+        updateListView();
 
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
         LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setAdapter(mDiaryListAdapter);
-
-//        DividerItemDecoration dividerItemDecoration =
-//                new DividerItemDecoration(getContext(),new LinearLayoutManager(getContext()).getOrientation());
-//        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -136,11 +120,12 @@ public class DiaryListView extends LinearLayout {
         Log.d(TAG,"onDetachedFromWindow(...)");
     }
 
-    public void setDiaryListener(@Nullable OnSelectListener l) {
+    public void setDiaryListener(@Nullable ListViewListener l) {
         mSelectListener = l;
     }
 
-    public interface OnSelectListener {
+    public interface ListViewListener {
+        void onUpdateItemList(String selectResult);
         void onItemClick(View v, int position, DiaryListItem item);
     }
 
@@ -193,5 +178,31 @@ public class DiaryListView extends LinearLayout {
 
         @Override
         public void onRequestDisallowInterceptTouchEvent (boolean disallowIntercept){}
+    }
+
+    private void updateListView() {
+        Log.d(TAG,"updateListView");
+        mDiaryListViewArrayList = new ArrayList<>();
+        List<Contact> itemList = new ArrayList<>();
+        String searchDate = Fragment_DiaryList.getInstance().getSearchDate();
+        if (searchDate == null) {
+            Log.d(TAG,"searchDate is null");
+
+            return;
+        }
+        mTitleView.setText(searchDate);
+        DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
+//        if (dbHelperUtils == null) {
+//            dbHelperUtils = DatabaseManager.getInstance().getDB();
+////            dbHelperUtils = new DBHelperUtils(getContext());
+//        }
+        itemList.addAll(dbHelperUtils.getContacts(searchDate));
+
+        for (int i = 0; i < itemList.size(); i++) {
+            Log.d(TAG,"item ::: " + itemList.get(i).toString());
+            mDiaryListViewArrayList.add(new DiaryListItem(itemList.get(i).getId(), itemList.get(i).getImageUriList(), itemList.get(i).getTitle(), itemList.get(i).getDescription(), itemList.get(i).getDate()));
+        }
+        mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
+        mRecyclerView.setAdapter(mDiaryListAdapter);
     }
 }

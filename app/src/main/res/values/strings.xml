@@ -32,4 +32,6 @@
 
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
+
+    <!--<stirng name="ks0000_notification">"날짜를 선택해 주세요!"</stirng>-->
 </resources>

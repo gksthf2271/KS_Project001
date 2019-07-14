@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Fragment_BaseList extends BaseFragment implements DiaryListView.OnSelectListener {
+public class Fragment_BaseList extends BaseFragment implements DiaryListView.ListViewListener {
 
     public static final String TAG = Fragment_BaseList.class.getName();
     @BindView(R.id.fragment_container)
@@ -48,7 +48,12 @@ public class Fragment_BaseList extends BaseFragment implements DiaryListView.OnS
                 .commit();
     }
 
-//Todo: Diary Item Btn click 시 아래 소스 수행되도록 수정
+    @Override
+    public void onUpdateItemList(String selectResult) {
+
+    }
+
+    //Todo: Diary Item Btn click 시 아래 소스 수행되도록 수정
     @Override
     public void onItemClick(View v, int position, DiaryListItem item) {
         // Start the detail activity in single pane mode.

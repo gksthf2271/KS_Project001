@@ -81,7 +81,7 @@ public class Fragment_CreateDiary extends Fragment {
             EditText diaryText = mDetailView.findViewById(R.id.diaryText);
             Contact contact = new Contact();
 
-            contact.setDate(diaryDate.getText().toString());
+            contact.setDate(diaryDate.getText().toString().replace("/",""));
             contact.setTitle(diaryTitle.getText().toString());
             contact.setDescription(diaryText.getText().toString());
             contact.setId(System.currentTimeMillis());

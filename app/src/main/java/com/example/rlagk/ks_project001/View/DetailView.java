@@ -97,7 +97,6 @@ public class DetailView extends LinearLayout {
 
     @OnClick(R.id.fab)
     public void onFabClicked(View view) {
-//        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         onClickFab();
     }
 
@@ -121,7 +120,8 @@ public class DetailView extends LinearLayout {
     DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            String time = year +"/" + month +"/" + dayOfMonth;
+            month++;
+            String time = year + "/" + month + "/" + dayOfMonth;
             Log.d(TAG,"date ::: " + time);
             mDiaryDate.setText(time);
         }

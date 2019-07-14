@@ -18,13 +18,12 @@
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/diaryText_title_title"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Date :"
                 android:textSize="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -34,7 +33,8 @@
             <TextView
                 android:id="@+id/diaryText_title"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="date"

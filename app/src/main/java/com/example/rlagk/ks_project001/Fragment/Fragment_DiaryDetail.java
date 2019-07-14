@@ -85,7 +85,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflateAndBind(inflater, container, R.layout.fragment_article_detail);
-        ButterKnife.bind(this.getActivity());
+//        ButterKnife.bind(this.getActivity());
 
         if (mBundle != null) {
             loadBackdrop();
