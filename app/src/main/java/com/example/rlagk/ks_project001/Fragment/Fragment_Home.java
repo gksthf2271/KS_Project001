@@ -5,12 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Adapter.AddDiaryImageAdapter;
+import com.example.rlagk.ks_project001.DB.Contact;
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
+import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +28,12 @@ public class Fragment_Home extends BaseFragment {
     public static final String TAG = Fragment_Home.class.getName();
     @BindView(R.id.horizontalImageRecyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.txt_description)
+    TextView mDescriptionView;
 
     private AddDiaryImageAdapter mHorImageViewAdapter;
     private ArrayList<HorImageItem> mHorImageViewList;
+    private List<Contact> mContactList;
 
     public static Fragment_Home getInstance() {
         if (sInstance == null) {
@@ -43,8 +51,12 @@ public class Fragment_Home extends BaseFragment {
 
     @Override
     public void onStart() {
-        Log.d(TAG, "onStart");
         super.onStart();
+        Log.d(TAG, "onStart");
+        mContactList = null;
+        mHorImageViewList = new ArrayList<>();
+        mRecyclerView.setOnScrollChangeListener(onScrollChangeListener);
+        initView();
     }
 
     @Override
@@ -53,15 +65,26 @@ public class Fragment_Home extends BaseFragment {
         super.onResume();
     }
 
+    RecyclerView.OnScrollChangeListener onScrollChangeListener = new RecyclerView.OnScrollChangeListener(){
+
+        @Override
+        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+            Log.d(TAG,"onScrollChange(...)" + v);
+        }
+    };
+
     private void initView() {
+        mContactList = DatabaseManager.getInstance().getDB().getContacts(10);
+        for (Contact contact : mContactList) {
+            if(contact == null) {
+                return;
+            }
+            mHorImageViewList.add(new HorImageItem(contact));
+        }
         mHorImageViewAdapter = new AddDiaryImageAdapter(mHorImageViewList, getContext());
         LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setAdapter(mHorImageViewAdapter);
-    }
-
-    private void getDiaryList(int maxCount) {
-
     }
 }

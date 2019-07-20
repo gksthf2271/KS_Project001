@@ -48,6 +48,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG,"Create DB TABLE!");
         String CREATE_CONTACTS_TABLE = "CREATE TABLE "
                 + TABLE_CONTACTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DATE + " TEXT," + KEY_TITLE + " TEXT,"
@@ -89,14 +90,14 @@ public class DBHelperUtils extends SQLiteOpenHelper{
     public List<Contact> getContacts(int maxCount) {
         List<Contact> contactList = new ArrayList<Contact>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS + " LIMIT " + maxCount;
         Log.d(TAG,"selectQuery ::: " + selectQuery );
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
-            Log.d(TAG,"cursor ::: " + cursor.toString());
+            Log.d(TAG,"cursor ::: " + cursor);
             do {
                 Contact contact = new Contact();
                 contact.setId(cursor.getLong(0));
@@ -105,7 +106,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 contact.setDescription(cursor.getString(3));
                 contact.setImageUriList(cursor.getString(4));
                 // Adding contact to list
-                Log.d(TAG,"contact ::: " + contact.toString());
+                Log.d(TAG,"contact ::: " + contact);
                 contactList.add(contact);
             } while (cursor.moveToNext());
         }
@@ -223,6 +224,10 @@ public class DBHelperUtils extends SQLiteOpenHelper{
 
         // return count
         return cursor.getCount();
+    }
+
+    public int getDatabaseVersion(){
+        return DATABASE_VERSION;
     }
 }
 

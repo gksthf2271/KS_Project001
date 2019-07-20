@@ -1,6 +1,7 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,10 +43,11 @@ public class AddDiaryImageAdapter extends RecyclerView.Adapter<AddDiaryImageAdap
     @Override
     public void onBindViewHolder(@NonNull AddDiaryImageAdapter.ViewHolder holder, int position) {
         Log.d(TAG,"onBindViewHolder(...)");
+
         Glide.with(mContext)
                 .load(mItems.get(position).getUri())
+                .placeholder(R.drawable.close)
                 .into(holder.mImageView);
-
     }
 
     @Override
