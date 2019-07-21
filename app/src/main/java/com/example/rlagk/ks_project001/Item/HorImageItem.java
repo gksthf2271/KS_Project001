@@ -3,6 +3,7 @@ package com.example.rlagk.ks_project001.Item;
 import android.net.Uri;
 
 import com.example.rlagk.ks_project001.DB.Contact;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import androidx.annotation.NonNull;
 
@@ -35,7 +36,7 @@ public class HorImageItem {
         this.setDate(contact.getDate());
         this.setTitle(contact.getTitle());
         this.setDescription(contact.getDescription());
-        this.setUri(Uri.parse(contact.getImageUriList()));
+        this.setUri(contact.getImageUriList());
     }
 
     public String getID() {
@@ -79,6 +80,7 @@ public class HorImageItem {
     }
 
     public Uri getUri() {
+//        Utils.splitString(mUri.toString());
         return mUri;
     }
 

@@ -1,5 +1,6 @@
 package com.example.rlagk.ks_project001.Activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -33,9 +34,10 @@ public class ArticleDetailActivity extends BaseActivity {
             Fragment_CreateDiary fragment =  Fragment_CreateDiary.newInstance();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         } else {
+            String str = getIntent().getStringExtra("ImageUri");
             DiaryListItem diaryListItem = new DiaryListItem(
                     getIntent().getLongExtra("Id",0),
-                    getIntent().getStringExtra("ImageUri"),
+                    Uri.parse(str),
                     getIntent().getStringExtra("Title"),
                     getIntent().getStringExtra("Description"),
                     getIntent().getStringExtra("Date"));

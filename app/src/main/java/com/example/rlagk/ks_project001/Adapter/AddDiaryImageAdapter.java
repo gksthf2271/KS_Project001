@@ -1,7 +1,7 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 
@@ -18,6 +22,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AddDiaryImageAdapter extends RecyclerView.Adapter<AddDiaryImageAdapter.ViewHolder>{
@@ -42,11 +47,24 @@ public class AddDiaryImageAdapter extends RecyclerView.Adapter<AddDiaryImageAdap
 
     @Override
     public void onBindViewHolder(@NonNull AddDiaryImageAdapter.ViewHolder holder, int position) {
-        Log.d(TAG,"onBindViewHolder(...)");
+        Log.d(TAG,"onBindViewHolder(...) ::: " + mItems.get(position).getUri());
 
         Glide.with(mContext)
                 .load(mItems.get(position).getUri())
                 .placeholder(R.drawable.close)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        Log.d(TAG,"onLoadFailed(...) GlideException!!! " + e);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        Log.d(TAG,"onResourceReady(...)");
+                        return false;
+                    }
+                })
                 .into(holder.mImageView);
     }
 

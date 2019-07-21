@@ -133,19 +133,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Utils.loadFragment(getSupportFragmentManager(), fragment_diaryList, R.id.fragment_container, false);
         }
     };
-
-//    //Todo: android.support.v4.app.Fragment; -? android.app.Fragment 로 수정하기 lib 수정해야됨.
-//    public static void loadFragment(FragmentManager fragmentManager, @NonNull Fragment fragment) {
-//        Log.v(TAG, "loadFragment(...)  " + fragment);
-//        if (fragmentManager == null) {
-//            Log.w(TAG, "Failed to load a fragment (null FragmentManager)");
-//            return;
-//        }
-//
-//        String className = fragment.getClass().getName();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, fragment, className)
-//                .commit();
-//    }
 }
 

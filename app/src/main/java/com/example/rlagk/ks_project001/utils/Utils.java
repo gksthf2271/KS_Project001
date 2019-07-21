@@ -8,11 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class Utils {
     private static final String TAG = "Utils";
+
     public static String firstUri(String uri) {
-        String bundleString = uri.substring(1,uri.lastIndexOf("]"));
+        String bundleString = uri.substring(1, uri.lastIndexOf("]"));
         String result[] = bundleString.split(",");
         if (result == null) {
-            Log.i(TAG,"result is null!");
+            Log.i(TAG, "result is null!");
             return null;
         }
         return result[0];
@@ -27,7 +28,7 @@ public class Utils {
         }
 
         String className = fragment.getClass().getName();
-        FragmentTransaction fragmentTransaction= manager.beginTransaction();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
         fragmentTransaction.replace(container_id, fragment, className);
 
         if (stack)
@@ -40,5 +41,15 @@ public class Utils {
         loadFragment(manager, fragment, container_id, true);
     }
 
-
+    public static String splitString(String str) {
+        if (str.equals("[]")){
+            return str;
+        }
+        String[] result = str.split("\\[");
+        if (!result[0].equals("")) {
+            return str;
+        }
+        result = result[1].split("]");
+        return result[0];
+    }
 }

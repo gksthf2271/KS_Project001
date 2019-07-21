@@ -1,6 +1,7 @@
 package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,8 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
 //        GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams)holder.itemView.getLayoutParams();
 //        layoutParams.height = layoutParams.width;
 //        holder.itemView.requestLayout();
-        String firstImage = Utils.firstUri(mItems.get(position).getImageUri());
+//        String firstImage = Utils.firstUri(mItems.get(position).getImageUri());
+        Uri firstImage = mItems.get(position).getImageUri();
         if(firstImage == null) {
             return;
         }

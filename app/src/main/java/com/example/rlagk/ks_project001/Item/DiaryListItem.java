@@ -1,5 +1,7 @@
 package com.example.rlagk.ks_project001.Item;
 
+import android.net.Uri;
+
 public class DiaryListItem {
 //    private static final String TAG = DiaryListItem.class.getName();
 
@@ -7,7 +9,7 @@ public class DiaryListItem {
     String mTitle;
     String mDate;
     String mDescription;
-    String mImageUri;
+    Uri mImageUri;
 
     public long getId() {
         return mId;
@@ -25,17 +27,17 @@ public class DiaryListItem {
         return mDescription;
     }
 
-    public String getImageUri() {
+    public Uri getImageUri() {
         return mImageUri;
     }
 
-    public DiaryListItem(String image, String title, String date) {
+    public DiaryListItem(Uri image, String title, String date) {
         this.mImageUri = image;
         this.mTitle = title;
         this.mDate = date;
     }
 
-    public DiaryListItem(long id, String image, String title, String description, String date) {
+    public DiaryListItem(long id, Uri image, String title, String description, String date) {
         this.mId = id;
         this.mImageUri = image;
         this.mTitle = title;

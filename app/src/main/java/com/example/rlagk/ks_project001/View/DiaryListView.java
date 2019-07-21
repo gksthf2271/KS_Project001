@@ -2,6 +2,7 @@ package com.example.rlagk.ks_project001.View;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -81,7 +82,7 @@ public class DiaryListView extends LinearLayout {
             public void onItemClick(View view, int position) {
                 Log.d(TAG, "onItemClick");
                 long id = mDiaryListViewArrayList.get(position).getId();
-                String imageUri = mDiaryListViewArrayList.get(position).getImageUri();
+                Uri imageUri = mDiaryListViewArrayList.get(position).getImageUri();
                 String title = mDiaryListViewArrayList.get(position).getTitle();
                 String date = mDiaryListViewArrayList.get(position).getDate();
                 String description = mDiaryListViewArrayList.get(position).getDescription();

@@ -1,5 +1,7 @@
 package com.example.rlagk.ks_project001.DB;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 public class Contact {
@@ -7,12 +9,12 @@ public class Contact {
     String mDate;
     String mTitle;
     String mDescription;
-    String mImageUriList;
+    Uri mImageUriList;
 
     public Contact(){
 
     }
-    public Contact(Long id, String date, String title, String description, String imageUri){
+    public Contact(Long id, String date, String title, String description, Uri imageUri){
         this.mId = id;
         this.mDate = date;
         this.mTitle = title;
@@ -55,11 +57,11 @@ public class Contact {
         this.mId = mId;
     }
 
-    public String getImageUriList() {
+    public Uri getImageUriList() {
         return mImageUriList;
     }
 
-    public void setImageUriList(String mImageUriList) {
+    public void setImageUriList(Uri mImageUriList) {
         this.mImageUriList = mImageUriList;
     }
 

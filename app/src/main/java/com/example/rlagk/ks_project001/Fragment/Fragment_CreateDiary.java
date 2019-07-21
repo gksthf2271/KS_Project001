@@ -48,16 +48,15 @@ public class Fragment_CreateDiary extends Fragment {
 
     private String mTitle;
     private String mText;
-    private String mImageUri;
     private String mDescription;
     private boolean mFlag = false;
 
     private static volatile Fragment_CreateDiary sInstance;
 
-    private List<Uri> mImageUriList;
+    private Uri mImageUri;
 
     public Fragment_CreateDiary(){
-        mImageUriList = new ArrayList<>();
+        mImageUri = null;
     }
     public static Fragment_CreateDiary newInstance() {
         return new Fragment_CreateDiary();
@@ -85,7 +84,7 @@ public class Fragment_CreateDiary extends Fragment {
             contact.setTitle(diaryTitle.getText().toString());
             contact.setDescription(diaryText.getText().toString());
             contact.setId(System.currentTimeMillis());
-            contact.setImageUriList(mImageUriList.toString());
+            contact.setImageUriList(mImageUri);
 
             if (mDBHelperUtils == null) {
                 mDBHelperUtils = DatabaseManager.getInstance().getDB();
@@ -95,7 +94,7 @@ public class Fragment_CreateDiary extends Fragment {
             diaryText.setText("");
             diaryDate.setText("");
             diaryTitle.setText("");
-            mImageUriList.clear();
+            mImageUri = null;
             mHorizontalScrollView.clearView();
         }
     };
@@ -125,7 +124,7 @@ public class Fragment_CreateDiary extends Fragment {
                                 List<Uri> uris = new ArrayList<>();
                                 uris.add(uri);
                                 mHorizontalScrollView.updateAddImage(false,uris);
-                                mImageUriList.add(uri);
+                                mImageUri = uri;
                             } else {
                                 Log.d(TAG,"uri is null");
                                 return;
@@ -133,25 +132,25 @@ public class Fragment_CreateDiary extends Fragment {
                         }
                     });
 
-            TedBottomPicker.with(getActivity())
-                    .setPeekHeight(1600)
-                    .showTitle(false)
-                    .setCompleteButtonText("Done")
-                    .setEmptySelectionText("No Select")
-                    .setSelectedUriList(mImageUriList)
-                    .showMultiImage(new TedBottomSheetDialogFragment.OnMultiImageSelectedListener() {
-                        @Override
-                        public void onImagesSelected(List<Uri> uriList) {
-                            Log.d(TAG, "onImagesSelected");
-                            if(uriList != null && uriList.size() > 0){
-                                mHorizontalScrollView.updateAddImage(false, uriList);
-                                mImageUriList.addAll(uriList);
-                            } else {
-                                Log.d(TAG,"uriList is null");
-                                return;
-                            }
-                        }
-                    });
+//            TedBottomPicker.with(getActivity())
+//                    .setPeekHeight(1600)
+//                    .showTitle(false)
+//                    .setCompleteButtonText("Done")
+//                    .setEmptySelectionText("No Select")
+//                    .setSelectedUriList(mImageUri)
+//                    .showMultiImage(new TedBottomSheetDialogFragment.OnMultiImageSelectedListener() {
+//                        @Override
+//                        public void onImagesSelected(List<Uri> uriList) {
+//                            Log.d(TAG, "onImagesSelected");
+//                            if(uriList != null && uriList.size() > 0){
+//                                mHorizontalScrollView.updateAddImage(false, uriList);
+//                                mImageUri.addAll(uriList);
+//                            } else {
+//                                Log.d(TAG,"uriList is null");
+//                                return;
+//                            }
+//                        }
+//                    });
         }
     };
 
@@ -176,7 +175,7 @@ public class Fragment_CreateDiary extends Fragment {
         if (getArguments() != null) {
             mTitle = (String) getArguments().get("Title");
             mText = (String) getArguments().get("Text");
-            mImageUriList = (List<Uri>) getArguments().get("ImageUri");
+            mImageUri = (Uri) getArguments().get("ImageUri");
             mDescription = (String) getArguments().get("Description");
         }
         init();
@@ -193,7 +192,7 @@ public class Fragment_CreateDiary extends Fragment {
     }
 
     private void init(){
-        mImageUriList.clear();
+        mImageUri = null;
         mDBHelperUtils = DatabaseManager.getInstance().getDB();
         mDetailView.setListener(onFabClickListener);
     }
@@ -210,7 +209,7 @@ public class Fragment_CreateDiary extends Fragment {
 //
 //    private void showGalleryImageCallback(){
 //        if (mListener != null) {
-//            mListener.showGalleryImageCallback(mImageUriList);
+//            mListener.showGalleryImageCallback(mImageUri);
 //        }
 //    }
 //

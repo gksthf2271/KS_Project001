@@ -130,7 +130,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
         Bundle bundle = new Bundle();
         bundle.putString("Title",item.getTitle());
         bundle.putString("Date", item.getDate());
-        bundle.putString("ImageUri",item.getImageUri());
+        bundle.putString("ImageUri",item.getImageUri().toString());
         bundle.putString("Description", item.getDescription());
         args.putBundle(Fragment_DiaryDetail.ARG_ITEM_ID, bundle);
         fragment.setArguments(args);

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Adapter.AddDiaryImageAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
-import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
@@ -55,7 +54,6 @@ public class Fragment_Home extends BaseFragment {
         Log.d(TAG, "onStart");
         mContactList = null;
         mHorImageViewList = new ArrayList<>();
-        mRecyclerView.setOnScrollChangeListener(onScrollChangeListener);
         initView();
     }
 
@@ -64,14 +62,6 @@ public class Fragment_Home extends BaseFragment {
         Log.d(TAG, "onResume");
         super.onResume();
     }
-
-    RecyclerView.OnScrollChangeListener onScrollChangeListener = new RecyclerView.OnScrollChangeListener(){
-
-        @Override
-        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-            Log.d(TAG,"onScrollChange(...)" + v);
-        }
-    };
 
     private void initView() {
         mContactList = DatabaseManager.getInstance().getDB().getContacts(10);
