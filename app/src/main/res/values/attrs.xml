@@ -15,4 +15,12 @@
     <declare-styleable name="HorizontalScrollView">
         <attr name="horizontalScrollView" format="reference|integer" />
     </declare-styleable>
+
+    <declare-styleable name="CoupleInfoView">
+        <attr name="coupleInfoView" format="reference|integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MenuView">
+        <attr name="menuView" format="reference|integer" />
+    </declare-styleable>
 </resources>

@@ -12,6 +12,7 @@ import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.View.CoupleInfoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Fragment_Home extends BaseFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.txt_description)
     TextView mDescriptionView;
+    @BindView(R.id.cCoupleView)
+    CoupleInfoView mCoupleInfoView;
 
     private AddDiaryImageAdapter mHorImageViewAdapter;
     private ArrayList<HorImageItem> mHorImageViewList;

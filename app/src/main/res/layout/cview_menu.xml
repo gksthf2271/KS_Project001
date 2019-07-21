@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/group_menu"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <ImageView
+    android:id="@+id/menu_home"
+    android:src="@drawable/ic_home"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginLeft="40dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/menu_write"
+        android:src="@drawable/ic_add_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="45dp"
+        app:layout_constraintLeft_toRightOf="@id/menu_home"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/menu_list"
+        android:src="@drawable/ic_list"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="45dp"
+        app:layout_constraintLeft_toRightOf="@id/menu_write"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/menu_setting"
+        android:src="@drawable/ic_setting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!--<com.ismaeldivita.chipnavigation.ChipNavigationBar-->
+        <!--android:id="@+id/bottom_menu"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:cnb_orientationMode="vertical" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

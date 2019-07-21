@@ -4,37 +4,32 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 
 import com.example.rlagk.ks_project001.R;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.ButterKnife;
 
-public class MenuView extends LinearLayout {
-    private static final String TAG = MenuView.class.getName();
-
-    public MenuView(Context context) {
+public class CoupleInfoView extends ConstraintLayout {
+    private static final String TAG = CoupleInfoView.class.getName();
+    public CoupleInfoView(Context context) {
         super(context);
     }
 
-    public MenuView(Context context, @Nullable AttributeSet attrs) {
+    public CoupleInfoView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MenuView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CoupleInfoView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public MenuView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }
 
     private void initView() {
         Log.d(TAG,"initView(...)");
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.cview_menu, this);
+        inflater.inflate(R.layout.cview_couple_info, this);
         ButterKnife.bind(this);
     }
 
