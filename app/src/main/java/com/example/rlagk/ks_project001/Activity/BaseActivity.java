@@ -1,12 +1,13 @@
 package com.example.rlagk.ks_project001.Activity;
 
 
+import com.example.rlagk.ks_project001.View.MenuView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
-public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public abstract class BaseActivity extends AppCompatActivity implements MenuView.MenuItemClickListener {
     public static final String TAG = BaseActivity.class.getName();
 
 

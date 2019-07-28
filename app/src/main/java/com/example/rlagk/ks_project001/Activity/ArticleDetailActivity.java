@@ -45,14 +45,28 @@ public class ArticleDetailActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
     }
-
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    public void onClickHome() {
+
+    }
+
+    @Override
+    public void onClickWrite() {
+
+    }
+
+    @Override
+    public void onClickList() {
+
+    }
+
+    @Override
+    public void onClickSetting() {
 
     }
 }

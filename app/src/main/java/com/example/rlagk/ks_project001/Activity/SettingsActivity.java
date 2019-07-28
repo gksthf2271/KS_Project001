@@ -32,8 +32,23 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+    public void onClickHome() {
+
+    }
+
+    @Override
+    public void onClickWrite() {
+
+    }
+
+    @Override
+    public void onClickList() {
+
+    }
+
+    @Override
+    public void onClickSetting() {
+
     }
 
     public static class SettingsFragment extends PreferenceFragment {
