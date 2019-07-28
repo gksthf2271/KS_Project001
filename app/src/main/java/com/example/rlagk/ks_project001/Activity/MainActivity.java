@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
 
     private void initLayout() {
         mMenuView.setMenuClickListener(this);
+        Fragment_DiaryList_DateSelect.getInstance().setClickListener(mClickListener);
         Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
     }
 

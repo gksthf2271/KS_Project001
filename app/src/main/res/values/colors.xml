@@ -17,4 +17,6 @@
 
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
+
+    <color name="view_background">#C3E5E9</color>
 </resources>
