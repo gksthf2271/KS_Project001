@@ -9,12 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include layout="@layout/include_toolbar" />
-        <fragment android:name="com.example.rlagk.ks_project001.Activity.SettingsActivity$SettingsFragment"
+
+        <fragment
             android:id="@+id/settings_fragment"
+            android:name="com.example.rlagk.ks_project001.Activity.SettingsActivity$SettingsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
     <include layout="@layout/include_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

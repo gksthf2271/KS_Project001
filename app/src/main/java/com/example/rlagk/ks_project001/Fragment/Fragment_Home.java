@@ -28,8 +28,8 @@ public class Fragment_Home extends BaseFragment {
     public static final String TAG = Fragment_Home.class.getName();
     @BindView(R.id.horizontalImageRecyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.txt_description)
-    TextView mDescriptionView;
+//    @BindView(R.id.txt_description)
+//    TextView mDescriptionView;
     @BindView(R.id.cCoupleView)
     CoupleInfoView mCoupleInfoView;
 

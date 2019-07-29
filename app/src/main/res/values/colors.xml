@@ -18,5 +18,15 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
 
-    <color name="view_background">#C3E5E9</color>
+    <color name="view_background">#37334C</color>
+
+
+
+
+    <!--Background Color-->
+    <color name="background_1">#63707e</color>
+    <color name="background_1_5">#6663707E</color>
+    <color name="background_2">#93b5b3</color>
+    <color name="background_3">#c8dad3</color>
+    <color name="background_4">#f2f6f5</color>
 </resources>

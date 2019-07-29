@@ -2,6 +2,12 @@ package com.example.rlagk.ks_project001.utils;
 
 import android.util.Log;
 
+import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList_DateSelect;
+import com.example.rlagk.ks_project001.Fragment.Fragment_Home;
+import com.example.rlagk.ks_project001.R;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,6 +35,9 @@ public class Utils {
 
         String className = fragment.getClass().getName();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        if (fragment instanceof Fragment_CreateDiary) {
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_down);
+        }
         fragmentTransaction.replace(container_id, fragment, className);
 
         if (stack)
