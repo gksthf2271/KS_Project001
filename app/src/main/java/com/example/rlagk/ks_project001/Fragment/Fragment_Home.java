@@ -70,6 +70,7 @@ public class Fragment_Home extends BaseFragment {
     public void onResume() {
         Log.d(TAG, "onResume");
         super.onResume();
+        initView();
     }
 
     private void initView() {

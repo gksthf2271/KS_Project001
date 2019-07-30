@@ -55,6 +55,7 @@
                 android:columnWidth="100dp"
                 android:horizontalSpacing="10dp"
                 android:verticalSpacing="10dp"
+                android:padding="5dp"
                 app:layout_constraintBottom_toTopOf="@id/cCoupleView"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

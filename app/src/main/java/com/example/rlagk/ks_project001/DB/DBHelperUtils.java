@@ -81,7 +81,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
         values.put(KEY_DATE, String.valueOf(contact.getDate()));
         values.put(KEY_TITLE, contact.getTitle());
         values.put(KEY_DESCRIPTION, contact.getDescription());
-        values.put(KEY_IMAGE_URI_LIST, contact.getImageUriList().toString());
+        values.put(KEY_IMAGE_URI_LIST, contact.getImageUriList() == null ? null : contact.getImageUriList().toString());
 
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
@@ -105,7 +105,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 contact.setDate(cursor.getString(1));
                 contact.setTitle(cursor.getString(2));
                 contact.setDescription(cursor.getString(3));
-                contact.setImageUriList(Uri.parse(cursor.getString(4)));
+                contact.setImageUriList(cursor.getString(4) == null ? null : Uri.parse(cursor.getString(4)));
                 // Adding contact to list
                 Log.d(TAG,"contact ::: " + contact);
                 contactList.add(contact);
