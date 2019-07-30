@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.rlagk.ks_project001.Adapter.AddDiaryImageAdapter;
+import com.example.rlagk.ks_project001.Adapter.HomeDiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
@@ -26,14 +28,18 @@ import butterknife.BindView;
 public class Fragment_Home extends BaseFragment {
     private static volatile Fragment_Home sInstance;
     public static final String TAG = Fragment_Home.class.getName();
-    @BindView(R.id.horizontalImageRecyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.gridView)
+    GridView mGridView;
+//    @BindView(R.id.horizontalImageRecyclerView)
+//    RecyclerView mRecyclerView;
+
 //    @BindView(R.id.txt_description)
 //    TextView mDescriptionView;
     @BindView(R.id.cCoupleView)
     CoupleInfoView mCoupleInfoView;
 
-    private AddDiaryImageAdapter mHorImageViewAdapter;
+//    private AddDiaryImageAdapter mHorImageViewAdapter;
+    private HomeDiaryListAdapter mHomeDiaryListAdapter;
     private ArrayList<HorImageItem> mHorImageViewList;
     private List<Contact> mContactList;
 
@@ -74,10 +80,13 @@ public class Fragment_Home extends BaseFragment {
             }
             mHorImageViewList.add(new HorImageItem(contact));
         }
-        mHorImageViewAdapter = new AddDiaryImageAdapter(mHorImageViewList, getContext());
-        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(lim);
-        mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.setAdapter(mHorImageViewAdapter);
+        mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList);
+        mGridView.setAdapter(mHomeDiaryListAdapter);
+
+//        mHorImageViewAdapter = new AddDiaryImageAdapter(mHorImageViewList, getContext());
+//        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+//        mRecyclerView.setLayoutManager(lim);
+//        mRecyclerView.setHasFixedSize(false);
+//        mRecyclerView.setAdapter(mHorImageViewAdapter);
     }
 }
