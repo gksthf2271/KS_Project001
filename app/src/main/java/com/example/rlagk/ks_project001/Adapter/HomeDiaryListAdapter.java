@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -57,6 +58,8 @@ public class HomeDiaryListAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(mLayout, null);
 
         ImageView iv = (ImageView) convertView.findViewById(R.id.diaryImg);
+        TextView diaryDate = (TextView) convertView.findViewById(R.id.diaryText_date);
+        TextView diaryTitle = (TextView) convertView.findViewById(R.id.diaryText_title);
 
         Glide.with(mContext)
                 .load(mHorImageItemList.get(position).getImage())
@@ -75,8 +78,8 @@ public class HomeDiaryListAdapter extends BaseAdapter {
                     }
                 })
                 .into(iv);
-        iv.setImageResource(mHorImageItemList.get(position).getImage());
-
+        diaryDate.setText(mHorImageItemList.get(position).getDate());
+        diaryTitle.setText(mHorImageItemList.get(position).getTitle());
         return convertView;
     }
 }

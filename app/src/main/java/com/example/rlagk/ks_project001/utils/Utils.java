@@ -16,6 +16,9 @@ public class Utils {
     private static final String TAG = "Utils";
 
     public static String firstUri(String uri) {
+        if (uri.equals(null) || uri.equals("")){
+            return null;
+        }
         String bundleString = uri.substring(1, uri.lastIndexOf("]"));
         String result[] = bundleString.split(",");
         if (result == null) {

@@ -24,6 +24,7 @@
         android:layout_height="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="100일째 연애중"
+        android:textColor="@color/mdtp_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

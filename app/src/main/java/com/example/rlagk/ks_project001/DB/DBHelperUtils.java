@@ -133,7 +133,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 contact.setDate(cursor.getString(1));
                 contact.setTitle(cursor.getString(2));
                 contact.setDescription(cursor.getString(3));
-                contact.setImageUriList(Uri.parse(cursor.getString(4)));
+                contact.setImageUriList(Uri.parse(cursor.getString(4) == null ? "" : cursor.getString(4)));
                 // Adding contact to list
                 Log.d(TAG,"contact ::: " + contact.toString());
                 contactList.add(contact);
@@ -159,7 +159,7 @@ public class DBHelperUtils extends SQLiteOpenHelper{
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
-                Uri.parse(cursor.getString(4)));
+                Uri.parse(cursor.getString(4) == null ? "" : cursor.getString(4)));
         // return contact
         return contact;
     }
