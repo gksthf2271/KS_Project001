@@ -9,6 +9,7 @@
     app:layout_constraintTop_toBottomOf="@id/item_background">
 
     <ImageView
+        android:id="@+id/leftImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginRight="30dp"
@@ -31,6 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/rightImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="30dp"

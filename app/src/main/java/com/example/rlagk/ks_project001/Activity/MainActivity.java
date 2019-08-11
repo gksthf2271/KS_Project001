@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
@@ -48,7 +50,7 @@ public class MainActivity extends BaseActivity {
     private void initLayout() {
         mMenuView.setMenuClickListener(this);
         Fragment_DiaryList_DateSelect.getInstance().setClickListener(mClickListener);
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, true);
     }
 
     @Override
@@ -78,23 +80,29 @@ public class MainActivity extends BaseActivity {
             Log.d(TAG,"onClickDate ::: " + date);
             Fragment_DiaryList fragment_diaryList = Fragment_DiaryList.getInstance();
             fragment_diaryList.setSearchDate(date);
-            Utils.loadFragment(getSupportFragmentManager(), fragment_diaryList, R.id.fragment_container, false);
+            DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
+//            if (dbHelperUtils.getContacts(date).size() == 0) {
+//                Toast.makeText(getApplication(),"없다",3000);
+//                Utils.loadFragment(getSupportFragmentManager(), new Fragment_CreateDiary(), R.id.fragment_container, false);
+//            } else {
+            Utils.loadFragment(getSupportFragmentManager(), fragment_diaryList, R.id.fragment_container, true);
+//            }
         }
     };
 
     @Override
     public void onClickHome() {
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, true);
     }
 
     @Override
     public void onClickWrite() {
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container, false);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container, true);
     }
 
     @Override
     public void onClickList() {
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container, false);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container, true);
     }
 
     @Override

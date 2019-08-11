@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.View.DiaryListEmptyView;
 import com.example.rlagk.ks_project001.View.DiaryListView;
 import com.example.rlagk.ks_project001.utils.Utils;
 
-import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 
 
@@ -22,6 +22,9 @@ public class Fragment_DiaryList extends BaseFragment {
     public static final String TAG = Fragment_DiaryList.class.getName();
     @BindView(R.id.cDiaryListView)
     DiaryListView mDiaryListView;
+
+    @BindView(R.id.cDiaryListEmptyView)
+    DiaryListEmptyView mDiaryListEmptyView;
 
     String mSearchDate = null;
 
@@ -47,19 +50,19 @@ public class Fragment_DiaryList extends BaseFragment {
     public void onStart() {
         super.onStart();
         mDiaryListView.setDiaryListener(mSelectListener);
+        if (isDiaryListEmpty()) {
+            mDiaryListView.setVisibility(View.GONE);
+            mDiaryListEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mDiaryListView.setVisibility(View.VISIBLE);
+            mDiaryListEmptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG,"onResume");
-    }
-
-    private void popBackStack() {
-        FragmentManager fragmentManager = getFragmentManager();
-        if (fragmentManager != null) {
-            fragmentManager.popBackStack();
-        }
     }
 
     DiaryListView.ListViewListener mSelectListener = new DiaryListView.ListViewListener() {
@@ -87,5 +90,12 @@ public class Fragment_DiaryList extends BaseFragment {
     public String getSearchDate(){
         Log.d(TAG,"getSearchDate ::: " + mSearchDate);
         return mSearchDate;
+    }
+
+    private boolean isDiaryListEmpty() {
+        if (mDiaryListView.getDiaryListViewArrayListSize() <= 0) {
+            return true;
+        }
+        return false;
     }
 }

@@ -141,9 +141,8 @@ public class DiaryListView extends LinearLayout {
         private OnItemClickListener mListener;
 
         public interface OnItemClickListener {
-            public void onItemClick(View view, int position);
-
-            public void onLongItemClick(View view, int position);
+            void onItemClick(View view, int position);
+            void onLongItemClick(View view, int position);
         }
 
         GestureDetector mGestureDetector;
@@ -205,5 +204,9 @@ public class DiaryListView extends LinearLayout {
         }
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
         mRecyclerView.setAdapter(mDiaryListAdapter);
+    }
+
+    public int getDiaryListViewArrayListSize() {
+        return mDiaryListViewArrayList.size();
     }
 }

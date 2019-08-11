@@ -2,6 +2,8 @@ package com.example.rlagk.ks_project001.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,10 @@ public class HomeDiaryListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private int mGridHeight;
     private int mGridWidth;
+    private static final int MSG_RETRY = 0;
+
+    private static final int mGridViewHeight = 500;
+
 
     public HomeDiaryListAdapter(Context context, int layout, List<HorImageItem> horImageItemList, int gridViewWidth, int gridViewHeight) {
         this.mContext = context;
@@ -64,18 +70,26 @@ public class HomeDiaryListAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(mLayout, null);
         }
         ConstraintLayout rootLayout = (ConstraintLayout) convertView.findViewById(R.id.root_layout);
+        ConstraintLayout InfoGroupParentLayout = (ConstraintLayout) convertView.findViewById(R.id.group_parent);
         ImageView iv = (ImageView) convertView.findViewById(R.id.diaryImg);
         TextView diaryDate = (TextView) convertView.findViewById(R.id.diaryText_date);
         TextView diaryTitle = (TextView) convertView.findViewById(R.id.diaryText_title);
 
-        rootLayout.setLayoutParams(new ConstraintLayout.LayoutParams(mGridWidth - 100 ,500));
+        rootLayout.setLayoutParams(new ConstraintLayout.LayoutParams(mGridWidth+100,mGridViewHeight));
+
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(mGridWidth+100, mGridViewHeight/3);
+        layoutParams.bottomToBottom = rootLayout.getId();
+        InfoGroupParentLayout.setLayoutParams(layoutParams);
+
         Glide.with(convertView.getContext())
                 .load(mHorImageItemList.get(position).getUri())
                 .placeholder(R.drawable.close)
+                .error(R.drawable.img_error)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         Log.d(TAG, "onLoadFailed(...) GlideException!!! " + e);
+                        mHandler.sendEmptyMessageDelayed(MSG_RETRY,1000);
                         return false;
                     }
 
@@ -90,4 +104,19 @@ public class HomeDiaryListAdapter extends BaseAdapter {
         diaryTitle.setText(mHorImageItemList.get(position).getTitle());
         return convertView;
     }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.d(TAG,"MSG : " + msg);
+            switch (msg.what) {
+                case MSG_RETRY:
+                    Log.d(TAG,"Retry!");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }

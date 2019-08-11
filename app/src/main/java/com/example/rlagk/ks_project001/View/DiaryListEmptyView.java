@@ -4,29 +4,25 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.rlagk.ks_project001.R;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class CoupleInfoView extends ConstraintLayout {
-    private static final String TAG = CoupleInfoView.class.getName();
+public class DiaryListEmptyView extends ConstraintLayout {
+    private static final String TAG = DiaryListEmptyView.class.getName();
 
-    public CoupleInfoView(Context context) {
+    public DiaryListEmptyView(Context context) {
         super(context);
     }
 
-    public CoupleInfoView(Context context, @Nullable AttributeSet attrs) {
+    public DiaryListEmptyView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CoupleInfoView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DiaryListEmptyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
@@ -34,7 +30,7 @@ public class CoupleInfoView extends ConstraintLayout {
     private void initView() {
         Log.d(TAG,"initView(...)");
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.cview_couple_info, this);
+        inflater.inflate(R.layout.cview_diary_list_empty, this);
         ButterKnife.bind(this);
     }
 
@@ -42,10 +38,5 @@ public class CoupleInfoView extends ConstraintLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         initView();
-    }
-
-    @OnClick({R.id.group_couple_info, R.id.leftImage, R.id.rightImage})
-    void onImageClick(View view){
-        Log.d(TAG,"onImageClick(...)");
     }
 }

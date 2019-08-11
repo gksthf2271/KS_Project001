@@ -1,6 +1,7 @@
 package com.example.rlagk.ks_project001.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import java.util.Calendar;
 
@@ -73,6 +75,7 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
         public void onCancel(DialogInterface dialog) {
             Log.d(TAG,"onCancel");
             mDatePickerDialog = null;
+            Utils.loadFragment(getFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, true);
         }
     };
 

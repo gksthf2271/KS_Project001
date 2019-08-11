@@ -81,7 +81,7 @@ public class Fragment_Home extends BaseFragment {
     private void initView() {
         mContactList = DatabaseManager.getInstance().getDB().getContacts(100);
         int height = mGridView.getHeight();
-        int width = mGridView.getWidth();
+        int width = mGridView.getRequestedColumnWidth();
         for (Contact contact : mContactList) {
             if(contact == null) {
                 return;
@@ -95,17 +95,29 @@ public class Fragment_Home extends BaseFragment {
             mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList, width, height);
         }
         mGridView.setAdapter(mHomeDiaryListAdapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG,"Position ::: " + position);
-                if(DummyContent.isDebug){
-                    DummyContent dummyContent = new DummyContent(view.getContext());
-                    Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(dummyContent.ITEMS.get(position)), R.id.fragment_container);
-                } else {
-                    Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(mHorImageViewList.get(position)), R.id.fragment_container);
-                }
-            }
-        });
+        mGridView.setOnScrollChangeListener(mScrollChangeListener);
+        mGridView.setOnItemClickListener(mItemClickListener);
     }
+
+    private GridView.OnItemClickListener mItemClickListener = new GridView.OnItemClickListener(){
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d(TAG,"Position ::: " + position);
+            if(DummyContent.isDebug){
+                DummyContent dummyContent = new DummyContent(view.getContext());
+                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(dummyContent.ITEMS.get(position)), R.id.fragment_container);
+            } else {
+                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(mHorImageViewList.get(position)), R.id.fragment_container);
+            }
+        }
+    };
+
+    private GridView.OnScrollChangeListener mScrollChangeListener = new GridView.OnScrollChangeListener(){
+
+        @Override
+        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+            Log.d(TAG,"scrollX : "+ oldScrollX + ", scrollY : " + oldScrollY);
+        }
+    };
 }
