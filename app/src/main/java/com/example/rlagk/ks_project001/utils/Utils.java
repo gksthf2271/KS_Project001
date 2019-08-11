@@ -19,6 +19,9 @@ public class Utils {
         if (uri.equals(null) || uri.equals("")){
             return null;
         }
+        if (!uri.contains("[") && !uri.contains("]")) {
+            return uri;
+        }
         String bundleString = uri.substring(1, uri.lastIndexOf("]"));
         String result[] = bundleString.split(",");
         if (result == null) {

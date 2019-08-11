@@ -21,18 +21,23 @@ import com.example.rlagk.ks_project001.R;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class HomeDiaryListAdapter extends BaseAdapter {
     public static final String TAG = HomeDiaryListAdapter.class.getName();
     private Context mContext;
     private int mLayout;
-    private List<HorImageItem> mHorImageItemList;
+    private List<HorImageItem> mHorImageItemList = null;
     private LayoutInflater mLayoutInflater;
+    private int mGridHeight;
+    private int mGridWidth;
 
-    public HomeDiaryListAdapter(Context context, int layout, List<HorImageItem> horImageItemList) {
+    public HomeDiaryListAdapter(Context context, int layout, List<HorImageItem> horImageItemList, int gridViewWidth, int gridViewHeight) {
         this.mContext = context;
         this.mLayout = layout;
         this.mHorImageItemList = horImageItemList;
+        this.mGridWidth = gridViewWidth;
+        this.mGridHeight = gridViewHeight;
         mLayoutInflater = (LayoutInflater) context.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -54,15 +59,18 @@ public class HomeDiaryListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null)
+        if (convertView == null) {
+            Log.d(TAG,"convertView is null!");
             convertView = mLayoutInflater.inflate(mLayout, null);
-
+        }
+        ConstraintLayout rootLayout = (ConstraintLayout) convertView.findViewById(R.id.root_layout);
         ImageView iv = (ImageView) convertView.findViewById(R.id.diaryImg);
         TextView diaryDate = (TextView) convertView.findViewById(R.id.diaryText_date);
         TextView diaryTitle = (TextView) convertView.findViewById(R.id.diaryText_title);
 
-        Glide.with(mContext)
-                .load(mHorImageItemList.get(position).getImage())
+        rootLayout.setLayoutParams(new ConstraintLayout.LayoutParams(mGridWidth - 100 ,500));
+        Glide.with(convertView.getContext())
+                .load(mHorImageItemList.get(position).getUri())
                 .placeholder(R.drawable.close)
                 .listener(new RequestListener<Drawable>() {
                     @Override

@@ -1,30 +1,27 @@
 package com.example.rlagk.ks_project001.Fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
-import com.example.rlagk.ks_project001.Adapter.AddDiaryImageAdapter;
 import com.example.rlagk.ks_project001.Adapter.HomeDiaryListAdapter;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
-import com.example.rlagk.ks_project001.Item.DiaryListItem;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.CoupleInfoView;
+import com.example.rlagk.ks_project001.dummy.DummyContent;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class Fragment_Home extends BaseFragment {
@@ -41,8 +38,8 @@ public class Fragment_Home extends BaseFragment {
     CoupleInfoView mCoupleInfoView;
 
 //    private AddDiaryImageAdapter mHorImageViewAdapter;
-    private HomeDiaryListAdapter mHomeDiaryListAdapter;
-    private ArrayList<HorImageItem> mHorImageViewList;
+    private HomeDiaryListAdapter mHomeDiaryListAdapter = null;
+    private ArrayList<HorImageItem> mHorImageViewList = null;
     private List<Contact> mContactList;
 
     public static Fragment_Home getInstance() {
@@ -72,7 +69,6 @@ public class Fragment_Home extends BaseFragment {
     public void onResume() {
         Log.d(TAG, "onResume");
         super.onResume();
-        initView();
     }
 
     @Override
@@ -84,18 +80,32 @@ public class Fragment_Home extends BaseFragment {
 
     private void initView() {
         mContactList = DatabaseManager.getInstance().getDB().getContacts(100);
+        int height = mGridView.getHeight();
+        int width = mGridView.getWidth();
         for (Contact contact : mContactList) {
             if(contact == null) {
                 return;
             }
             mHorImageViewList.add(new HorImageItem(contact));
         }
-        mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList);
+        if (DummyContent.isDebug) {
+            DummyContent dummyContent = new DummyContent(this.getContext());
+            mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, dummyContent.ITEMS, width, height);
+        } else {
+            mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList, width, height);
+        }
         mGridView.setAdapter(mHomeDiaryListAdapter);
-//        mHorImageViewAdapter = new AddDiaryImageAdapter(mHorImageViewList, getContext());
-//        LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
-//        mRecyclerView.setLayoutManager(lim);
-//        mRecyclerView.setHasFixedSize(false);
-//        mRecyclerView.setAdapter(mHorImageViewAdapter);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG,"Position ::: " + position);
+                if(DummyContent.isDebug){
+                    DummyContent dummyContent = new DummyContent(view.getContext());
+                    Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(dummyContent.ITEMS.get(position)), R.id.fragment_container);
+                } else {
+                    Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(mHorImageViewList.get(position)), R.id.fragment_container);
+                }
+            }
+        });
     }
 }

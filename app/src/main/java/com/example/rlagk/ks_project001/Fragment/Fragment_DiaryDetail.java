@@ -11,25 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.rlagk.ks_project001.Activity.BaseActivity;
-import com.example.rlagk.ks_project001.Activity.MainActivity;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.DiaryListItem;
+import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
-import com.example.rlagk.ks_project001.dummy.DummyContent;
 import com.example.rlagk.ks_project001.utils.Utils;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.rlagk.ks_project001.dummy.DummyContent.isDebug;
 
 /**
  * Shows the mQuote detail page.
- *
+ * <p>
  * Created by Andreas Schrade on 14.12.2015.
  */
 public class Fragment_DiaryDetail extends BaseFragment {
@@ -42,8 +41,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
     /**
      * The dummy content of this fragment.
      */
-    private DummyContent.DummyItem dummyItem;
-    private static DiaryListItem mDiaryListItem;
+    private static Object mDiaryListItem;
 
     private Bundle mBundle;
 
@@ -63,8 +61,8 @@ public class Fragment_DiaryDetail extends BaseFragment {
     FloatingActionButton mFloatingBtn;
     private static volatile Fragment_DiaryDetail sInstance;
 
-    public static Fragment_DiaryDetail getInstance(){
-        if (sInstance == null){
+    public static Fragment_DiaryDetail getInstance() {
+        if (sInstance == null) {
             sInstance = new Fragment_DiaryDetail();
         }
         return sInstance;
@@ -99,7 +97,7 @@ public class Fragment_DiaryDetail extends BaseFragment {
     private void loadBackdrop() {
         String bundleString = mBundle.getString("ImageUri");
         String firstImage = Utils.firstUri(bundleString);
-        if(firstImage == null){
+        if (firstImage == null) {
             return;
         }
         Glide.with(getContext())
@@ -128,22 +126,45 @@ public class Fragment_DiaryDetail extends BaseFragment {
         Fragment_DiaryDetail fragment = new Fragment_DiaryDetail();
         Bundle args = new Bundle();
         Bundle bundle = new Bundle();
-        bundle.putString("Title",item.getTitle());
+        bundle.putString("Title", item.getTitle());
         bundle.putString("Date", item.getDate());
-        bundle.putString("ImageUri",item.getImageUri().toString());
+        bundle.putString("ImageUri", item.getImageUri().toString());
         bundle.putString("Description", item.getDescription());
         args.putBundle(Fragment_DiaryDetail.ARG_ITEM_ID, bundle);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public Fragment_DiaryDetail() {}
+    public static Fragment_DiaryDetail newInstance(HorImageItem item) {
+        mDiaryListItem = item;
+        Fragment_DiaryDetail fragment = new Fragment_DiaryDetail();
+        Bundle args = new Bundle();
+        Bundle bundle = new Bundle();
+        bundle.putString("Title", item.getTitle());
+        bundle.putString("Date", item.getDate());
+        bundle.putString("ImageUri", item.getUri() == null ? "" : item.getUri().toString());
+        bundle.putString("Description", item.getDescription());
+        args.putBundle(Fragment_DiaryDetail.ARG_ITEM_ID, bundle);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public Fragment_DiaryDetail() {
+    }
 
     @OnClick(R.id.floatBtn)
-    public void onCLickFloatBtn(View view){
+    public void onCLickFloatBtn(View view) {
         DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
-        Contact contact = dbHelperUtils.getContact(mDiaryListItem.getId());
-        dbHelperUtils.deleteContact(contact);
+        Contact contact = null;
+        if (!isDebug) {
+            if (mDiaryListItem instanceof HorImageItem) {
+                contact = dbHelperUtils.getContact(Integer.parseInt(((HorImageItem) mDiaryListItem).getID()));
+            } else if (mDiaryListItem instanceof DiaryListItem) {
+                contact = dbHelperUtils.getContact(((DiaryListItem) mDiaryListItem).getId());
+            }
+
+            dbHelperUtils.deleteContact(contact);
+        }
         getFragmentManager().popBackStack();
     }
 }
