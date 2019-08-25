@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
@@ -95,7 +96,7 @@ public class Fragment_Home extends BaseFragment {
             mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList, width, height);
         }
         mGridView.setAdapter(mHomeDiaryListAdapter);
-        mGridView.setOnScrollChangeListener(mScrollChangeListener);
+        mGridView.setOnScrollListener(mGirdViewScrollListener);
         mGridView.setOnItemClickListener(mItemClickListener);
     }
 
@@ -113,11 +114,28 @@ public class Fragment_Home extends BaseFragment {
         }
     };
 
-    private GridView.OnScrollChangeListener mScrollChangeListener = new GridView.OnScrollChangeListener(){
+    AbsListView.OnScrollListener mGirdViewScrollListener = new AbsListView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            switch (scrollState) {
+                case AbsListView.OnScrollListener.SCROLL_STATE_IDLE : // 스크롤이 정지되어 있는 상태야.
+                    Log.d(TAG,"SCROLL_STATE_IDLE!");
+                    mCoupleInfoView.showInfoView();
+                    break;
+                case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL : // 스크롤이 터치되어 있을 때 상태
+                    Log.d(TAG,"SCROLL_STATE_TOUCH_SCROLL!");
+                    mCoupleInfoView.hideInfoView();
+                    break;
+                case AbsListView.OnScrollListener.SCROLL_STATE_FLING : // 스크롤이 움직이고 있을때 상태
+                    Log.d(TAG,"SCROLL_STATE_FLING!");
+                    mCoupleInfoView.hideInfoView();
+                    break;
+            }
+        }
 
         @Override
-        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-            Log.d(TAG,"scrollX : "+ oldScrollX + ", scrollY : " + oldScrollY);
+        public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
+            Log.d(TAG,"onScroll(...) arg1 : " + arg1 + ", arg2 : " +arg2 + ", arg3 : " + arg3);
         }
     };
 }

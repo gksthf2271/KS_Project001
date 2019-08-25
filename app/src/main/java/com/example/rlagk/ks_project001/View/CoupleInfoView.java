@@ -48,4 +48,12 @@ public class CoupleInfoView extends ConstraintLayout {
     void onImageClick(View view){
         Log.d(TAG,"onImageClick(...)");
     }
+
+    public void hideInfoView() {
+        this.setVisibility(View.GONE);
+    }
+
+    public void showInfoView() {
+        this.setVisibility(View.VISIBLE);
+    }
 }

@@ -52,6 +52,7 @@ public class Fragment_DiaryList extends BaseFragment {
         mDiaryListView.setDiaryListener(mSelectListener);
         if (isDiaryListEmpty()) {
             mDiaryListView.setVisibility(View.GONE);
+            mDiaryListEmptyView.setEmptyIconClickListener(mEmptyIconClickListener);
             mDiaryListEmptyView.setVisibility(View.VISIBLE);
         } else {
             mDiaryListView.setVisibility(View.VISIBLE);
@@ -98,4 +99,12 @@ public class Fragment_DiaryList extends BaseFragment {
         }
         return false;
     }
+
+    DiaryListEmptyView.EmptyIconClickListener mEmptyIconClickListener = new DiaryListEmptyView.EmptyIconClickListener() {
+        @Override
+        public void onClickEmptyIcon() {
+            Log.d(TAG,"onClickEmptyIcon(...)");
+            Utils.loadFragment(getFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container,false);
+        }
+    };
 }

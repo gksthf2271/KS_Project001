@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
     private void initLayout() {
         mMenuView.setMenuClickListener(this);
         Fragment_DiaryList_DateSelect.getInstance().setClickListener(mClickListener);
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, true);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onClickHome() {
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, true);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onClickList() {
-        Utils.loadFragment(getSupportFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container, true);
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container, false);
     }
 
     @Override

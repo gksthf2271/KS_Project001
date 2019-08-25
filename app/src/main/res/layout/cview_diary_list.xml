@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:orientation="vertical">
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/divider">
+        android:layout_height="match_parent">
+        <!--android:background="@drawable/divider"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/group_date"
@@ -54,12 +55,7 @@
                 android:id="@+id/recyclerview_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="10dp"
-                app:layout_constraintLeft_toLeftOf="parent">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                app:layout_constraintLeft_toLeftOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

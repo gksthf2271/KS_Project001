@@ -25,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -73,8 +74,11 @@ public class DiaryListView extends LinearLayout {
 
         mDiaryListAdapter = new DiaryListAdapter(mDiaryListViewArrayList, getContext());
         LinearLayoutManager lim = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(mRecyclerView.getContext(),new LinearLayoutManager(getContext()).getOrientation());
         mRecyclerView.setLayoutManager(lim);
         mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.setAdapter(mDiaryListAdapter);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
