@@ -88,6 +88,7 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
         }
         mDatePickerDialog = new DatePickerDialog(
                 getContext(),
+                R.style.DialogTheme,
                 mDatePickerListener,
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),

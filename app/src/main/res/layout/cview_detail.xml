@@ -79,6 +79,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/ic_done"
+        app:backgroundTint="@color/background_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
