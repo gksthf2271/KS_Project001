@@ -44,9 +44,17 @@ public class CoupleInfoView extends ConstraintLayout {
         initView();
     }
 
-    @OnClick({R.id.group_couple_info, R.id.leftImage, R.id.rightImage})
-    void onImageClick(View view){
-        Log.d(TAG,"onImageClick(...)");
+    @OnClick(R.id.leftImage)
+    void onLeftImageClick(View view){
+        Log.d(TAG,"onLeftImageClick(...)");
+    }
+    @OnClick(R.id.rightImage)
+    void onRightImageClick(View view){
+        Log.d(TAG,"onRightImageClick(...)");
+    }
+    @OnClick(R.id.txt_count)
+    void onDateCountImageClick(View view){
+        Log.d(TAG,"onDateCountImageClick(...)");
     }
 
     public void hideInfoView() {
