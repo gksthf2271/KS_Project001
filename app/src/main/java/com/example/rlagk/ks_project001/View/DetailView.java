@@ -133,6 +133,7 @@ public class DetailView extends LinearLayout {
             Calendar now = Calendar.getInstance();
             DatePickerDialog dpd = new DatePickerDialog(
                     getContext(),
+                    R.style.DialogTheme,
                     mDatePickerListener,
                     now.get(Calendar.YEAR),
                     now.get(Calendar.MONTH),

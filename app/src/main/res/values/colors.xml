@@ -29,7 +29,14 @@
     <color name="background_2">#93b5b3</color>
     <color name="background_3">#c8dad3</color>
     <color name="background_4">#f2f6f5</color>
-    <color name="background_5">#59AF9A</color>
+
+    <!--Dialog-->
+    <color name="dialog_background">#494949</color>
+    <color name="dialog_dateSelectedTextColor">#59AF9A</color>
+
+    <!--TextInput-->
+    <color name="textInput_TextColor_FocusOff">#696969</color>
+    <color name="textInput_TextColor_FocusOn">#212121</color>
 
     <color name="home_info_background">#99FFFFFF</color>
 </resources>

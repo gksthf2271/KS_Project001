@@ -153,12 +153,12 @@ public class Fragment_DiaryDetail extends BaseFragment {
     }
 
     @OnClick(R.id.floatBtn)
-    public void onCLickFloatBtn(View view) {
+    public void onClickFloatBtn(View view) {
         DBHelperUtils dbHelperUtils = DatabaseManager.getInstance().getDB();
         Contact contact = null;
         if (!isDebug) {
             if (mDiaryListItem instanceof HorImageItem) {
-                contact = dbHelperUtils.getContact(Integer.parseInt(((HorImageItem) mDiaryListItem).getID()));
+                contact = dbHelperUtils.getContact(Long.parseLong(((HorImageItem) mDiaryListItem).getID()));
             } else if (mDiaryListItem instanceof DiaryListItem) {
                 contact = dbHelperUtils.getContact(((DiaryListItem) mDiaryListItem).getId());
             }

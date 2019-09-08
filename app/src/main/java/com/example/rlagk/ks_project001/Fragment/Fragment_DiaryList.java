@@ -63,6 +63,12 @@ public class Fragment_DiaryList extends BaseFragment {
         mContactList = null;
         mHorImageViewList = new ArrayList<>();
         mContactList = DatabaseManager.getInstance().getDB().getContacts(mSearchDate);
+        if (DummyContent.isDebug) {
+            mGridView.setVisibility(View.VISIBLE);
+            mDiaryListEmptyView.setVisibility(View.GONE);
+            initView();
+            return;
+        }
         if (isDiaryListEmpty()) {
             mGridView.setVisibility(View.GONE);
             mDiaryListEmptyView.setEmptyIconClickListener(mEmptyIconClickListener);
@@ -96,12 +102,12 @@ public class Fragment_DiaryList extends BaseFragment {
             }
             mHorImageViewList.add(new HorImageItem(contact));
         }
-//        if (DummyContent.isDebug) {
-//            DummyContent dummyContent = new DummyContent(this.getContext());
-//            mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, dummyContent.ITEMS, width, height);
-//        } else {
+        if (DummyContent.isDebug) {
+            DummyContent dummyContent = new DummyContent(this.getContext());
+            mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, dummyContent.ITEMS, width, height);
+        } else {
             mHomeDiaryListAdapter = new HomeDiaryListAdapter(getContext(), R.layout.adapter_home_list_dairy, mHorImageViewList, width, height);
-//        }
+        }
         mGridView.setAdapter(mHomeDiaryListAdapter);
         mGridView.setOnItemClickListener(mItemClickListener);
     }
