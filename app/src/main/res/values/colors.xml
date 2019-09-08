@@ -38,5 +38,9 @@
     <color name="textInput_TextColor_FocusOff">#696969</color>
     <color name="textInput_TextColor_FocusOn">#212121</color>
 
-    <color name="home_info_background">#99FFFFFF</color>
+    <!--FinishPopup-->
+    <color name="popup_finish">#E6FFFFFF</color>
+
+
+    <color name="home_info_background">#E6FFFFFF</color>
 </resources>

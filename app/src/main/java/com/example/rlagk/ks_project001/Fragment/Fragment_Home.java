@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 
-public class Fragment_Home extends BaseFragment {
+public class Fragment_Home extends BaseFragment{
     private static volatile Fragment_Home sInstance;
     public static final String TAG = Fragment_Home.class.getName();
     @BindView(R.id.gridView)
@@ -138,4 +138,5 @@ public class Fragment_Home extends BaseFragment {
             Log.d(TAG,"onScroll(...) arg1 : " + arg1 + ", arg2 : " +arg2 + ", arg3 : " + arg3);
         }
     };
+
 }

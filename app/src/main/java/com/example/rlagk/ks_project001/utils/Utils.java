@@ -3,9 +3,6 @@ package com.example.rlagk.ks_project001.utils;
 import android.util.Log;
 
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
-import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
-import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList_DateSelect;
-import com.example.rlagk.ks_project001.Fragment.Fragment_Home;
 import com.example.rlagk.ks_project001.R;
 
 import androidx.fragment.app.Fragment;

@@ -17,6 +17,8 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import butterknife.BindView;
 
 public class Fragment_DiaryList_DateSelect extends BaseFragment {
     private static volatile Fragment_DiaryList_DateSelect sInstance;
@@ -51,6 +53,11 @@ public class Fragment_DiaryList_DateSelect extends BaseFragment {
         Log.d(TAG,"onResume");
         super.onResume();
         showDatePicker();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override

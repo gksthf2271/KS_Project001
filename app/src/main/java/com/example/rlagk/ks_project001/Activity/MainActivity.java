@@ -1,12 +1,15 @@
 package com.example.rlagk.ks_project001.Activity;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
@@ -18,6 +21,7 @@ import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.MenuView;
 import com.example.rlagk.ks_project001.utils.Utils;
 
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,6 +32,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.menu_view)
     MenuView mMenuView;
     protected static final int NAV_DRAWER_ITEM_INVALID = -1;
+    private PopupWindow mPopupWindow ;
 
     public static MainActivity getInstance(){
         if (sInstance == null){
@@ -51,27 +56,6 @@ public class MainActivity extends BaseActivity {
         mMenuView.setMenuClickListener(this);
         Fragment_DiaryList_DateSelect.getInstance().setClickListener(mClickListener);
         Utils.loadFragment(getSupportFragmentManager(), Fragment_Home.getInstance(), R.id.fragment_container, false);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 
     private Fragment_DiaryList_DateSelect.ClickListener mClickListener = new Fragment_DiaryList_DateSelect.ClickListener() {
@@ -108,6 +92,42 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onClickSetting() {
         startActivity(new Intent(getApplication(), SettingsActivity.class));
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (fragment.getClass().getName().equals(Fragment_Home.class.getName())) {
+                showFinishPopup();
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void showFinishPopup() {
+        View popupView = getLayoutInflater().inflate(R.layout.activity_main_finish, null);
+        mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+
+        Button cancel = (Button) popupView.findViewById(R.id.Cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
+            }
+        });
+
+        Button ok = (Button) popupView.findViewById(R.id.Ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
 

@@ -21,7 +21,9 @@ import com.example.rlagk.ks_project001.View.HorizontalScrollView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.core.content.ContextCompat;
@@ -78,9 +80,17 @@ public class Fragment_CreateDiary extends Fragment {
             EditText diaryTitle = mDetailView.findViewById(R.id.diaryTitle);
             TextView diaryDate = mDetailView.findViewById(R.id.diaryDate);
             EditText diaryText = mDetailView.findViewById(R.id.diaryText);
+
+            String inputText = diaryDate.getText().toString();
             Contact contact = new Contact();
 
-            contact.setDate(diaryDate.getText().toString().replace("/",""));
+            if(inputText.equals("") || inputText == null) {
+                Date dt = new Date();
+                SimpleDateFormat full_sdf = new SimpleDateFormat("yyyyMd");
+                inputText = full_sdf.format(dt);
+            }
+
+            contact.setDate(inputText.replace("/",""));
             contact.setTitle(diaryTitle.getText().toString());
             contact.setDescription(diaryText.getText().toString());
             contact.setId(System.currentTimeMillis());

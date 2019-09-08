@@ -39,19 +39,19 @@ public class DummyContent {
 
     private void init() {
         ITEMS.clear();
-        addItem(new HorImageItem("1", "20190810", "Hi my name is Kim HanSol!","Focusing is about saying No.", getUriToDrawble(R.drawable.p1)));
-        addItem(new HorImageItem("2", "20190810", "Napoleon Hill","Action is the foundational key to all success.", getUriToDrawble(R.drawable.p2)));
-        addItem(new HorImageItem("3", "20190810", "Pablo Picaso","Our only limitations are those we set up in our own minds.", getUriToDrawble(R.drawable.p3)));
-        addItem(new HorImageItem("4", "20190810", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
-        addItem(new HorImageItem("5", "20190810", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p5)));
-        addItem(new HorImageItem("6", "20190810", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p1)));
-        addItem(new HorImageItem("7", "20190810", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p2)));
-        addItem(new HorImageItem("8", "20190810", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p3)));
-        addItem(new HorImageItem("9", "20190810", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
-        addItem(new HorImageItem("10", "20190810", "Pablo Picaso","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p5)));
-        addItem(new HorImageItem("11", "20190810", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p1)));
-        addItem(new HorImageItem("12", "20190810", "Pablo Picaso","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p3)));
-        addItem(new HorImageItem("13", "20190810", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
+        addItem(new HorImageItem("1", "20190908", "Hi my name is Kim HanSol!","Focusing is about saying No.", getUriToDrawble(R.drawable.p1)));
+        addItem(new HorImageItem("2", "20190908", "Napoleon Hill","Action is the foundational key to all success.", getUriToDrawble(R.drawable.p2)));
+        addItem(new HorImageItem("3", "20190908", "Pablo Picaso","Our only limitations are those we set up in our own minds.", getUriToDrawble(R.drawable.p3)));
+        addItem(new HorImageItem("4", "20190907", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
+        addItem(new HorImageItem("5", "20190907", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p5)));
+        addItem(new HorImageItem("6", "20190905", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p1)));
+        addItem(new HorImageItem("7", "20190905", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p2)));
+        addItem(new HorImageItem("8", "20190905", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p3)));
+        addItem(new HorImageItem("9", "20190901", "Napoleon Hill","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
+        addItem(new HorImageItem("10", "20190901", "Pablo Picaso","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p5)));
+        addItem(new HorImageItem("11", "20190902", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p1)));
+        addItem(new HorImageItem("12", "20190904", "Pablo Picaso","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p3)));
+        addItem(new HorImageItem("13", "20190903", "Steve Jobs","Deciding what not do do is as important as deciding what to do.", getUriToDrawble(R.drawable.p4)));
     }
 
     private static void addItem(HorImageItem item) {

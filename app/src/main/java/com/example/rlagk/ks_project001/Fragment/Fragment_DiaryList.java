@@ -20,6 +20,7 @@ import com.example.rlagk.ks_project001.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 
 
@@ -151,7 +152,7 @@ public class Fragment_DiaryList extends BaseFragment {
         @Override
         public void onClickEmptyIcon() {
             Log.d(TAG,"onClickEmptyIcon(...)");
-            Utils.loadFragment(getFragmentManager(), Fragment_DiaryList_DateSelect.getInstance(), R.id.fragment_container,false);
+            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container,false);
         }
     };
 }
