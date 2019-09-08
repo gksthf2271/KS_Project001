@@ -29,6 +29,7 @@
     <color name="background_2">#93b5b3</color>
     <color name="background_3">#c8dad3</color>
     <color name="background_4">#f2f6f5</color>
+    <color name="background_5">#59AF9A</color>
 
     <color name="home_info_background">#99FFFFFF</color>
 </resources>
