@@ -49,8 +49,13 @@
         <item name="android:textColorPrimary">@color/background_4</item> <!--days of the month-->
         <item name="android:textColorSecondary">@color/background_4</item>    <!--days of the week-->
         <item name="colorAccent">@color/background_1_5</item>
-        <item name="android:buttonBarNegativeButtonStyle">@color/background_5</item>
-        <item name="android:buttonBarPositiveButtonStyle">@color/background_5</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
+    </style>
+
+    <style name="DatePickerTheme.ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/background_5</item>
+        <item name="android:textSize">17dp</item>
     </style>
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
