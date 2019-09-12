@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 import com.example.rlagk.ks_project001.DB.DBHelperUtils;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
+import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryDetail;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList;
 import com.example.rlagk.ks_project001.Fragment.Fragment_DiaryList_DateSelect;
 import com.example.rlagk.ks_project001.Fragment.Fragment_Home;
@@ -97,13 +98,18 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (fragment.getClass().getName().equals(Fragment_Home.class.getName())) {
+            if (getCurrentFragment() instanceof Fragment_Home) {
                 showFinishPopup();
+            } else if (getCurrentFragment() instanceof Fragment_DiaryDetail) {
+                getSupportFragmentManager().popBackStack();
             }
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public Fragment getCurrentFragment() {
+        return Utils.currentFragment(getSupportFragmentManager(), R.id.fragment_container);
     }
 
     private void showFinishPopup() {

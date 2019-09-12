@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.rlagk.ks_project001.Fragment.Fragment_CreateDiary;
 import com.example.rlagk.ks_project001.R;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -63,5 +64,9 @@ public class Utils {
         }
         result = result[1].split("]");
         return result[0];
+    }
+
+    public static Fragment currentFragment(@NonNull FragmentManager fragmentManager, int container_id){
+        return fragmentManager.findFragmentById(container_id);
     }
 }

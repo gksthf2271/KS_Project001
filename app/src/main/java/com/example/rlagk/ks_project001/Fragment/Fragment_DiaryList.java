@@ -120,9 +120,9 @@ public class Fragment_DiaryList extends BaseFragment {
             Log.d(TAG,"Position ::: " + position);
             if(DummyContent.isDebug){
                 DummyContent dummyContent = new DummyContent(view.getContext());
-                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(dummyContent.ITEMS.get(position)), R.id.fragment_container);
+                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(dummyContent.ITEMS.get(position)), R.id.fragment_container, true);
             } else {
-                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(mHorImageViewList.get(position)), R.id.fragment_container);
+                Utils.loadFragment(getFragmentManager(), Fragment_DiaryDetail.newInstance(mHorImageViewList.get(position)), R.id.fragment_container, true);
             }
         }
     };
