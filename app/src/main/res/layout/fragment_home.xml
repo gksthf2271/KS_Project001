@@ -61,6 +61,16 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.example.rlagk.ks_project001.View.DiaryListEmptyView
+                android:id="@+id/cDiaryListEmptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/cCoupleView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.example.rlagk.ks_project001.View.CoupleInfoView
                 android:id="@+id/cCoupleView"
                 android:layout_width="match_parent"
@@ -70,4 +80,5 @@
                 app:layout_constraintRight_toRightOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

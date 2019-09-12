@@ -5,10 +5,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +32,6 @@ import java.util.List;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gun0912.tedbottompicker.TedBottomPicker;
@@ -51,7 +54,7 @@ public class Fragment_CreateDiary extends Fragment {
     private String mTitle;
     private String mText;
     private String mDescription;
-    private boolean mFlag = false;
+    private PopupWindow mPopupWindow ;
 
     private static volatile Fragment_CreateDiary sInstance;
 
@@ -75,18 +78,23 @@ public class Fragment_CreateDiary extends Fragment {
         @Override
         public void clickFab() {
             Log.d(TAG, "saveBTNClick(...) ");
-            ID++;
 
             EditText diaryTitle = mDetailView.findViewById(R.id.diaryTitle);
             TextView diaryDate = mDetailView.findViewById(R.id.diaryDate);
             EditText diaryText = mDetailView.findViewById(R.id.diaryText);
 
+            if(diaryTitle.getText().toString().equals("") && diaryText.getText().toString().equals("")){
+                showConflictPopup();
+                return;
+            }
+
             String inputText = diaryDate.getText().toString();
             Contact contact = new Contact();
 
+            ID++;
             if(inputText.equals("") || inputText == null) {
                 Date dt = new Date();
-                SimpleDateFormat full_sdf = new SimpleDateFormat("yyyyMd");
+                SimpleDateFormat full_sdf = new SimpleDateFormat("yyyyMMdd");
                 inputText = full_sdf.format(dt);
             }
 
@@ -207,23 +215,22 @@ public class Fragment_CreateDiary extends Fragment {
         mDetailView.setListener(onFabClickListener);
     }
 
+    private void showConflictPopup() {
+        View popupView = getLayoutInflater().inflate(R.layout.activity_main_finish, null);
+        mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-    public FragmentManager getFragManager(){
-        FragmentManager fragmentManager = getFragmentManager();
-        return fragmentManager;
+        TextView textView = (TextView) popupView.findViewById(R.id.txt_title);
+        textView.setText("내용을 입력하세요.");
+        Button cancel = (Button) popupView.findViewById(R.id.Cancel);
+        cancel.setVisibility(View.GONE);
+        Button ok = (Button) popupView.findViewById(R.id.Ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
+            }
+        });
     }
-
-//    public interface showGalleryImageCallbackListener{
-//        void showGalleryImageCallback(List<Uri> uriList);
-//    }
-//
-//    private void showGalleryImageCallback(){
-//        if (mListener != null) {
-//            mListener.showGalleryImageCallback(mImageUri);
-//        }
-//    }
-//
-//    public void setImageCallbackListener(showGalleryImageCallbackListener listener) {
-//        mListener = listener;
-//    }
 }

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
-    android:divider="@drawable/divider"
     android:orientation="horizontal"
     android:showDividers="middle"
     tools:context="com.example.rlagk.ks_project001.Activity.Fragment_BaseList"
@@ -11,7 +10,6 @@
 
     <fragment
         android:id="@+id/article_list"
-        android:name="com.example.rlagk.ks_project001.quote.ArticleListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"

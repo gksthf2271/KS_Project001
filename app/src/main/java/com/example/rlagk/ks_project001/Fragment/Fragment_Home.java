@@ -15,6 +15,7 @@ import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
 import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.CoupleInfoView;
+import com.example.rlagk.ks_project001.View.DiaryListEmptyView;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
 import com.example.rlagk.ks_project001.utils.Utils;
 
@@ -37,6 +38,8 @@ public class Fragment_Home extends BaseFragment{
 //    TextView mDescriptionView;
     @BindView(R.id.cCoupleView)
     CoupleInfoView mCoupleInfoView;
+    @BindView(R.id.cDiaryListEmptyView)
+    DiaryListEmptyView mDiaryListEmptyView;
 
 //    private AddDiaryImageAdapter mHorImageViewAdapter;
     private HomeDiaryListAdapter mHomeDiaryListAdapter = null;
@@ -83,6 +86,15 @@ public class Fragment_Home extends BaseFragment{
         mContactList = DatabaseManager.getInstance().getDB().getContacts(100);
         int height = mGridView.getHeight();
         int width = mGridView.getRequestedColumnWidth();
+        if (mContactList.size() <= 0) {
+            mGridView.setVisibility(View.GONE);
+            mDiaryListEmptyView.setEmptyIconClickListener(mEmptyIconClickListener);
+            mDiaryListEmptyView.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            mGridView.setVisibility(View.VISIBLE);
+            mDiaryListEmptyView.setVisibility(View.GONE);
+        }
         for (Contact contact : mContactList) {
             if(contact == null) {
                 return;
@@ -135,8 +147,14 @@ public class Fragment_Home extends BaseFragment{
 
         @Override
         public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
-            Log.d(TAG,"onScroll(...) arg1 : " + arg1 + ", arg2 : " +arg2 + ", arg3 : " + arg3);
+            Log.d(TAG, "onScroll(...) arg1 : " + arg1 + ", arg2 : " + arg2 + ", arg3 : " + arg3);
         }
     };
-
+    DiaryListEmptyView.EmptyIconClickListener mEmptyIconClickListener = new DiaryListEmptyView.EmptyIconClickListener() {
+        @Override
+        public void onClickEmptyIcon() {
+            Log.d(TAG, "onClickEmptyIcon(...)");
+            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container, false);
+        }
+    };
 }

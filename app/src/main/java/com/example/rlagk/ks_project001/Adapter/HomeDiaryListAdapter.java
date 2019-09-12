@@ -68,7 +68,12 @@ public class HomeDiaryListAdapter extends BaseAdapter {
         if (convertView == null) {
             Log.d(TAG,"convertView is null!");
             convertView = mLayoutInflater.inflate(mLayout, null);
+            initView(convertView, position);
         }
+        return convertView;
+    }
+
+    private void initView(View convertView, int position) {
         ConstraintLayout rootLayout = (ConstraintLayout) convertView.findViewById(R.id.root_layout);
         ConstraintLayout InfoGroupParentLayout = (ConstraintLayout) convertView.findViewById(R.id.group_parent);
         ImageView iv = (ImageView) convertView.findViewById(R.id.diaryImg);
@@ -100,9 +105,14 @@ public class HomeDiaryListAdapter extends BaseAdapter {
                     }
                 })
                 .into(iv);
-        diaryDate.setText(mHorImageItemList.get(position).getDate());
+        String date = mHorImageItemList.get(position).getDate();
+        if (date.equals("") || date.length() < 8) {
+            diaryDate.setText(date);
+        } else {
+            date = date.substring(0, 4) + "/" + date.substring(4, 6) + "/" + date.substring(6,date.length());
+            diaryDate.setText(date);
+        }
         diaryTitle.setText(mHorImageItemList.get(position).getTitle());
-        return convertView;
     }
 
     private Handler mHandler = new Handler(){

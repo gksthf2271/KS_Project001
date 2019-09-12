@@ -50,7 +50,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/group_text"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="140dp"
             android:layout_marginTop="20dp"
             android:theme="@style/TextLabel"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -60,7 +60,8 @@
                 android:id="@+id/diaryText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/write_hint_text" />
+                android:hint="@string/write_hint_text"
+                android:maxLines="3" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,7 +40,12 @@
 
     <!--FinishPopup-->
     <color name="popup_finish">#E6FFFFFF</color>
+    <color name="popup_background">#99212121</color>
+
+    <!--Fab Color-->
+    <color name="fab_color">#99212121</color>
 
 
     <color name="home_info_background">#E6FFFFFF</color>
+    <color name="empty_color">#00000000</color>
 </resources>
