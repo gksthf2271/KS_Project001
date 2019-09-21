@@ -86,7 +86,8 @@ public class Fragment_Home extends BaseFragment{
         mContactList = DatabaseManager.getInstance().getDB().getContacts(100);
         int height = mGridView.getHeight();
         int width = mGridView.getRequestedColumnWidth();
-        if (mContactList.size() <= 0) {
+
+        if (mContactList.size() <= 0 && !DummyContent.isDebug) {
             mGridView.setVisibility(View.GONE);
             mDiaryListEmptyView.setEmptyIconClickListener(mEmptyIconClickListener);
             mDiaryListEmptyView.setVisibility(View.VISIBLE);
@@ -95,6 +96,7 @@ public class Fragment_Home extends BaseFragment{
             mGridView.setVisibility(View.VISIBLE);
             mDiaryListEmptyView.setVisibility(View.GONE);
         }
+
         for (Contact contact : mContactList) {
             if(contact == null) {
                 return;

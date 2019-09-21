@@ -1,12 +1,15 @@
 package com.example.rlagk.ks_project001.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.rlagk.ks_project001.Activity.MainActivity;
+import com.example.rlagk.ks_project001.Activity.SettingsActivity;
 import com.example.rlagk.ks_project001.R;
 
 import androidx.annotation.Nullable;
@@ -44,13 +47,20 @@ public class CoupleInfoView extends ConstraintLayout {
         initView();
     }
 
-    @OnClick(R.id.leftImage)
-    void onLeftImageClick(View view){
-        Log.d(TAG,"onLeftImageClick(...)");
-    }
-    @OnClick(R.id.rightImage)
-    void onRightImageClick(View view){
-        Log.d(TAG,"onRightImageClick(...)");
+//    @OnClick(R.id.leftImage)
+//    void onLeftImageClick(View view){
+//        Log.d(TAG,"onLeftImageClick(...)");
+//    }
+//    @OnClick(R.id.rightImage)
+//    void onRightImageClick(View view){
+//        Log.d(TAG,"onRightImageClick(...)");
+//    }
+
+    @OnClick({R.id.group_couple_info, R.id.rightImage, R.id.leftImage, R.id.txt_count})
+    void onClickCoupleInfoBar(View view){
+        Log.d(TAG,"onClickCoupleInfoBar(...) ::: " + view.getId());
+        Intent intent = new Intent(getContext(), SettingsActivity.class);
+        getContext().startActivity(intent);
     }
     @OnClick(R.id.txt_count)
     void onDateCountImageClick(View view){

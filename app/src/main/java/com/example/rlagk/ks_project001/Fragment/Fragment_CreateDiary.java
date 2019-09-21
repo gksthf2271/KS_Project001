@@ -77,7 +77,7 @@ public class Fragment_CreateDiary extends Fragment {
     private DetailView.fabClickListener onFabClickListener = new DetailView.fabClickListener() {
         @Override
         public void clickFab() {
-            Log.d(TAG, "saveBTNClick(...) ");
+            Log.d(TAG, "saveBTNClick(...)");
 
             EditText diaryTitle = mDetailView.findViewById(R.id.diaryTitle);
             TextView diaryDate = mDetailView.findViewById(R.id.diaryDate);
