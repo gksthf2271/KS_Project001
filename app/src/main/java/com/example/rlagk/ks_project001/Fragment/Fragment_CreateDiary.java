@@ -189,7 +189,7 @@ public class Fragment_CreateDiary extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sharediary, container, false);
         ButterKnife.bind(this,v);
 
-        mHorizontalScrollView.showGalleryCallbackListener(showGalleryCallbackListener);
+        mHorizontalScrollView.addGalleryCallbackListener(showGalleryCallbackListener);
         if (getArguments() != null) {
             mTitle = (String) getArguments().get("Title");
             mText = (String) getArguments().get("Text");

@@ -100,7 +100,8 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (getCurrentFragment() instanceof Fragment_Home) {
                 showFinishPopup();
-            } else if (getCurrentFragment() instanceof Fragment_DiaryDetail) {
+            } else if (getCurrentFragment() instanceof Fragment_DiaryDetail
+                    || getCurrentFragment() instanceof Fragment_CreateDiary) {
                 getSupportFragmentManager().popBackStack();
             }
             return false;

@@ -5,7 +5,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.rlagk.ks_project001.Fragment.Fragment_Home;
+import com.example.rlagk.ks_project001.Fragment.Fragment_Settings;
 import com.example.rlagk.ks_project001.R;
+import com.example.rlagk.ks_project001.utils.Utils;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragment;
@@ -18,17 +21,15 @@ public class SettingsActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
+        init();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sample_actions, menu);
-        return true;
+    private void init(){
+        loadSettingFragment();
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
+    private void loadSettingFragment(){
+        Utils.loadFragment(getSupportFragmentManager(), Fragment_Settings.getInstance(), R.id.fragment_container, false);
     }
 
     @Override
@@ -49,13 +50,5 @@ public class SettingsActivity extends BaseActivity {
     @Override
     public void onClickSetting() {
 
-    }
-
-    public static class SettingsFragment extends PreferenceFragment {
-        public SettingsFragment() {}
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            addPreferencesFromResource(R.xml.settings_prefs);
-        }
     }
 }

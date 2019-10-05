@@ -1,5 +1,6 @@
 package com.example.rlagk.ks_project001.Fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.rlagk.ks_project001.Adapter.HomeDiaryListAdapter;
+import com.example.rlagk.ks_project001.CoupleInfoListener;
 import com.example.rlagk.ks_project001.DB.Contact;
 import com.example.rlagk.ks_project001.DB.DatabaseManager;
 import com.example.rlagk.ks_project001.Item.HorImageItem;
@@ -17,14 +19,26 @@ import com.example.rlagk.ks_project001.R;
 import com.example.rlagk.ks_project001.View.CoupleInfoView;
 import com.example.rlagk.ks_project001.View.DiaryListEmptyView;
 import com.example.rlagk.ks_project001.dummy.DummyContent;
+import com.example.rlagk.ks_project001.utils.SharedPreferencesUtils;
 import com.example.rlagk.ks_project001.utils.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
+
+import static com.example.rlagk.ks_project001.Fragment.Fragment_Settings.KEY_COUPLE_DATE;
+import static com.example.rlagk.ks_project001.Fragment.Fragment_Settings.KEY_COUPLE_INFO;
+import static com.example.rlagk.ks_project001.Fragment.Fragment_Settings.KEY_LEFT_IMAGE_URI;
+import static com.example.rlagk.ks_project001.Fragment.Fragment_Settings.KEY_RIGHT_IMAGE_URI;
 
 public class Fragment_Home extends BaseFragment{
     private static volatile Fragment_Home sInstance;
@@ -45,6 +59,7 @@ public class Fragment_Home extends BaseFragment{
     private HomeDiaryListAdapter mHomeDiaryListAdapter = null;
     private ArrayList<HorImageItem> mHorImageViewList = null;
     private List<Contact> mContactList;
+    private CoupleInfoListener mCoupleInfoListener;
 
     public static Fragment_Home getInstance() {
         if (sInstance == null) {
@@ -73,6 +88,7 @@ public class Fragment_Home extends BaseFragment{
     public void onResume() {
         Log.d(TAG, "onResume");
         super.onResume();
+        updateCoupleInfoView();
     }
 
     @Override
@@ -112,6 +128,8 @@ public class Fragment_Home extends BaseFragment{
         mGridView.setAdapter(mHomeDiaryListAdapter);
         mGridView.setOnScrollListener(mGirdViewScrollListener);
         mGridView.setOnItemClickListener(mItemClickListener);
+        mCoupleInfoListener = mCoupleInfoView.getCoupleListener();
+        updateCoupleInfoView();
     }
 
     private GridView.OnItemClickListener mItemClickListener = new GridView.OnItemClickListener(){
@@ -156,7 +174,46 @@ public class Fragment_Home extends BaseFragment{
         @Override
         public void onClickEmptyIcon() {
             Log.d(TAG, "onClickEmptyIcon(...)");
-            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container, false);
+            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container, true);
         }
     };
+
+    private void updateCoupleInfoView() {
+        String coupleInfo = SharedPreferencesUtils.getPref(getContext(), SharedPreferencesUtils.PREF_FILE_NAME, SharedPreferencesUtils.PREF_KEY_COUPLE_INFO);
+        if (coupleInfo == null) return;
+        JSONObject readCoupleInfo = null;
+        try {
+            readCoupleInfo = new JSONObject(coupleInfo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String date = null;
+        String leftImageUri = null;
+        String rightImageUri = null;
+        try {
+            readCoupleInfo = readCoupleInfo.getJSONObject(KEY_COUPLE_INFO);
+            date = readCoupleInfo.get(KEY_COUPLE_DATE).toString();
+            leftImageUri = readCoupleInfo.get(KEY_LEFT_IMAGE_URI).toString();
+            rightImageUri = readCoupleInfo.get(KEY_RIGHT_IMAGE_URI).toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Uri leftUri = leftImageUri == null ? null : Uri.parse(leftImageUri);
+        Uri rightUri = rightImageUri == null ? null : Uri.parse(rightImageUri);
+        mCoupleInfoListener.onUpdateCoupleViwe(leftUri, rightUri, updateDate(date));
+    }
+
+    private String updateDate(String time){
+        Date currentDate = new Date();
+        long mValue = 24*60*60*1000;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long longResultmDate = currentDate.getTime() - date.getTime();
+        return String.valueOf(longResultmDate / mValue + 1);
+    }
 }

@@ -89,7 +89,7 @@ public class HorizontalScrollView extends LinearLayout {
         }
     }
 
-    public void showGalleryCallbackListener(showGalleryListener listener) {
+    public void addGalleryCallbackListener(showGalleryListener listener) {
         mListener = listener;
     }
 

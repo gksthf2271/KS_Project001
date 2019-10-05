@@ -152,7 +152,7 @@ public class Fragment_DiaryList extends BaseFragment {
         @Override
         public void onClickEmptyIcon() {
             Log.d(TAG,"onClickEmptyIcon(...)");
-            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container,false);
+            Utils.loadFragment(getFragmentManager(), Fragment_CreateDiary.getInstance(), R.id.fragment_container,true);
         }
     };
 }
