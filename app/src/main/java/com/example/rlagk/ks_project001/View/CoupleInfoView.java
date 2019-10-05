@@ -60,7 +60,7 @@ public class CoupleInfoView extends ConstraintLayout{
 
         mCoupleInfoListener = new CoupleInfoListener() {
             @Override
-            public void onUpdateCoupleViwe(Uri leftUri, Uri rightUri, String date) {
+            public void onUpdateCoupleViwe(@Nullable Uri leftUri, @Nullable Uri rightUri, @Nullable String date) {
                 loadImage(mLeftImage, leftUri);
                 loadImage(mRightImage, rightUri);
                 if (date != null && !date.equals(""))

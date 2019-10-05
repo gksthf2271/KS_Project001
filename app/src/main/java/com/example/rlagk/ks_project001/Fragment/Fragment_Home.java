@@ -193,13 +193,14 @@ public class Fragment_Home extends BaseFragment{
         try {
             readCoupleInfo = readCoupleInfo.getJSONObject(KEY_COUPLE_INFO);
             date = readCoupleInfo.get(KEY_COUPLE_DATE).toString();
-            leftImageUri = readCoupleInfo.get(KEY_LEFT_IMAGE_URI).toString();
-            rightImageUri = readCoupleInfo.get(KEY_RIGHT_IMAGE_URI).toString();
+            leftImageUri = String.valueOf(readCoupleInfo.get(KEY_LEFT_IMAGE_URI));
+            rightImageUri = String.valueOf(readCoupleInfo.get(KEY_RIGHT_IMAGE_URI));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Uri leftUri = leftImageUri == null ? null : Uri.parse(leftImageUri);
         Uri rightUri = rightImageUri == null ? null : Uri.parse(rightImageUri);
+        if (mCoupleInfoListener == null) mCoupleInfoListener = mCoupleInfoView.getCoupleListener();
         mCoupleInfoListener.onUpdateCoupleViwe(leftUri, rightUri, updateDate(date));
     }
 
