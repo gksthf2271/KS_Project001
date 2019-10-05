@@ -87,8 +87,9 @@ public class Fragment_Home extends BaseFragment{
     @Override
     public void onResume() {
         Log.d(TAG, "onResume");
-        super.onResume();
+        mCoupleInfoListener = mCoupleInfoView.getCoupleListener();
         updateCoupleInfoView();
+        super.onResume();
     }
 
     @Override
@@ -128,7 +129,6 @@ public class Fragment_Home extends BaseFragment{
         mGridView.setAdapter(mHomeDiaryListAdapter);
         mGridView.setOnScrollListener(mGirdViewScrollListener);
         mGridView.setOnItemClickListener(mItemClickListener);
-        mCoupleInfoListener = mCoupleInfoView.getCoupleListener();
         updateCoupleInfoView();
     }
 

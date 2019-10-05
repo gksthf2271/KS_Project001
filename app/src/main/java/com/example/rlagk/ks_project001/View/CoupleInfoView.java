@@ -61,10 +61,10 @@ public class CoupleInfoView extends ConstraintLayout{
         mCoupleInfoListener = new CoupleInfoListener() {
             @Override
             public void onUpdateCoupleViwe(@Nullable Uri leftUri, @Nullable Uri rightUri, @Nullable String date) {
-                loadImage(mLeftImage, leftUri);
-                loadImage(mRightImage, rightUri);
                 if (date != null && !date.equals(""))
                     mDateCount.setText(date + "일째 연애중");
+                loadImage(mLeftImage, leftUri);
+                loadImage(mRightImage, rightUri);
             }
 
             @Override
@@ -104,7 +104,7 @@ public class CoupleInfoView extends ConstraintLayout{
     }
 
     private void loadImage(ImageView view, Uri uri){
-        if (view == null) {
+        if (view == null || uri.toString().equals("") || uri == null) {
             return;
         }
 

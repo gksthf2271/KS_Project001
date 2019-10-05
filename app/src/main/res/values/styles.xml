@@ -18,7 +18,7 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
-    <style name="ToolbarPopUp" parent ="ThemeOverlay.AppCompat.Light">
+    <style name="ToolbarPopUp" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/theme_window_background</item>
     </style>
 
@@ -44,13 +44,20 @@
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">@color/dialog_background</item>     <!--calendar background-->
-        <item name="android:colorControlActivated">@color/dialog_dateSelectedTextColor</item> <!--selected day-->
+        <item name="android:windowBackground">@color/dialog_background
+        </item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/dialog_dateSelectedTextColor
+        </item> <!--selected day-->
         <item name="android:textColorPrimary">@color/background_4</item> <!--days of the month-->
-        <item name="android:textColorSecondary">@color/background_4</item>    <!--days of the week-->
+        <item name="android:textColorSecondary">@color/background_4
+        </item>    <!--days of the week-->
         <item name="colorAccent">@color/dialog_background</item>
-        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
-        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/DatePickerTheme.ButtonBarNegativeButtonStyle
+        </item>
+        <item name="android:buttonBarPositiveButtonStyle">
+            @style/DatePickerTheme.ButtonBarNegativeButtonStyle
+        </item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -66,14 +73,23 @@
         <item name="android:textSize">17dp</item>
     </style>
 
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <style name="Base.Theme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Base.Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Base.Theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <declare-styleable name="app">
+        <attr name="bottomDragVisibleHeight" format="dimension" />
+        <attr name="bototmExtraIndicatorHeight" format="dimension" />
+    </declare-styleable>
+
+
     <dimen name="activity_vertical_margin">16dp</dimen>
+
     <dimen name="card_bottom_info_height">150dp</dimen>
+
     <dimen name="card_extra_height">20dp</dimen>
 
-
-    <declare-styleable name="app">
-    <attr name="bottomDragVisibleHeight" format="dimension" />
-    <attr name="bototmExtraIndicatorHeight" format="dimension" />
-    </declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
 </resources>

@@ -2,46 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.rlagk.ks_project001">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
-    <!--갤러리 호출-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme"
         tools:replace="android:appComponentFactory"
-        android:appComponentFactory="whateverString">
-        <activity android:name=".Activity.MainActivity">
+        android:label="써봐">
+        <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.ArticleDetailActivity"
+        <activity android:name=".Activity.MainActivity">
+        </activity>
+        <activity
+            android:name=".Activity.ArticleDetailActivity"
             android:label="" />
-
-        <activity android:name=".Activity.SettingsActivity"
+        <activity
+            android:name=".Activity.SettingsActivity"
             android:label="Settings" />
+    </application> <!-- 갤러리 호출 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-
-
-
-        <!--<activity android:name=".CameraActivity"-->
-            <!--android:screenOrientation="landscape">-->
-            <!--&lt;!&ndash; configure this activity to use landscape orientation &ndash;&gt;-->
-
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -174,8 +174,8 @@ public class Fragment_Settings extends BaseFragment {
         Log.d(TAG,"onClickSave");
         try {
             mCoupleInfo.put(KEY_COUPLE_DATE, mTextDateSelector.getText());
-            mCoupleInfo.put(KEY_LEFT_IMAGE_URI, mLeftImageUri);
-            mCoupleInfo.put(KEY_RIGHT_IMAGE_URI, mRightImageUri);
+            mCoupleInfo.put(KEY_LEFT_IMAGE_URI, mLeftImageUri == null ? "" : mLeftImageUri);
+            mCoupleInfo.put(KEY_RIGHT_IMAGE_URI, mRightImageUri == null ? "" : mRightImageUri);
             mCoupleInfoDataObject.put(KEY_COUPLE_INFO, mCoupleInfo);
         } catch (JSONException e) {
             e.printStackTrace();
