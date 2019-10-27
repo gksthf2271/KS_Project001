@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="activity_background">#2b3f6b</color>
+    <color name="activity_background">#2B3F57</color>
     <color name="fragment_background">#7b8ea9</color>
     <color name="point_1">#fcc6a2</color>
     <color name="point_2">#f89b6c</color>
@@ -36,7 +36,7 @@
 
     <!--Dialog-->
     <color name="dialog_background">#494949</color>
-    <color name="dialog_dateSelectedTextColor">#59AF9A</color>
+    <color name="dialog_dateSelectedTextColor">#2B3F57</color>
 
     <!--TextInput-->
     <color name="textInput_TextColor_FocusOff">#696969</color>

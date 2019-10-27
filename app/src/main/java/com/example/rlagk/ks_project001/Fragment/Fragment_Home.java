@@ -45,17 +45,11 @@ public class Fragment_Home extends BaseFragment{
     public static final String TAG = Fragment_Home.class.getName();
     @BindView(R.id.gridView)
     GridView mGridView;
-//    @BindView(R.id.horizontalImageRecyclerView)
-//    RecyclerView mRecyclerView;
-
-//    @BindView(R.id.txt_description)
-//    TextView mDescriptionView;
     @BindView(R.id.cCoupleView)
     CoupleInfoView mCoupleInfoView;
     @BindView(R.id.cDiaryListEmptyView)
     DiaryListEmptyView mDiaryListEmptyView;
 
-//    private AddDiaryImageAdapter mHorImageViewAdapter;
     private HomeDiaryListAdapter mHomeDiaryListAdapter = null;
     private ArrayList<HorImageItem> mHorImageViewList = null;
     private List<Contact> mContactList;

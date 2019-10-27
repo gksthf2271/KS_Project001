@@ -37,14 +37,14 @@
         app:layout_constraintLeft_toRightOf="@id/menu_write"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/menu_setting"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_marginLeft="45dp"-->
-        <!--android:src="@drawable/ic_setting"-->
-        <!--app:layout_constraintLeft_toRightOf="@+id/menu_list"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <ImageView
+        android:id="@+id/menu_setting"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="45dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintLeft_toRightOf="@+id/menu_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

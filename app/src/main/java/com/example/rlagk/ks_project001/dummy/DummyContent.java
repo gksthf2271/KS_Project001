@@ -24,7 +24,7 @@ public class DummyContent {
         init();
     }
 
-    public static final boolean isDebug = false;
+    public static final boolean isDebug = true;
 
     /**
      * An array of sample items.

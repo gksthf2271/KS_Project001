@@ -75,11 +75,11 @@ public class MenuView extends LinearLayout {
         mListener.onClickList();
     }
 
-//    @OnClick(R.id.menu_setting)
-//    void onClickSetting(View v) {
-//        Log.d(TAG, "onClickSetting(...)");
-//        mListener.onClickSetting();
-//    }
+    @OnClick(R.id.menu_setting)
+    void onClickSetting(View v) {
+        Log.d(TAG, "onClickSetting(...)");
+        mListener.onClickSetting();
+    }
 
     public void setMenuClickListener(MenuItemClickListener listener) {
         mListener = listener;
