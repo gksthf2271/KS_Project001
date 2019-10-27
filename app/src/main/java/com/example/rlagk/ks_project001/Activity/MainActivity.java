@@ -106,8 +106,6 @@ public class MainActivity extends BaseActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.child("message").push().setValue(DummyContent.ITEMS);  // 기본 database 하위 message라는 child에 chatData를
 
-
-
         databaseReference.child("message").addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
