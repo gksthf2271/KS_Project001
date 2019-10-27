@@ -7,8 +7,8 @@ android {
         applicationId "com.example.rlagk.ks_project001"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.1"
+        versionCode 102
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
